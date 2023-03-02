@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <title></title>
+    <style>
+        .img{
+            width: 55px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="create-order-to-suppliers">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div class="padding-container mt-4">
+                <div class="row" id="importForm">
+                    <div class="col-lg-8 col-12">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 pb-5">
+                                <div class="wrapper-content h-100">
+                                    <div class="ui-information">
+                                        <div class="ui-information-head">
+                                            <div class="ui-information-head__purechase_ordernew">
+                                                <div class="ui-information-title">Nhà cung cấp</div>
+                                            </div>
+                                        </div>
+                                        <div class="ui-information-body">
+                                            <div class="mt-16 popover-wrapper">
+                                                <div class="trigger text-left">
+                                                    <div class="omni-popover-container choice-supplier hide" style="position: absolute; left: 20px; top: 95px; width: 353px;  "></div>
+                                                    <span><select class="text-left cursor-pointer d-inline-block form-select form-select-lg" style="margin-top:3px" id="supplierCre" >
+
+                                                    </select></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 pb-5">
+                                <div class="wrapper-content h-100">
+                                    <div class="ui-information">
+                                        <div class="ui-information-head pb-10"><label class="ui-information-title m-0">Kho nhập</label></div>
+                                        <div class="mt-16">
+                                            <div class="trigger text-left">
+                                                <div class="omni-popover-container choice-warehouse hide" style="position: absolute; left: 20px; top: 95px; width: 353px;"></div>
+                                                <span><select class="text-left cursor-pointer d-inline-block form-select form-select-lg" id="warehouseCre">Chọn kho nhập
+
+                                                </select></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper-content mb-5">
+                            <div class="ui-information">
+                                <div class="ui-information-head"><span class="ui-information-title">Sản phẩm</span>
+                                </div>
+                                <div class="ui-information-body">
+                                    <div class="form-group p-0 mt16">
+                                        <button id="btnShowItemListModal" class="btn btn-success">Chọn hàng</button>
+                                        <div class="omni-layout-card--section-section">
+                                            <div class="ui-table-normal-container">
+                                                <div class="omni-layout-card--section pt-0">
+                                                    <table id="tbListImportItems" class="ui-table ui-table-vertical-top">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="table-header--product min-width-250px">Sản Phẩm</th>
+                                                            <th class="text-center w-5">Số lượng</th>
+                                                            <th class="text-right table-header--money">Giá</th>
+                                                            <th class="text-right table-header--money">Thành tiền</th>
+                                                            <th class="table-header--quantity"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div class="wrapper-content mb-5">
+                            <div class="ui-information">
+                                <div class="ui-information-head pb-10"><label class="ui-information-title m-0">Nhân viên xử lý</label></div>
+                                <div class="mt-16">
+                                    <div class="trigger text-left">
+                                        <div class="omni-popover-container choice-warehouse hide" style="position: absolute; left: 20px; top: 95px; width: 353px;"></div>
+                                        <span><select class="text-left cursor-pointer d-inline-block form-select form-select-lg" id="userCre">Chọn nhân viên
+
+                                        </select></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper-content mb-5">
+                            <div class="ui-information">
+                                <div class="ui-information-head pb-10"><label class="ui-information-title m-0">Chi phí
+                                    mua hàng</label></div>
+                                <div class="my-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            Tổng số lượng đặt
+                                        </div>
+                                        <div class="col-auto text-right fw-bolder" id="totalImportQuantity"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="row">
+                                        <div class="col text-primary">
+                                            <b>Tổng tiền hàng</b>
+                                        </div>
+                                        <div class="col-auto text-right fw-bolder text-primary">
+                                            <b id="grandTotalCostPrice">0 ₫</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cost-collapse-wrapper pb-4 border-bottom">
+                                    <div class="pl-16 item-collapse null"></div>
+                                </div>
+                                <div class="alert-danger-create-import text-left hide">
+
+                                </div>
+                                <button id="btnCreateImport" class="btn btn-primary w-100 mt-5">
+                                    <span>Đặt hàng</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-none"></div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+<th:block th:replace="inventory-management/modal-import-item-list :: modal-import-item-list"/>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+<script>
+
+    const page = {
+        urls: {
+            supplierAPI: App.BASE_URL_SUPPLIER,
+            warehouseAPI: App.BASE_URL_WAREHOUSE,
+            userAPI: App.BASE_URL_USER,
+            itemAPI: App.BASE_URL_ITEM,
+            itemProductImportAPI: App.BASE_URL_ITEM + "/import-products",
+            createImportAPI: App.BASE_URL_IMPORT_ORDER + "/add"
+        },
+        elements: {}
+    }
+
+    page.elements.btnShowItemListModal = $("#btnShowItemListModal");
+    page.elements.modalItemList = $("#modalItemList");
+
+    page.elements.supplierCre = $('#supplierCre');
+    page.elements.warehouseCre = $('#warehouseCre');
+    page.elements.userCre = $("#userCre");
+
+    page.elements.itemList = $('#itemList');
+    page.elements.btnChooseDone = $("#btnChooseDone");
+    page.elements.btnCancelChoose = $("#btnCancelChoose");
+    page.elements.btnCreateImport = $("#btnCreateImport");
+    page.elements.tbListImportItems = $("#tbListImportItems");
+
+    page.elements.chooseQuantity = $("#chooseQuantity");
+    page.elements.totalImportQuantity = $("#totalImportQuantity");
+    page.elements.grandTotalCostPrice = $("#grandTotalCostPrice");
+
+
+    let item = new Item();
+    let product = new Product();
+
+    let listItemProducts = [];
+    let listItems = [];
+
+    let importOrder = new ImportOrder();
+
+    let importPurchase = {}
+    importPurchase.supplierId = null;
+    importPurchase.warehouseId = null;
+    importPurchase.userId = null;
+    importPurchase.orderItems = [];
+
+    let chooseQuantity = 0;
+    let totalImportQuantity = 0;
+    let grandTotalCostPrice = 0;
+
+
+    function drawSuppliers(elem, suppliers) {
+        elem.append(`<option value="0" disabled selected>Chọn nhà cung cấp</option>`);
+        $.each(suppliers, (i, item) => {
+            let str = `<option value="${item.id}">${item.title}</option>`;
+            elem.append(str);
+        })
+    }
+
+    function getSuppliersCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.supplierAPI
+        })
+            .done(data => {
+                page.elements.supplierCre.empty();
+                drawSuppliers(page.elements.supplierCre, data);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    getSuppliersCre();
+
+    function drawWarehouses(elem, warehouses) {
+        elem.append(`<option value="0" disabled selected>Chọn kho nhập</option>`);
+        $.each(warehouses, (i, item) => {
+            let str = `<option value="${item.id}">${item.title}</option>`;
+            elem.append(str);
+        })
+    }
+
+    function getWarehousesCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.warehouseAPI
+        })
+            .done(data => {
+                page.elements.warehouseCre.empty();
+                drawWarehouses(page.elements.warehouseCre, data);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    getWarehousesCre();
+
+    function drawUsers(elem, users) {
+        elem.append(`<option value="0" disabled selected>Chọn nhân viên</option>`);
+        $.each(users, (i, item) => {
+            let str = `<option value="${item.id}">${item.fullName}</option>`;
+            elem.append(str);
+        })
+    }
+
+    function getUsersCre(){
+        return $.ajax({
+            type: "GET",
+            url: page.urls.userAPI
+        })
+            .done(data => {
+                page.elements.userCre.empty();
+                drawUsers(page.elements.userCre, data);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    getUsersCre();
+
+    page.elements.btnShowItemListModal.on("click", () => {
+        page.elements.modalItemList.modal("show");
+    })
+
+    page.elements.supplierCre.on('change', () => {
+        importPurchase.supplierId = page.elements.supplierCre.val();
+    })
+
+    page.elements.warehouseCre.on('change', () => {
+        importPurchase.warehouseId = page.elements.warehouseCre.val();
+    })
+
+    page.elements.userCre.on('change', () => {
+        importPurchase.userId = page.elements.userCre.val();
+    })
+
+
+    page.elements.btnShowItemListModal.on("click", function() {
+        $("#itemList .checkbox").prop("checked", false);
+
+        $.each(listItems, (i, item) => {
+            $("#ul_" + item.id).prop("checked", true);
+        })
+
+        chooseQuantity = listItems.length;
+        page.elements.chooseQuantity.text(listItems.length + " sản phẩm đã được chọn");
+        page.elements.modalItemList.modal("show");
+    })
+
+    function renderItem(item) {
+        let str = `
+            <ul class="next-list--divided--top import-item" data-id="${item.id}">
+                <li>
+                    <div class="cursor-pointer d-flex align-items-start justify-content-between mt-4">
+                        <div class="row w-100">
+                            <div class="col-md-5 col-12">
+                                <div class="d-flex">
+                                    <div class="hrv-next-input-checkbox product-list__item--input ">
+                                        <label class="hrv-next-label--switch hrv-next-label--empty" for="hrv-checkbox-112"></label>
+                                        <input id="ul_${item.id}" class="checkbox" data-id="${item.id}" type="checkbox">
+                                    </div>
+                                    <div class="ml-2">
+                                        <img class="img" src="${product.urlImage}" alt="${product.title}"/>
+                                    </div>
+                                    <div class="omni-product-search__text"><span>${product.title}</span>
+                                        <div class="mb-0 text-secondary word-break"><p class="mb-0">
+                                            <b>SKU</b>: ${product.sku}</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-12 ml-md-auto omni-product-item-info px-0">
+                                <div class="row">
+                                    <span class="col-4 text-left"></span>
+                                        <span class="text-right col-3"></span>
+                                        <span class="text-right col-3">
+                                        <span class="text-nowrap">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND', }).format(item.costPrice)}</span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        `;
+        return str;
+    }
+
+    function loadAllItemProducts() {
+        $.ajax({
+            type: "GET",
+            url: page.urls.itemProductImportAPI
+        })
+            .done(data => {
+                listItemProducts = data;
+                $.each(listItemProducts, (i, obj) => {
+                    product = obj.product;
+
+                    let str = renderItem(obj);
+                    page.elements.itemList.prepend(str);
+                })
+                onClickItem();
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    loadAllItemProducts();
+
+    function getItemById(itemId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.itemAPI + "/" + itemId
+        })
+            .done(data => {
+                item = data;
+                product = item.product;
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function renderImportItem(item) {
+        let str = `
+            <tr id="tr_${item.id}">
+                <td class="align-middle text-normal fix-overflow-tooltip">
+                    <div class="order-block--table">
+                        <div class="order-block--table-image">
+                            <div class="table-cell--image">
+                                <img class="box-image" src="${product.urlImage}">
+                            </div>
+                        </div>
+                        <div class="order-block--table-content">
+                            <div class="trigger "><span><strong
+                                class="text-primary mb-2 d-inline-block cursor-pointer table-break-word"><span
+                                class="">${item.product.title}</span></strong></span></div>
+                            <p class="mb-2 text-secondary">SKU: ${item.product.sku}</p></div>
+                    </div>
+                </td>
+                <td class="align-middle text-center">
+                    <div class="quantity-decimal_wrapper position-relative">
+                        <div class="">
+                        <input type="number" id="quantity_${item.id}" data-id="${item.id}" data-price="${item.costPrice}"
+                             class="next-input text-left min-width-100px position-relative inp-quantity"
+                             min="1" step="1" value="1">
+                        </div>
+                    </div>
+                </td>
+                <td class="align-middle text-right">
+                    <div id="costPrice_${item.id}" class="no-padding border-0 text-right">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND', }).format(item.costPrice)}</div>
+                    <div class="display-none"></div>
+                </td>
+                <td class="text-right align-middle text-primary">
+                    <div id="totalCostPrice_${item.id}" class="border-0">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND', }).format(item.costPrice)}</div>
+                </td>
+                <td class="text-right align-middle">
+                    <button class="btn btn-link text-secondary btnRemoveImportItem" data-id="${item.id}">
+                        <svg class="svg-next-icon svg-next-icon-size-14" width="14" height="14">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                <path
+                                    d="M18.263 16l10.07-10.07c.625-.625.625-1.636 0-2.26s-1.638-.627-2.263 0L16 13.737 5.933 3.667c-.626-.624-1.637-.624-2.262 0s-.624 1.64 0 2.264L13.74 16 3.67 26.07c-.626.625-.626 1.636 0 2.26.312.313.722.47 1.13.47s.82-.157 1.132-.47l10.07-10.068 10.068 10.07c.312.31.722.468 1.13.468s.82-.157 1.132-.47c.626-.625.626-1.636 0-2.26L18.262 16z"></path>
+                            </svg>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        `;
+
+        return str;
+    }
+
+    function removeItemOnce(arr, value) {
+        let index = arr.indexOf(value);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+        return arr;
+    }
+
+    function onClickItem() {
+        $(".import-item").on("click", function () {
+            let itemId = $(this).data("id");
+
+            let itemChecked = $(this).find("#ul_" + itemId).prop("checked");
+
+            if (!itemChecked) {
+                $(this).find("#ul_" + itemId).prop("checked", true);
+                chooseQuantity++;
+                page.elements.chooseQuantity.text(chooseQuantity + " sản phẩm đã được chọn");
+            }
+            else {
+                $(this).find("#ul_" + itemId).prop("checked", false);
+                chooseQuantity--;
+                page.elements.chooseQuantity.text(chooseQuantity + " sản phẩm đã được chọn");
+            }
+        })
+    }
+
+    page.elements.btnChooseDone.on("click", () => {
+        $("#tbListImportItems tbody").empty();
+
+        let importItems = $(".import-item");
+
+        listItems = [];
+
+        $.each(importItems, function(i, item) {
+            let itemId = +$(this).data("id");
+
+            let itemChecked = $(this).find("#ul_" + itemId).prop("checked");
+
+            if (itemChecked) {
+                listItemProducts.filter(item => {
+                    if (item.id === itemId) {
+                        item.totalQuantity = 1;
+                        totalImportQuantity++;
+                        item.totalAmount = item.costPrice;
+                        listItems.push(item);
+                        let str = renderImportItem(item);
+                        $("#tbListImportItems tbody").prepend(str);
+                    }
+                });
+            }
+        })
+        removeImportItem();
+
+        page.elements.totalImportQuantity.text(totalImportQuantity);
+
+        $.each(listItems, (i, obj) => {
+            grandTotalCostPrice += obj.costPrice;
+        })
+
+        page.elements.grandTotalCostPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(grandTotalCostPrice));
+
+        $('#importForm .alert-danger-create-import').empty();
+
+        page.elements.modalItemList .modal("hide");
+        $("ul.import-item .product-list__item--input input").prop("checked", false);
+    })
+
+    page.elements.btnCancelChoose.on("click", () => {
+        $('#importForm .alert-danger-create-import').empty();
+    })
+
+    function removeImportItem() {
+        $(".btnRemoveImportItem").on("click", function() {
+            let importItemId = +$(this).data("id");
+            $(`#tr_${importItemId}`).empty();
+
+            getItemById(importItemId).then(() => {
+
+                $.each(listItems, (i, obj) => {
+                    if (obj.id === importItemId) {
+                        grandTotalCostPrice -= obj.totalAmount;
+                        totalImportQuantity -= obj.totalQuantity;
+
+                        removeItemOnce(listItems, obj);
+
+                        page.elements.totalImportQuantity.text(totalImportQuantity);
+                        page.elements.grandTotalCostPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(grandTotalCostPrice));
+                    }
+                })
+            })
+        })
+    }
+
+    function createImport() {
+        App.SweetAlert.showConfirm("Xác nhận đặt hàng?", "Đơn đặt hàng sẽ được tạo").then(result => {
+            if (result.isConfirmed) {
+                $.each(listItems, (i, obj) => {
+                    let chooseImportItem = new ImportItemCreate();
+                    chooseImportItem.id = obj.id;
+                    chooseImportItem.quantity = Number($("#quantity_" + obj.id).val());
+
+                    importPurchase.orderItems.push(chooseImportItem);
+                })
+                console.log(JSON.stringify(importPurchase));
+
+                $.ajax({
+                    headers: {
+                        accept: "application/json",
+                        "content-type": "application/json"
+                    },
+                    type: "POST",
+                    url: page.urls.createImportAPI,
+                    data: JSON.stringify(importPurchase)
+                })
+                    .done(data => {
+                        importOrder = data;
+                        App.IziToast.showSuccessAlert("Tạo đơn nhập hàng thành công");
+                        clearOldImportInfo();
+                    })
+                    .fail(jqXHR => {
+                        console.log(jqXHR);
+
+                        $('#importForm .alert-danger-create-import').empty().removeClass('hide').addClass('show');
+
+                        if (jqXHR.responseJSON) {
+                            $.each(jqXHR.responseJSON, (key, item) => {
+                                let str = `<label id="${key}-error" class="error" for="${key}">${item}</label><br>`;
+                                $("#" + key).addClass("error");
+                                $('#importForm .alert-danger-create-import').append(str);
+                            })
+                        }
+                    })
+            }
+        })
+    }
+
+    function clearOldImportInfo() {
+        page.elements.supplierCre.val(0);
+        page.elements.warehouseCre.val(0);
+        page.elements.userCre.val(0);
+
+        importPurchase.supplierId = null;
+        importPurchase.warehouseId = null;
+        importPurchase.userId = null;
+
+        $("#tbListImportItems tbody").empty();
+        listItems = [];
+        $.each(listItems, (i, obj) => {
+            $("ul").find("#ul_" + obj.id).prop("checked", false);
+        })
+        importPurchase.orderItems = [];
+
+        page.elements.chooseQuantity.text("0 sản phẩm đã được chọn");
+        page.elements.totalImportQuantity.text(0);
+        page.elements.grandTotalCostPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(0));
+    }
+
+    page.elements.btnCreateImport.on("click", () => {
+        createImport();
+        $('#importForm .alert-danger-create-import').empty();
+        importPurchase.orderItems = [];
+    })
+
+    page.elements.tbListImportItems.on("input", ".inp-quantity", function() {
+        let id = +$(this).data("id");
+
+        let quantity = Math.floor(Number($(this).val()));
+        let costPrice = Number($(this).data("price"));
+        let totalCostPrice = quantity * costPrice;
+
+        $("#totalCostPrice_" + id).text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(totalCostPrice));
+
+        totalImportQuantity = 0;
+        grandTotalCostPrice = 0;
+
+        $.each(listItems, (i, obj) => {
+            totalImportQuantity += Math.floor(Number($("#quantity_" + obj.id).val()));
+            obj.totalAmount = Math.floor(Number($("#quantity_" + obj.id).val())) * obj.costPrice;
+            grandTotalCostPrice += obj.totalAmount;
+        })
+
+        page.elements.totalImportQuantity.text(totalImportQuantity);
+        page.elements.grandTotalCostPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(grandTotalCostPrice));
+    })
+
+
+
+</script>
+</body>
+</html>

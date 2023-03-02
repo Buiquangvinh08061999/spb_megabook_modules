@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"/>
+
+  <style>
+    .status_cancel{
+      background: #e90e0e59;
+      color: #b81223;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<!--new-list-->
+<div class="order-list">
+  <main id="_main_content_" class="ui-main">
+    <div class="wrapper-block">
+
+      <div class="padding-container">
+        <div class="row no-gutters pb-4">
+          <div class="col align-items-center d-flex">
+            <p class="title-page">Danh sách đơn hàng</p>
+          </div>
+
+<!--          <div class="row">-->
+<!--            <div class="col-sm-4 col-3">-->
+<!--              <div class="wrapper-content pd-all-15"  style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px" >-->
+
+<!--                <div class="report-group-head color-white" style="color: rgb(87, 89, 98);">Đơn hàng đang chờ nhập-->
+<!--                </div>-->
+<!--                <div class="report-group-body color-white text-right table-break-word"-->
+<!--                     style="color: rgb(87, 89, 98);"><span id="count-pending"></span>  &lt;!&ndash;tổng số lượng đơn hàng trạng thái pending&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-sm-4 col-3">-->
+<!--              <div class="wrapper-content pd-all-15"-->
+<!--                   style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px">-->
+<!--                <div class="report-group-head color-white" style="color: rgb(106 202 119 / 85%);">Số lượng đang chờ nhập </div>-->
+
+<!--                <div class="report-group-body color-white text-right table-break-word"-->
+<!--                     style="color: rgb(106 202 119 / 85%);"><span id="sum-quantity"></span> &lt;!&ndash;tổng tiền order theo trạng thái pending&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--            </div>-->
+
+<!--          </div>-->
+
+
+        </div>
+
+        <div>
+          <div class="omni-tabs-wrapper ">
+            <ul role="tablist" class="omni-tabs false">
+              <li class="omni-tab-container">
+                <a href="/orders" class="omni-tab omni-tab-selected text-decoration-none">
+
+                  <span class="text-black ">Tất cả đơn hàng bị hủy</span>
+                </a>
+              </li>
+              <li class="false omni-disclosureTab">
+                <a class="omni-disclosureActivator">
+                                    <span class="text-black">
+                                        <span class="mr-2">Xem thêm</span>
+                                        <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                             width="10" height="10">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847">
+                                                <g>
+                                                    <path
+                                                            d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </svg>
+                                    </span>
+                </a>
+              </li>
+            </ul>
+            <div class="omni-tabs omni-tabMeasurer">
+              <li class="omni-tab-container">
+                <a href="/orders" class="omni-tab omni-tab-selected  text-decoration-none">
+                  <span class="text-black">Tất cả đơn hàng</span>
+                </a>
+              </li>
+
+              <a class="omni-disclosureActivator">
+                                <span class="text-black">
+                                    <span class="mr-2">Xem thêm</span>
+                                    <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90" width="10"
+                                         height="10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847">
+                                            <g>
+                                                <path
+                                                        d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </svg>
+                                </span>
+              </a>
+            </div>
+
+            <div>
+              <div class="position-relative">
+                <div class="order-list--table table-list--config">
+                  <div class="ui-table-listing-container">
+
+                    <table id="tbListImportOrders" class="ui-table">
+
+                      <thead>
+                      <tr>
+                        <th class="">
+                          <span>Mã phiếu</span>
+                        </th>
+                        <th class="">
+                          <span>Ngày hủy đơn</span>
+                        </th>
+                        <th class="">
+                          <span>Kho nhập</span>
+                        </th>
+                        <th class="">
+                          <span>Người tạo</span>
+                        </th>
+
+                        <th class="">
+                          <span>Trạng thái</span>
+                        </th>
+                        <th>
+                          <span>Số lượng</span>
+                        </th>
+                        <th>
+                          <span>Tổng tiền</span>
+                        </th>
+
+                      </tr>
+                      </thead>
+
+                      <tbody>
+
+                      </tbody>
+
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="_container_portal_"></div>
+  </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+    const pages = {
+      urls: {
+        listImportOrderCancel: App.BASE_URL_IMPORT_ORDER + "/list-status-cancel",
+      },
+      elements: {}
+    }
+    let importOrder = new ImportOrder();
+    let importOrderItem = new ImportOrderItem();
+    let importOrderStatus = new ImportOrderStatus();
+
+    let warehouse = new Warehouse();
+    let supplier = new Supplier();
+
+
+    function renderImportOrder(importOrder) {
+      let str =`
+                <tr id="tr_${importOrder.id}">
+                    <td>
+                       <a class="text-decoration-none" href="/inventory-management/import-order-detail/${importOrder.id}">${importOrder.id}</a>
+                    </td>
+                    <td>
+                        <div>${importOrder.updateAt}</div>
+                    </td>
+                    <td>
+                        <div>${importOrder.warehouse.title}</div>
+                    </td>
+                    <td>
+                       <span>${importOrder.createBy}</span>
+                    </td>
+                    <td>
+                        <span class="status_cancel">${importOrder.importOrderStatus.titleVi}</span>
+                    </td>
+                    <td>
+                        <span>${importOrder.grandQuantity}</span>
+                    </td>
+                    <td>
+                         <span>
+                            ${new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                             }).format(importOrder.grandTotal)}
+                        </span>
+                    </td>
+
+                </tr>
+            `;
+      return str;
+    }
+
+    function loadAllImportOrders() {
+      $.ajax({
+        "type": "GET",
+        "url": pages.urls.listImportOrderCancel
+      })
+          .done(data => {
+            console.log(data)
+
+            importOrders = data;
+
+            $.each(data, (i, item) => {
+              importOrder = item;
+              importOrderStatus = importOrder.importOrderStatus;
+              supplier = importOrder.supplier;
+              warehouse = importOrder.warehouse;
+
+
+              let str = renderImportOrder(importOrder)
+              $('#tbListImportOrders tbody').prepend(str);
+
+            })
+
+          })
+    }
+
+    loadAllImportOrders();
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

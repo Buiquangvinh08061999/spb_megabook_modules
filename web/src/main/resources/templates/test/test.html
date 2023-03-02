@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+
+<th:block th:replace="layout/header :: header"/>
+
+<!--home-content-->
+<div class="dropdown">
+        <span content="Trung"
+              class="hrv-avatar hrv-avatar-circle hrv-avatar-icon "
+              style="width: 46px; height: 46px; line-height: 46px; font-size: 14px; background: rgb(41, 121, 255);"
+              type="button"
+              class="btn btn-primary dropdown-toggle"
+              data-bs-toggle="dropdown">
+
+        </span>
+    <span class="hrv-avatar-string" style="line-height: 46px;">T</span>
+    <!-- <span content="Trung"
+    class="hrv-avatar hrv-avatar-circle hrv-avatar-icon "
+    style="width: 46px; height: 46px; line-height: 46px; font-size: 14px; background: rgb(41, 121, 255);"
+    id="dropdownMenu1"
+    type="button">
+    <span class="hrv-avatar-string" style="line-height: 46px;">T</span> -->
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+</div>
+</body>
+<th:block th:replace="layout/script::script "/>
+</html>

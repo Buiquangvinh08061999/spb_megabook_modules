@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"/>
+  <title></title>
+</head>
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="depots">
+  <main id="_main_content_" class="ui-main">
+    <div class="wrapper-block">
+      <div class="position-relative">
+        <div class="padding-container">
+          <div class="row no-gutters pb-4">
+            <div class="col align-items-center d-flex"><p class="title-page">Danh sách nhà cung cấp</p>
+            </div>
+<!--            <div class="col-auto pl-3">-->
+<!--              <a href="/inventory-management/create-warehouse">-->
+<!--                <button class="btn btn-primary"  style="padding: 10px 15px">-->
+<!--                  <svg class="svg-next-icon svg-next-icon-size-16" width="16" height="16">-->
+<!--                    <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">-->
+<!--                      <path fill-rule="evenodd" clip-rule="evenodd"-->
+<!--                            d="M6.99992 0.333374C3.31992 0.333374 0.333252 3.32004 0.333252 7.00004C0.333252 10.68 3.31992 13.6667 6.99992 13.6667C10.6799 13.6667 13.6666 10.68 13.6666 7.00004C13.6666 3.32004 10.6799 0.333374 6.99992 0.333374ZM6.33325 3.66671V6.33337H3.66658V7.66671H6.33325V10.3334H7.66658V7.66671H10.3333V6.33337H7.66658V3.66671H6.33325ZM1.66659 7.00004C1.66659 9.94004 4.05992 12.3334 6.99992 12.3334C9.93992 12.3334 12.3333 9.94004 12.3333 7.00004C12.3333 4.06004 9.93992 1.66671 6.99992 1.66671C4.05992 1.66671 1.66659 4.06004 1.66659 7.00004Z"></path>-->
+<!--                    </svg>-->
+<!--                  </svg>-->
+<!--                  <span class="ml-3 d-none d-sm-inline-block">Tạo kho hàng</span>-->
+<!--              </button>-->
+<!--            </a>-->
+<!--            </div>-->
+          </div>
+          <div>
+
+            <div class="omni-tabs-wrapper ">
+              <ul role="tablist" class="omni-tabs false">
+                <li class="omni-tab-container"><a class="omni-tab omni-tab-selected"><span
+                        class="text-black">Tất cả</span></a></li>
+                <li class="false omni-disclosureTab"><a class="omni-disclosureActivator"><span
+                        class="text-black"><span class="mr-2">Xem thêm</span><svg
+                        class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90" width="10"
+                        height="10"><svg xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 451.846 451.847"><g><path
+                        d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></g></svg></svg></span></a>
+                </li>
+              </ul>
+              <div class="omni-tabs omni-tabMeasurer">
+                <li class="omni-tab-container"><a class="omni-tab omni-tab-selected"><span
+                        class="text-black">Tất cả</span></a></li>
+                <a class="omni-disclosureActivator"><span class="text-black"><span
+                        class="mr-2">Xem thêm</span><svg
+                        class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90" width="10"
+                        height="10"><svg xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 451.846 451.847"><g><path
+                        d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></g></svg></svg></span></a>
+              </div>
+              <div class="position-relative">
+                <div class="table-list--config">
+                  <div class="ui-table-listing-container">
+
+                    <table id="tbListWarehouses" class="ui-table">
+                      <thead>
+                      <tr>
+                        <th class="table-header--name">#</th>
+                        <th class="table-header--name"><span>Tên kho</span></th>
+                        </th>
+                        <th class="table-header--quantity text-left"><span>Số điện thoại</span>
+                        </th>
+                        <th class="table-header--email"><span>Email</span></th>
+                        <th class="table-header--email"><span>Địa chỉ</span></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+
+
+
+                      </tbody>
+
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="_container_portal_"></div>
+  </main>
+</div>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+
+
+<script>
+
+  const page = {
+    urls: {
+      warehouseAPI: App.BASE_URL_WAREHOUSE
+    },
+    elements: {}
+  }
+
+  page.elements.tbListWarehouses = $("#tbListWarehouses");
+
+  let supplier = null;
+
+  $(() => {
+
+    supplier = page.elements.tbListWarehouses.DataTable({
+      ajax: {
+        contentType: "application/json",
+        url: page.urls.warehouseAPI,
+        type: "GET",
+        dataSrc: ""
+      },
+      lengthMenu: [
+        [5, 10, 15, -1],
+        ["5", "10", "15", "All"]
+      ],
+      searching: true,
+      select: true,
+      bDestroy: true,
+      columns: [
+        {
+          data: "id",
+          width: 10
+        },
+        {
+          data: "title"
+        },
+        {
+          data: "phone"
+        },
+        {
+          data: "email"
+        },
+        {
+          data: "locationRegion",
+          render: function(locationRegion) {
+            return `${locationRegion.wardName}, ${locationRegion.districtName}, ${locationRegion.provinceName}`;
+          }
+        }
+      ]
+    })
+  })
+
+
+</script>
+
+</body>
+</html>

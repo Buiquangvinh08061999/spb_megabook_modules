@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <title></title>
+</head>
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="create-suppliers">
+    <main id="_main_content_" class="ui-main">
+
+        <div class="wrapper-block">
+            <div class="ui-title-bar-container max-width-center">
+                <div class="row">
+                    <div class="col-11 col-lg-6 mb-2 mb-sm-0">
+                        <div class="ui-toolbar-info">
+                            <div class="ui-toolbar-head">Thông tin nhà cung cấp</div>
+                            <div>Vui lòng cung cấp các thông tin về nhà cung cấp sẽ tạo</div>
+                        </div>
+                    </div>
+                    <div class="col-1 col-lg-6 mb-2 mb-sm-0">
+                        <a href="/inventory-management/suppliers">
+                            <button class="btn btn-outline-primary float-right">Quay lại</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <form id="formCreateSupplier">
+            <div class="padding-container">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="wrapper-content mb-5">
+                            <div class="ui-information">
+                                <div class="ui-information-head"><span
+                                        class="ui-information-title">Thông tin chung</span></div>
+                                <div class="ui-information-body">
+                                    <div class="form-group px-0">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12"><label class="label-input-group">Nhà cung cấp</label>
+                                                <div class=""><input autocomplete="on" type="text" class="next-input" id="titleCre"
+                                                                     placeholder="Nhập tên nhà cung cấp" value=""></div>
+                                            </div>
+                                            <div class="col-sm-6 col-12"><label class="label-input-group">Mã số thuế</label>
+                                                <div class=""><input autocomplete="on" type="text" class="next-input" id="taxCodeCre"
+                                                                     placeholder="Nhập mã số thuế" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group px-0 pb-0">
+
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12 pt-16"><label class="label-input-group">Tỉnh/Thành phố</label>
+                                                <div class="trigger omni-selection ">
+                                                    <span>
+                                                        <div class="omni-input-wrapper ">
+                                                            <select title="" placeholder="Chọn Tỉnh/Thành phố" id="provinceCre"
+                                                                    class="omni-input" type="text" utocomplete="new-password" value="">
+
+                                                            </select>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12 pt-16"><label class="label-input-group">Quận/Huyện</label>
+                                                <div class="trigger omni-selection ">
+                                                    <span>
+                                                        <div class="omni-input-wrapper ">
+                                                            <select title="" placeholder="Chọn Quận/Huyện" id="districtCre"
+                                                                class="omni-input " type="text" autocomplete="new-password" alue="">
+
+                                                            </select>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-12 pt-16"><label class="label-input-group">Phường/Xã/Thị trấn</label>
+                                                <div class="trigger omni-selection">
+                                                    <span>
+                                                        <div class="omni-input-wrapper">
+                                                            <select title="" placeholder="Chọn Phường/Xã/Thị trấn" id="wardCre"
+                                                                class="omni-input " type="text" autocomplete="new-password" value="">
+
+                                                            </select>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12"><label class="label-input-group">Địa chỉ</label>
+                                                <div class=""><input autocomplete="on" type="text" id="addressCre"
+                                                                     class="next-input" placeholder="Nhập địa chỉ" value=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="wrapper-content mb-5">
+                            <div class="ui-information">
+                                <div class="ui-information-head"><span class="ui-information-title">Người liên hệ</span>
+                                </div>
+                                <div class="ui-information-body">
+                                    <div class="form-group px-0">
+                                        <div class="row">
+                                            <div class="col-12"><label class="label-input-group">Tên người liên
+                                                hệ</label>
+                                                <div class=""><input autocomplete="on" type="text" id="fullNameCre"
+                                                                     class="next-input"
+                                                                     placeholder="Nhập tên người liên hệ" value=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group px-0">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12"><label class="label-input-group">Địa chỉ
+                                                email</label>
+                                                <div class=""><input autocomplete="on" type="text" id="emailCre"
+                                                                     class="next-input" placeholder="Nhập địa chỉ email"
+                                                                     step="1" value=""></div>
+                                            </div>
+                                            <div class="col-sm-6 col-12"><label class="label-input-group">Số điện
+                                                thoại</label>
+                                                <div class=""><input autocomplete="on" type="text" id="phoneCre"
+                                                                     class="next-input" placeholder="Nhập số điện thoại" value=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btnCreateSupplier" type="button" class="btn btn-primary btn-lg float-right">Lưu</button>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <div class="ui-information wrapper-content">
+                            <div class="form-group px-0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="ui-information-head"><span
+                                                class="ui-information-title">Ghi chú</span></div>
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0 pb-0"><textarea placeholder="Nhập ghi chú..." id="noteCre"
+                                                                                        rows="4" class="hrv-ui-textarea"
+                                                                                        style="overflow: hidden; overflow-wrap: break-word; height: 88px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="display-none"></div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+
+<script>
+    
+    const page = {
+        urls: {
+            getAllProvinces: App.BASE_URL_PROVINCE + "/",
+            getAllDistricts: App.BASE_URL_PROVINCE + "/district",
+            getAllWards: App.BASE_URL_PROVINCE + "/ward",
+            createSupplierAPI: App.BASE_URL_SUPPLIER + "/create"
+        },
+        elements: {}
+    }
+
+    page.elements.provinceCre = $("#provinceCre");
+    page.elements.districtCre = $("#districtCre");
+    page.elements.wardCre = $("#wardCre");
+
+    page.elements.titleCre = $("#titleCre");
+    page.elements.taxCodeCre = $("#taxCodeCre");
+    page.elements.addressCre = $("#addressCre");
+    page.elements.fullNameCre = $("#fullNameCre");
+    page.elements.emailCre = $("#emailCre");
+    page.elements.phoneCre = $("#phoneCre");
+    page.elements.noteCre = $("#noteCre");
+
+    page.elements.formCreateSupplier = $("#formCreateSupplier");
+    page.elements.btnCreateSupplier = $("#btnCreateSupplier");
+    
+
+    let supplier = new Supplier();
+    let locationRegion = new LocationRegion();
+
+
+    function getAllProvincesCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllProvinces
+        })
+            .done(data => {
+                page.elements.provinceCre.empty();
+                drawProvinces(page.elements.provinceCre, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllDistrictsCre(provinceId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllDistricts + "/" + provinceId
+        })
+            .done(data => {
+                page.elements.districtCre.empty();
+                drawDistricts(page.elements.districtCre, data.results);
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllWardsCre(districtId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllWards + "/" + districtId
+        })
+            .done(data => {
+                page.elements.wardCre.empty();
+                drawWards(page.elements.wardCre, data.results);
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function drawProvinces(elem, provinces) {
+        $.each(provinces, (i, item) => {
+            let str = `<option value="${item.province_id}"> ${item.province_name} </option> `;
+            elem.append(str);
+        })
+    }
+
+    function drawDistricts(elem, districts) {
+        $.each(districts, (i, item) => {
+            let str = `<option value="${item.district_id}"> ${item.district_name} </option>`;
+            elem.append(str);
+        })
+    }
+
+    function drawWards(elem, wards) {
+        $.each(wards, (i, item) => {
+            let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+            elem.append(str);
+        })
+    }
+
+    getAllProvincesCre().then(() => {
+        let provinceId = page.elements.provinceCre.val();
+        getAllDistrictsCre(provinceId).then(() => {
+            let districtId = page.elements.districtCre.val();
+            getAllWardsCre(districtId);
+        })
+    })
+
+    page.elements.provinceCre.on('change', function () {
+        let provinceId = page.elements.provinceCre.val();
+        getAllDistrictsCre(provinceId).then(() => {
+            let districtId = page.elements.districtCre.val();
+            getAllWardsCre(districtId);
+        })
+    })
+
+    page.elements.districtCre.on('change', function () {
+        let districtId = page.elements.districtCre.val();
+        getAllWardsCre(districtId);
+    })
+
+
+    function doCreateSupplier() {
+        supplier.title = page.elements.titleCre.val();
+        supplier.taxCode = page.elements.taxCodeCre.val();
+
+        locationRegion.provinceId = page.elements.provinceCre.val();
+        locationRegion.provinceName = $("#provinceCre :selected").text();
+        locationRegion.districtId = page.elements.districtCre.val();
+        locationRegion.districtName = $("#districtCre :selected").text();
+        locationRegion.wardId = page.elements.wardCre.val();
+        locationRegion.wardName = $("#districtCre :selected").text();
+        locationRegion.address = page.elements.addressCre.val();
+
+        supplier.fullName = page.elements.fullNameCre.val();
+        supplier.email = page.elements.emailCre.val();
+        supplier.phone = page.elements.phoneCre.val();
+        supplier.note = page.elements.noteCre.val();
+
+        supplier.locationRegion = locationRegion;
+
+        $.ajax({
+            headers: {
+                accept: "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: page.urls.createSupplierAPI,
+            data: JSON.stringify(supplier)
+        })
+            .done(data => {
+                supplier = data;
+                locationRegion = supplier.locationRegion;
+                page.elements.formCreateSupplier[0].reset();
+                App.SweetAlert.showSuccessAlert("Đã thêm nhà cung cấp!");
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    page.elements.btnCreateSupplier.on("click", () => {
+        doCreateSupplier();
+    })
+
+
+
+
+</script>
+
+</body>
+</html>

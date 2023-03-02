@@ -1,0 +1,222 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<div class="order-detail">
+
+    <main id="_main_content_" class="ui-main">
+
+
+        <div class="wrapper-block">
+
+            <div>
+                <th:block th:object="${order}">
+                    <div class="order-detail-header ui-title-bar-container max-width-center">
+                        <div class="row align-items-start">
+                            <div class="col-lg col-sm-12">
+                                <div class="order-detail--list-status">
+                                    <div class="ui-toolbar-product-info">
+                                        <div class="ui-product-body pl-0">Mã đơn hàng</div>
+                                        <div class="ui-product-head">
+                                            <div class="table-break-word"><strong class="order-detail--list-status-code" th:text="${order.id}"></strong>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="ui-toolbar-product-info">
+                                        <div class="ui-product-body">Trạng thái đơn hàng</div>
+                                        <div class="ui-product-head">
+                                            <div class="table-break-word"><span class="order-detail--list-status-name"><div
+                                                    class="status-component"><span
+                                                    class="circle-status mr-2 circle-status-2"></span><span
+                                                    class="badges--order-payment-status-2" th:text="${order.orderStatus.titleVi}"></span></div>
+                                        </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div><span style="font-size: 20px;font-weight: bold">Ngày tạo đơn hàng:</span> <span style="font-size: 20px" th:text="${order.CreateAt}"></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </th:block>
+
+                <div class="padding-container">
+                    <div class="row">
+                        <div class="col-lg-9 col-12">
+                            <div class="omni-layout-card card-default">
+
+                                <div>
+                                    <div class="ui-table-normal-container">
+                                        <table class="ui-table ui-table-vertical-top">
+                                            <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th class="text-center">Số lượng</th>
+                                                <th class="text-right ">Giá</th>
+                                                <th class="text-right">Thành tiền</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <th:block th:each="orderItem : ${orderItemList}">
+                                                <tr>
+                                                    <td>
+                                                        <div class="order-block--table">
+                                                            <div class="order-block--table-image">
+                                                                <div class="table-cell--image">
+                                                                    <img class="box-image" th:src="@{${orderItem.item.product.urlImage}}" >
+                                                                </div>
+                                                            </div>
+                                                            <div class="order-block--table-content">
+                                                                <strong class="mb-2 table-break-word"> <span th:text="${orderItem.productTitle}"></span></strong>
+                                                                <p class="mb-2 text-secondary" th:text="'SKU:'+ ${orderItem.productSku}"></p>
+                                                                <p class="" th:text="'Còn tồn '+ ${orderItem.item.available} +' trong kho'"></p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="align-middle text-center">
+                                                        <div th:text="${orderItem.itemQuantity}"></div>
+                                                    </td>
+                                                    <td class=" align-middle text-right">
+                                                        <div th:text="${#numbers.formatInteger(orderItem.itemPrice, 0, 'POINT')} + ' ₫'"></div>
+                                                    </td>
+
+                                                    <td class="align-middle text-right text-success">
+                                                        <div th:text="${#numbers.formatInteger(orderItem.totalPrice, 0, 'POINT')} + ' ₫'"></div>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="omni-layout-card card-default">
+                                <div class="omni-layout-card--section">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="ui-information-body pb-4">
+
+                                                <th:block th:object="${sumAllQuantity}">
+                                                    <div class="row">
+                                                        <div class="col">Số lượng sản phẩm</div>
+                                                        <div class="col-auto text-right" th:text="${sumAllQuantity}"></div>
+                                                    </div>
+                                                </th:block>
+
+                                            </div>
+                                            <th:block th:object="${order}">
+                                                <div class="ui-information-body pb-4">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="mb-1 font-weight-bold text-primary">Tổng giá trị đơn hàng</p>
+                                                        </div>
+                                                        <div class="col-auto text-right font-weight-bold text-primary" th:text="${#numbers.formatInteger(order.grandTotal, 0, 'POINT')} + ' ₫'"></div>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+                                            <div class="pb-0 text-right">
+                                                <div class="d-inline-block"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3 col-12">
+                            <div class="omni-layout-card card-default">
+                                <div class="omni-layout-card--header line-bottom"><span class="header-title">Xác Thực Đơn Hàng</span>
+                                </div>
+                                <div class="omni-layout-card--section">
+                                    <p class="mb-0">
+                                        <svg class="svg-next-icon mr-3 svg-next-icon-size-16" width="16" height="16">
+                                            <svg viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M1.41663 8.50002C1.41663 4.59002 4.58996 1.41669 8.49996 1.41669C12.41 1.41669 15.5833 4.59002 15.5833 8.50002C15.5833 12.41 12.41 15.5834 8.49996 15.5834C4.58996 15.5834 1.41663 12.41 1.41663 8.50002ZM7.08329 10.0371L11.7512 5.36918L12.75 6.37502L7.08329 12.0417L4.24996 9.20835L5.24871 8.2096L7.08329 10.0371Z"
+                                                      fill="#2962FF"></path>
+                                            </svg>
+                                        </svg>
+                                        Đơn hàng đã được xác thực
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card card-default">
+                                <div class="omni-layout-card--header line-bottom"><span class="header-title">Thông Tin Người Mua</span>
+                                </div>
+                                <th:block th:object="${order}">
+                                    <div class="omni-layout-card--section">
+
+                                        <a class="d-block" th:href="'/customers/detail/'+ ${customer.id}" th:text="${customer.fullName}"></a>
+
+                                        <p th:text="${customer.email}"></p>
+
+<!--                                        <div class="mt-2 color-black table-break-word d-flex justify-content-between">-->
+<!--                                            <span class="mr-1">• <span class="label-hover-description cursor-pointer">Đã đặt</span>-->
+<!--                                            </span><b>3 Đơn hàng (chưa làm)</b>-->
+<!--                                        </div>-->
+<!--                                        <div class="mt-2 color-black table-break-word d-flex justify-content-between"><span-->
+<!--                                                class="mr-1">• <span class="label-hover-description cursor-pointer">Doanh thu tích lũy</span></span><span-->
+<!--                                                class="text-nowrap font-weight-bold">165,000 ₫(chưa làm)</span>-->
+<!--                                        </div>-->
+
+                                    </div>
+
+                                </th:block>
+
+
+                            </div>
+<!--                            <div class="omni-layout-card card-default">-->
+<!--                                <div class="omni-layout-card&#45;&#45;section">-->
+<!--                                    <div class="omni-layout-card&#45;&#45;section-section">-->
+<!--                                        <p class="header-title">Nhân Viên Tạo</p>-->
+<!--                                        <div class="table-break-word"><a href="">Trung</a>-->
+
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+
+<!--                    <div class="order-delete&#45;&#45;block">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-3 col-3">-->
+<!--                                <div class="">-->
+<!--                                    <button class="btn btn-primary mr-0"><span><a href="/orders/pending" class="text-decoration-none text-dark">Quay lại</a></span> </button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+<script>
+
+</script>
+</body>
+</html>

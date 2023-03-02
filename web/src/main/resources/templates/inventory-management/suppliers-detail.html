@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <title></title>
+</head>
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<th:block th:object="${supplier}">
+<div class="suppliers-detail">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div>
+                <div class="padding-container inventory-supplier--container">
+                    <div class="display-none"></div>
+                    <div class="col-12 pr-0 mb-4 d-flex flex-row-reverse">
+                        <div class="dropdown ui-popover-arrow-right ui-popover-placement-right ">
+                            <a href="/inventory-management/suppliers">
+                                <button class="btn btn-outline-primary float-end">Quay lại</button>
+                            </a>
+                            <div class="ui-popover">
+                                <div class="ui-popover__tooltip"></div>
+                                <div class="ui-popover__content-wrapper">
+                                    <div class="ui-popover__content" style="width: 185px;">
+                                        <div class="ui-popover__pane">
+                                            <div class="my-2"><p class="ellipsis-item text-danger">Tạm ngừng nhà cung
+                                                cấp</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-lg-8 col-12">
+                            <div class="ui-information wrapper-content mb-5">
+                                <div class="ui-information-body">
+                                    <div class="row form-group pt-0 flex-nowrap">
+                                        <div class="col-6 text-left ui-toolbar-info">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <div class="supplier-info-name" th:text="${supplier.title}"></div>
+                                            </div>
+                                            <div class="ui-toolbar-body text-transform-none">
+                                                <div class="company-info-text" th:text="${supplier.taxCode}"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-right debt-wrapper">
+                                            <div class="company-info-text">Tổng mua</div>
+                                            <div class="info-price mt-2">0 ₫ (chưa có dữ liệu)</div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group pt-0 flex-nowrap">
+                                        <div class="row mt-5">
+                                            <div class="col-12"><label class="label-input-group">Ghi chú</label>
+                                                <br>
+                                                <span th:text="${supplier.note}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-lg-4">
+                            <div class="display-none"></div>
+                            <div class="ui-information wrapper-content mb-5">
+                                <div class="ui-information-head d-flex">
+                                    <span class="ui-information-title">Thông tin liên hệ</span>
+                                </div>
+                                <br>
+                                <p th:text="${supplier.fullName}"></p>
+                                <p class="text-primary" th:text="${supplier.email}"></p>
+                                <div class="ui-information-head d-flex mt-4"
+                                     style="padding-top: 16px; box-shadow: rgba(38, 50, 56, 0.1) 0px 1px 0px inset; padding-bottom: 10px;">
+                                    <span class="ui-information-title">Địa chỉ</span></div>
+                                <p th:text="${locationRegion.address}"></p>
+                                <p><th:block th:text="${locationRegion.wardName}"/>, <th:block th:text="${locationRegion.districtName}"/>, <th:block th:text="${locationRegion.provinceName}"/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+</th:block>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+
+</body>
+</html>

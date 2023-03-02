@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="create-product">
+    <main id="_main_content_" class="ui-main">
+
+        <div class="padding-container pb-0">
+            <div class="row">
+                <div class="col-11"><label class="title-header">Tạo sản phẩm</label></div>
+                <div class="col-1">
+                    <a href="/products">
+                        <button class="btn btn-outline-primary float-right">Quay lại</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <form id="formCreateProduct">
+            <div class="wrapper-block">
+                <div class="padding-container pb-0">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-head">
+                                        <span class="ui-information-title">Thông tin chung</span>
+                                    </div>
+                                    <div class="ui-information-body">
+                                        <div class="form-group px-0">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-12">
+                                                    <label for="titleCre" class="label-input-group">Tên sản phẩm</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="titleCre" name="titleCre"
+                                                               class="next-input" placeholder="Nhập tên sản phẩm"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Danh mục</label>
+                                                    <div class="trigger omni-selection ">
+                                                    <span>
+                                                        <div class="omni-input-wrapper ">
+                                                            <select class="omni-input" id="categoryCre" name="categoryCre">
+
+                                                            </select>
+                                                        </div>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0 ">
+                                            <div class="row">
+
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Mã SKU</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="skuCre" name="skuCre"
+                                                               class="next-input" placeholder="Nhập mã SKU"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Đơn vị sản phẩm</label>
+                                                    <div class="trigger omni-selection ">
+                                                    <span>
+                                                        <div class="omni-input-wrapper ">
+                                                            <select class="omni-input" id="unitCre" name="unitCre">
+
+                                                            </select>
+                                                        </div>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0 ">
+                                            <div class="row">
+
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Tác giả</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="authorCre" name="authorCre"
+                                                               class="next-input" placeholder="Nhập tác giả"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Nhà xuất bản</label>
+                                                    <div class="trigger omni-selection ">
+                                                    <span>
+                                                        <div class="omni-input-wrapper ">
+                                                            <select class="omni-input" id="publisherCre" name="publisherCre">
+
+                                                            </select>
+                                                        </div>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0 ">
+                                            <div class="row">
+
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Giá vốn</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="costPriceCre" name="authorCre"
+                                                               class="next-input" placeholder="Nhập giá vốn"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Giá bán</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="priceCre" name="authorCre"
+                                                               class="next-input" placeholder="Nhập giá bán"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0 ">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-12">
+                                                    <label for="describeCre" class="label-input-group">Mô tả sản phẩm</label>
+                                                    <input autocomplete="on" type="text" id="describeCre" name="describeCre"
+                                                           class="next-input" placeholder="Mô tả sản phẩm"
+                                                           value="">
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label for="urlImageCre" class="label-input-group">Hình ảnh sản phẩm</label>
+                                                    <input autocomplete="on" type="text" id="urlImageCre" name="urlImageCre"
+                                                           class="next-input" placeholder="Vui lòng nhập đường dẫn của ảnh"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="padding-container pt-0 ">
+                    <div class="row pt-4 mx-0">
+                        <div class="col">
+                        </div>
+                        <div class="col-auto pr-0">
+                            <button id="btnCreateProduct" type="button"
+                                    class="btn btn-primary ml-3 GTM-luu_san_pham btn-lg">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="display-none"></div>
+            </div>
+        </form>
+
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+    
+    const page = {
+        urls: {
+            categoryAPI: App.BASE_URL_CATEGORY,
+            unitAPI: App.BASE_URL_UNIT,
+            publisherAPI: App.BASE_URL_PUBLISHER,
+            createProductAPI: App.BASE_URL_PRODUCT + "/create"
+        },
+        elements: {}
+    }
+    
+    page.elements.categoryCre = $('#categoryCre');
+    page.elements.unitCre = $('#unitCre');
+    page.elements.publisherCre = $('#publisherCre');
+
+    page.elements.titleCre = $("#titleCre");
+    page.elements.skuCre = $("#skuCre");
+    page.elements.authorCre = $("#authorCre");
+    page.elements.costPriceCre = $("#costPriceCre");
+    page.elements.priceCre = $("#priceCre");
+    page.elements.describeCre = $("#describeCre");
+    page.elements.urlImageCre = $("#urlImageCre");
+
+    page.elements.formCreateProduct = $("#formCreateProduct");
+    page.elements.btnCreateProduct = $("#btnCreateProduct");
+
+
+    let product = new Product();
+
+    let category = new Category();
+    let unit = new Unit();
+    let publisher = new Publisher();
+
+    let item = new Item();
+
+
+    function drawCategories(elem, categories) {
+        $.each(categories, (i, item) => {
+            let str = `<option value="${item.id}">${item.title}</option>`;
+            elem.append(str);
+        })
+    }
+
+    function getAllCategoriesCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.categoryAPI
+        })
+            .done(data => {
+                page.elements.categoryCre.empty();
+                drawCategories(page.elements.categoryCre, data);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    getAllCategoriesCre();
+
+    function drawUnits(elem, units) {
+        $.each(units, (i, item) => {
+            let str = `<option value="${item.id}">${item.title}</option>`;
+            elem.append(str);
+        })
+    }
+
+    function getAllUnitsCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.unitAPI
+        })
+            .done(data => {
+                page.elements.unitCre.empty();
+                drawUnits(page.elements.unitCre, data);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    getAllUnitsCre();
+
+    function drawPublishers(elem, publishers) {
+        $.each(publishers, (i, item) => {
+            let str = `<option value="${item.id}">${item.title}</option>`;
+            elem.append(str);
+        })
+    }
+
+    function getAllPublishersCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.publisherAPI
+        })
+            .done(data => {
+                page.elements.publisherCre.empty();
+                drawPublishers(page.elements.publisherCre, data);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    getAllPublishersCre();
+
+
+    //doCreate
+    function doCreateProduct() {
+        product.title = page.elements.titleCre.val();
+        product.sku = page.elements.skuCre.val();
+        product.author = page.elements.authorCre.val();
+        product.describe = page.elements.describeCre.val();
+        product.urlImage = page.elements.urlImageCre.val();
+        product.costPrice = page.elements.costPriceCre.val();
+        product.price = page.elements.priceCre.val();
+        product.deleted = 0;
+
+        category.id = page.elements.categoryCre.val();
+        category.title = $('#categoryCre :selected').text();
+        unit.id = page.elements.unitCre.val();
+        unit.title = $('#unitCre :selected').text();
+        publisher.id = page.elements.publisherCre.val();
+        publisher.title = $('#publisherCre :selected').text();
+
+        product.category = category;
+        product.unit = unit;
+        product.publisher = publisher;
+
+        $.ajax({
+            headers: {
+                accept: "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: page.urls.createProductAPI,
+            data: JSON.stringify(product)
+        })
+            .done(data => {
+                product = data;
+                category = product.category;
+                unit = product.unit;
+                publisher = product.publisher;
+
+                page.elements.formCreateProduct[0].reset();
+                App.SweetAlert.showSuccessAlert("Tạo sản phẩm thành công!");
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    page.elements.btnCreateProduct.on("click", () => {
+        doCreateProduct();
+    })
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

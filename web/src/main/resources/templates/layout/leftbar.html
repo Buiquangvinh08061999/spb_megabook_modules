@@ -1,0 +1,341 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="leftbar">
+
+    <div class="left-bar">
+        <aside class="omnimenu-ui">
+            <div class="partial-menu-left">
+                <div class="aside-logo"><a aria-current="page" class="active">
+                    <div class="row no-gutters">
+                        <div class="col-auto title-logo-primary">
+
+                        <img src="../../static/assets/image/logo.png" style="margin: 10px 45px;-webkit-transform: scale(1.5,1.5);">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="partial-menu--top">
+                    <div class="next-nav-menu-left">
+                        <div class="main-menuLeft--block">
+                            <div class="nav-left menu-main--block">
+                                <ul class="nav-list-items" style="padding-left: 0px">
+                                    <li class="next-nav-item my-3">
+                                        <a class="div-detect next-nav-link d-flex justify-content-between  "
+                                           href="/home">
+                                            <div class="menu-parent d-flex align-items-center">
+                                                <div>
+                                                <span>
+                                                    <span class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24">
+                                                        <svg width="24" height="24" fill="#7790B6">
+                                                            <svg viewBox="0 0 24 24">
+                                                            <path
+                                                                    d="M23 8C23 9.1 22.1 10 21 10C20.82 10 20.65 9.98 20.49 9.93L16.93 13.48C16.98 13.64 17 13.82 17 14C17 15.1 16.1 16 15 16C13.9 16 13 15.1 13 14C13 13.82 13.02 13.64 13.07 13.48L10.52 10.93C10.36 10.98 10.18 11 10 11C9.82 11 9.64 10.98 9.48 10.93L4.93 15.49C4.98 15.65 5 15.82 5 16C5 17.1 4.1 18 3 18C1.9 18 1 17.1 1 16C1 14.9 1.9 14 3 14C3.18 14 3.35 14.02 3.51 14.07L8.07 9.52C8.02 9.36 8 9.18 8 9C8 7.9 8.9 7 10 7C11.1 7 12 7.9 12 9C12 9.18 11.98 9.36 11.93 9.52L14.48 12.07C14.64 12.02 14.82 12 15 12C15.18 12 15.36 12.02 15.52 12.07L19.07 8.51C19.02 8.35 19 8.18 19 8C19 6.9 19.9 6 21 6C22.1 6 23 6.9 23 8Z">
+                                                            </path>
+                                                        </svg>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                                    <span class="text-menu-new">Tổng quan</span>
+                                                </div>
+                                                <div>
+
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="next-nav-item my-3">
+                                        <a class="div-detect next-nav-link d-flex justify-content-between"
+                                           id="order-tab"
+                                           data-bs-toggle="collapse" role="button"
+                                           data-bs-target="#multiCollapseExample1" aria-expanded="false"
+                                           aria-controls="multiCollapseExample1">
+                                            <div class="menu-parent d-flex align-items-center">
+                                                <div>
+                                                    <span>
+                                                        <span class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24">
+                                                            <svg width="24" height="24" fill="#7790B6">
+                                                                <svg viewBox="0 0 24 24">
+                                                                    <path
+                                                                            d="M18.2963 11.97C17.9563 12.59 17.2963 13 16.5463 13H9.09628L7.99628 15H19.9963V17H7.99628C6.47628 17 5.51628 15.37 6.24628 14.03L7.59628 11.59L3.99628 4H1.99628V2H5.26628L6.20628 4H21.0063C21.7663 4 22.2463 4.82 21.8763 5.48L18.2963 11.97ZM19.3063 6H7.15628L9.52628 11H16.5463L19.3063 6ZM7.99628 18C6.89628 18 6.00628 18.9 6.00628 20C6.00628 21.1 6.89628 22 7.99628 22C9.09628 22 9.99628 21.1 9.99628 20C9.99628 18.9 9.09628 18 7.99628 18ZM16.0063 20C16.0063 18.9 16.8963 18 17.9963 18C19.0963 18 19.9963 18.9 19.9963 20C19.9963 21.1 19.0963 22 17.9963 22C16.8963 22 16.0063 21.1 16.0063 20Z">
+                                                                    </path>
+                                                                </svg>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                    <span class="text-menu-new">Đơn hàng</span>
+                                                </div>
+                                                <div>
+                                                    <span class="omni-svg-create svg-next-icon icon-arrow-menu  svg-next-icon-size-24">
+                                                        <svg width="24" height="24" fill="#7790B6">
+                                                            <svg viewBox="0 0 24 24">
+                                                                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z">
+                                                                </path>
+                                                            </svg>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="showCreateOrder"
+                                                   href="/orders/create">
+                                                    <span class="pr-2 text-menu-new">Tạo đơn hàng</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="showOrderList"
+                                                   href="/orders">
+                                                    <span class="pr-2 text-menu-new">Tất cả đơn hàng</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child  text-decoration-none "
+                                                   id="showOrderPending"
+                                                   href="/orders/pending">
+                                                    <span class="pr-2 text-menu-new">Đơn hàng đang chờ xử lí</span>
+                                                </a>
+                                            </div>
+
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child  text-decoration-none "
+                                                   href="/orders/completed">
+                                                    <span class="pr-2 text-menu-new">Đơn hàng đã hoàn thành</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child  text-decoration-none "
+                                                   href="/orders/canceled">
+                                                    <span class="pr-2 text-menu-new">Đơn hàng đã hủy</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="next-nav-item my-3">
+                                        <a class="div-detect next-nav-link d-flex justify-content-between"
+                                           id="customer-tab"
+                                           data-bs-toggle="collapse" role="button"
+                                           data-bs-target="#multiCollapseExample4" aria-expanded="false"
+                                           aria-controls="multiCollapseExample4">
+                                            <div class="menu-parent d-flex align-items-center">
+                                                <div>
+                                                    <span>
+                                                        <span class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24">
+                                                            <svg width="24" height="24" fill="#7790B6">
+                                                                <svg viewBox="0 0 24 24">
+                                                                    <path
+                                                                            d="M21.41 11.58L12.41 2.58C12.05 2.22 11.55 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.55 2.22 12.05 2.59 12.42L11.59 21.42C11.95 21.78 12.45 22 13 22C13.55 22 14.05 21.78 14.41 21.41L21.41 14.41C21.78 14.05 22 13.55 22 13C22 12.45 21.77 11.94 21.41 11.58ZM13 20.01L4 11V4H11V3.99L20 12.99L13 20.01ZM5 6.5C5 5.67157 5.67157 5 6.5 5C7.32843 5 8 5.67157 8 6.5C8 7.32843 7.32843 8 6.5 8C5.67157 8 5 7.32843 5 6.5Z">
+                                                                    </path>
+                                                                </svg>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                    <span class="text-menu-new">Sản phẩm</span>
+                                                </div>
+                                                <div>
+                                                    <span class="omni-svg-create svg-next-icon icon-arrow-menu  svg-next-icon-size-24">
+                                                        <svg width="24" height="24" fill="#7790B6">
+                                                            <svg
+                                                                viewBox="0 0 24 24">
+                                                                <path
+                                                                        d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z">
+                                                                </path>
+                                                            </svg>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="collapse multi-collapse" id="multiCollapseExample4">
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="create-product"
+                                                   href="/products/create">
+                                                    <span class="pr-2 text-menu-new">Tạo sản phẩm</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="product-list"
+                                                   href="/products">
+                                                    <span class="pr-2 text-menu-new">Danh sách sản phẩm</span>
+                                                </a>
+                                            </div>
+
+
+                                        </div>
+                                    </li>
+                                    <li class="next-nav-item my-3">
+                                        <a class="div-detect next-nav-link d-flex justify-content-between"
+                                           id="invetory-tab"
+                                           data-bs-toggle="collapse" role="button"
+                                           data-bs-target="#multiCollapseExample3" aria-expanded="false"
+                                           aria-controls="multiCollapseExample3">
+                                            <div class="menu-parent d-flex align-items-center">
+                                                <div>
+                                                    <span>
+                                                        <span class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24">
+                                                            <svg width="24" height="24" fill="#7790B6">
+                                                                <svg viewBox="0 0 24 24">
+                                                                    <path
+                                                                            fill-rule="evenodd" d="M19.15 3.55L20.54 5.23C20.83 5.57 21 6.02 21 6.5V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V6.5C3 6.02 3.17 5.57 3.46 5.23L4.84 3.55C5.12 3.21 5.53 3 6 3H18C18.47 3 18.88 3.21 19.15 3.55ZM17.76 5H6.24L5.42 6H18.59L17.76 5ZM5 19V8H19V19H5ZM10.55 14H8L12 10L16 14H13.45V17H10.55V14Z">
+                                                                    </path>
+                                                                </svg>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                    <span class="text-menu-new">Quản lí tồn kho</span>
+                                                </div>
+                                                <div>
+                                                    <span class="omni-svg-create svg-next-icon icon-arrow-menu  svg-next-icon-size-24">
+                                                        <svg width="24" height="24" fill="#7790B6">
+                                                            <svg viewBox="0 0 24 24">
+                                                                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z">
+                                                                </path>
+                                                            </svg>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="collapse multi-collapse" id="multiCollapseExample3">
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="create-import"
+                                                   href="/inventory-management/create-import">
+                                                    <span class="pr-2 text-menu-new">Tạo phiếu đặt</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="inventory"
+                                                   href="/inventory-management">
+                                                    <span class="pr-2 text-menu-new">Chi tiết tồn kho</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="import"
+                                                   href="/inventory-management/import-list">
+                                                    <span class="pr-2 text-menu-new">Tất cả đơn đặt hàng</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="order-to-supplier-pending"
+                                                   href="/inventory-management/import-pending">
+                                                    <span class="pr-2 text-menu-new">Đơn hàng đang chờ nhập</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="order-to-supplier-completed"
+                                                   href="/inventory-management/import-completed">
+                                                    <span class="pr-2 text-menu-new">Đơn hàng đã hoàn thành</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="order-to-supplier-canceled"
+                                                   href="/inventory-management/import-canceled">
+                                                    <span class="pr-2 text-menu-new">Đơn hàng đã hủy</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="suppliers"
+                                                   href="/inventory-management/suppliers">
+                                                    <span class="pr-2 text-menu-new">Nhà cung cấp</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-list--child">
+                                                <a aria-current="page"
+                                                   class="d-block menu-child text-decoration-none"
+                                                   id="depot"
+                                                   href="/inventory-management/warehouses">
+                                                    <span class="pr-2 text-menu-new">Kho hàng</span>
+                                                </a>
+                                            </div>
+
+
+                                        </div>
+                                    </li>
+
+                                    </li>
+
+                                    <li class="next-nav-item my-3"><a
+                                            class="div-detect next-nav-link d-flex justify-content-between  "
+                                            href="/customers">
+                                        <div class="menu-parent d-flex align-items-center">
+                                            <div><span><span
+                                                    class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24"><svg
+                                                    width="24" height="24" fill="#7790B6"><svg
+                                                    viewBox="0 0 24 24">
+                                                                    <path fill-rule="evenodd"
+                                                                          d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM7.07 18.28C7.5 17.38 10.12 16.5 12 16.5C13.88 16.5 16.51 17.38 16.93 18.28C15.57 19.36 13.86 20 12 20C10.14 20 8.43 19.36 7.07 18.28ZM12 14.5C13.46 14.5 16.93 15.09 18.36 16.83C19.38 15.49 20 13.82 20 12C20 7.59 16.41 4 12 4C7.59 4 4 7.59 4 12C4 13.82 4.62 15.49 5.64 16.83C7.07 15.09 10.54 14.5 12 14.5ZM12 6C10.06 6 8.5 7.56 8.5 9.5C8.5 11.44 10.06 13 12 13C13.94 13 15.5 11.44 15.5 9.5C15.5 7.56 13.94 6 12 6ZM10.5 9.5C10.5 10.33 11.17 11 12 11C12.83 11 13.5 10.33 13.5 9.5C13.5 8.67 12.83 8 12 8C11.17 8 10.5 8.67 10.5 9.5Z">
+                                                                    </path>
+                                                                </svg></svg></span></span><span class="text-menu-new">Khách hàng</span>
+                                            </div>
+                                            <div></div>
+                                        </div>
+                                    </a></li>
+                                    <li class="next-nav-item my-3"><a
+                                            class="div-detect next-nav-link d-flex justify-content-between "
+                                            href="/reports">
+
+                                        <div class="menu-parent d-flex align-items-center">
+                                            <div><span><span
+                                                    class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24"><svg
+                                                    width="24" height="24" fill="#7790B6"><svg
+                                                    viewBox="0 0 24 24">
+                                                                    <path
+                                                                            d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM9 10H7V17H9V10ZM11 7H13V17H11V7ZM17 13H15V17H17V13Z">
+                                                                    </path>
+                                                                </svg></svg></span></span><span
+                                                    class="text-menu-new">Báo cáo</span></div>
+                                            <div></div>
+                                        </div>
+                                    </a></li>
+                                    <li class="next-nav-item my-3"><a
+                                            class="div-detect next-nav-link d-flex justify-content-between "
+                                            href="/staffs">
+                                        <div class="menu-parent d-flex align-items-center">
+                                            <div><span><span
+                                                    class="omni-svg-create svg-next-icon next-nav-icon mr-3 svg-next-icon-size-24"><svg
+                                                    width="24" height="24" fill="#7790B6">
+                                                <svg class="svg-icon" viewBox="0 0 24 24">
+                                                    <path d="M15.573,11.624c0.568-0.478,0.947-1.219,0.947-2.019c0-1.37-1.108-2.569-2.371-2.569s-2.371,1.2-2.371,2.569c0,0.8,0.379,1.542,0.946,2.019c-0.253,0.089-0.496,0.2-0.728,0.332c-0.743-0.898-1.745-1.573-2.891-1.911c0.877-0.61,1.486-1.666,1.486-2.812c0-1.79-1.479-3.359-3.162-3.359S4.269,5.443,4.269,7.233c0,1.146,0.608,2.202,1.486,2.812c-2.454,0.725-4.252,2.998-4.252,5.685c0,0.218,0.178,0.396,0.395,0.396h16.203c0.218,0,0.396-0.178,0.396-0.396C18.497,13.831,17.273,12.216,15.573,11.624 M12.568,9.605c0-0.822,0.689-1.779,1.581-1.779s1.58,0.957,1.58,1.779s-0.688,1.779-1.58,1.779S12.568,10.427,12.568,9.605 M5.06,7.233c0-1.213,1.014-2.569,2.371-2.569c1.358,0,2.371,1.355,2.371,2.569S8.789,9.802,7.431,9.802C6.073,9.802,5.06,8.447,5.06,7.233 M2.309,15.335c0.202-2.649,2.423-4.742,5.122-4.742s4.921,2.093,5.122,4.742H2.309z M13.346,15.335c-0.067-0.997-0.382-1.928-0.882-2.732c0.502-0.271,1.075-0.429,1.686-0.429c1.828,0,3.338,1.385,3.535,3.161H13.346z">
+
+                                                    </path>
+                                            </svg>
+                                            </svg></span></span><span
+                                                    class="text-menu-new">Nhân sự</span></div>
+                                            <div></div>
+                                        </div>
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+</th:block>

@@ -1,0 +1,68 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="modal-update-customer-2">
+
+    <div class="modal fade" id="modalUpdateCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cập nhật thông tin khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="formUpdateCustomer">
+                        <div class="row">
+                            <div class="col-lg-6 mt-3">
+                                <label for="fullNameUp">Họ và tên</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Nhập tên đầy đủ" id="fullNameUp">
+                            </div>
+                            <div class="col-lg-6 mt-3">
+                                <label for="emailUp">Email</label>
+                                <input type="email" class="form-control form-control-lg" placeholder="Nhập email" id="emailUp">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mt-3">
+                                <label for="phoneUp">Số điện thoại</label>
+                                <input type="tel" class="form-control form-control-lg" placeholder="Nhập SĐT" id="phoneUp">
+                            </div>
+                            <div class="col-lg-6 mt-3">
+                                <label for="addressUp">Địa chỉ</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Nhập địa chỉ" id="addressUp">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 mt-3">
+                                <label for="provinceUp" class="label-input-group">Tỉnh/Thành phố</label>
+                                <select id="provinceUp" name="provinceUp" type="text" class="form-control form-control-lg">
+
+                                </select>
+                            </div>
+                            <div class="col-lg-4 mt-3">
+                                <label for="districtUp" class="label-input-group">Quận/Huyện</label>
+                                <select id="districtUp" name="districtUp" type="text" class="form-control form-control-lg">
+
+                                </select>
+                            </div>
+                            <div class="col-lg-4 mt-3">
+                                <label for="wardUp" class="label-input-group">Phường/Xã/Thị trấn</label>
+                                <select id="wardUp" name="wardUp" type="text" class="form-control form-control-lg">
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-lg" id="btnUpdateCustomer">
+                        <i class="fas fa-edit"></i>
+                        Cập nhật
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>

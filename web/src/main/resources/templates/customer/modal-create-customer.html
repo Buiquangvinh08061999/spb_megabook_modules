@@ -1,0 +1,82 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="modal-create-customer">
+    <div id="modalCreateCustomer" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-alert-danger hide"></div>
+
+                    <form id="frmUpdateProduct" method="post">
+                        <!--                        <fieldset class="row g-3">-->
+                        <div class="row mb-5">
+                            <div class="col-md-6 ">
+                                <label for="fullname" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control form-control p-4 input-text-size" id="fullname" name="fullname"
+                                       value=""/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control form-control p-4 input-text-size" id="email" name="email"
+                                       value=""/>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="phone" class="form-control form-control p-4 input-text-size" id="phone" name="phone"
+                                       value=""/>
+                            </div>
+
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <input class="form-control form-control p-4 input-text-size" type="text" id="address" name="address"/>
+                            </div>
+
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label for="province" class="form-label">Tỉnh/Thành phố</label>
+                                <select class="form-select p-2 input-text-size" id="province" name="province" >
+                                    <option selected disabled value="0">Chọn Tỉnh/Thành phố </option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="district" class="form-label">Quận/huyện</label>
+                                <select class="form-select p-2 input-text-size" id="district" name="district" >
+                                    <option selected disabled >Chọn Quận/Huyện</option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label for="ward" class="form-label">Phường/xã</label>
+                                <select class="form-select p-2 input-text-size" id="ward" name="ward" >
+                                    <option selected disabled >Chọn Phường/xã</option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!--                        </fieldset>-->
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="btnCreate">Tạo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

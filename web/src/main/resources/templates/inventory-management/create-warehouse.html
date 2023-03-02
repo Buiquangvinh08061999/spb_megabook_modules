@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <title></title>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="create-depot">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div>
+                <div class="padding-container layout-720px">
+                    <div class="col mb-4"><h2 class="ui-heading title-settings mb-4">Thông tin địa chỉ và kho hàng</h2>
+                        <div class="wrapper-content mb-0 settings-location--block">
+                            <div class="ui-information">
+                                <div class="ui-information-body">
+                                    <div class="row">
+                                        <div class="col col-md-12">
+                                            <label class="label-input-group">Tên</label>
+                                            <input autocomplete="on" type="text" class="next-input"
+                                                                 placeholder="Nhập te"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-information-body">
+                                    <div class="row">
+                                        <div class="col col-md-12 pt-16">
+                                            <div class="row">
+                                                <div class="col-6"><label class="label-input-group">Email</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text"
+                                                                         class="next-input" placeholder="Nhập email"/></div>
+                                                </div>
+                                                <div class="col-6"><label class="label-input-group">Điện thoại</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text"
+                                                                         class="next-input" placeholder="Nhập số điện thoại"/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-12 pt-16"><label class="label-input-group">Địa chỉ</label>
+                                            <div ><span><div class="omni-input-wrapper ">
+                                                <input
+                                                    id="addressCre" autocomplete="on"
+                                                                        placeholder="Nhập địa chỉ" class="omni-input" type="text"/>
+                                            </div></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-12 pt-16"><label class="label-input-group">Tỉnh/Thành phố</label>
+                                            <div ><span><div class="omni-input-wrapper">
+                                                <select id="provinceCre" class="omni-input" type="text">
+
+                                                </select>
+                                            </div></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-12 pt-16"><label
+                                                class="label-input-group">Quận/Huyện</label>
+                                            <div ><span><div class="omni-input-wrapper">
+                                                <select id="districtCre" class="omni-input" type="text">
+
+                                                </select>
+                                            </div></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-12 pt-16"><label class="label-input-group">Phường/Xã/Thị trấn</label>
+                                            <div ><span><div class="omni-input-wrapper">
+                                                <select id="wardCre" class="omni-input"
+                                                    type="text">
+
+                                                </select>
+                                            </div></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-right">
+                        <button class="btn btn-primary"><span>Lưu</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+
+</div>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+
+</body>
+</html>

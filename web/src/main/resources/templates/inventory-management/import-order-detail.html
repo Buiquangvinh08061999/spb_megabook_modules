@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<th:block th:object="${importOrder}">
+<div class="import-order-detail">
+  <main id="_main_content_" class="ui-main">
+    <div class="wrapper-block">
+      <div class="padding-container">
+        <div class="">
+          <div class="row">
+            <div class="col-lg-8 col-12">
+              <div class="row">
+                <div class="col-12 col-lg-6 pb-5">
+                  <div class="wrapper-content h-100">
+                    <div class="ui-information">
+                      <div class="ui-information-head">
+                        <div class="ui-information-head__purechase_ordernew">
+                          <div class="ui-information-title">Nhà cung cấp</div>
+                        </div>
+                      </div>
+                      <div class="ui-information-body">
+                        <div class="mt-16 popover-wrapper">
+                          <div th:text="${supplier.title}"></div>
+                          <div>
+                            <div class="color-gray-solid table-break-word pt-12"><th:block th:text="${locationSupplier.address}"/><br><th:block th:text="${locationSupplier.wardName}"/>, <th:block th:text="${locationSupplier.districtName}"/>, <th:block th:text="${locationSupplier.provinceName}"/>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center pt-12">
+                              <div class="color-gray-solid table-break-word mr-3" th:text="${supplier.phone}"></div>
+<!--                              <a href="" class="text-decoration-none"><span-->
+<!--                                      class="no-wrap">Xem chi tiết</span></a>-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6 pb-5">
+                  <div class="wrapper-content h-100">
+                    <div class="ui-information">
+                      <div class="ui-information-head pb-10"><label
+                              class="ui-information-title m-0">Kho nhập</label></div>
+                      <div class="mt-16">
+                        <div th:text="${warehouse.title}"></div>
+                        <div>
+                          <div class="color-gray-solid table-break-word pt-12"><th:block th:text="${locationWarehouse.address}"/><br><th:block th:text="${locationWarehouse.wardName}"/>, <th:block th:text="${locationWarehouse.districtName}"/>, <th:block th:text="${locationWarehouse.provinceName}"/>
+                          </div>
+                          <div class="d-flex justify-content-between align-items-center pt-12">
+                            <div class="color-gray-solid table-break-word mr-3" th:text="${warehouse.phone}"></div>
+<!--                            <a href="" class="text-decoration-none"><span-->
+<!--                                    class="no-wrap">Xem chi tiết</span></a>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="wrapper-content mb-5">
+                <div class="ui-information">
+                  <div class="ui-information-body">
+                    <div class="stocktakes-tabs">
+                      <div>
+                        <div class="omni-tabs-wrapper ">
+                          <ul role="tablist" class="omni-tabs false">
+                            <li class="omni-tab-container"><a
+                                    class="omni-tab omni-tab-selected"><span
+                                    class="text-black">Sản phẩm</span></a></li>
+                          </ul>
+                          <div class="omni-tabs omni-tabMeasurer">
+                            <li class="omni-tab-container"><a
+                                    class="omni-tab omni-tab-selected"><span
+                                    class="text-black">Sản phẩm</span></a></li>
+                            <li class="omni-tab-container"><a class="omni-tab false"><span
+                                    class="text-black">Lịch sử nhập hàng</span></a></li>
+                            <a class="omni-disclosureActivator"><span
+                                    class="text-black"><span class="mr-2">Xem thêm</span><svg
+                                    class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                    width="10" height="10"><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 451.846 451.847"><g><path
+                                    d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></g></svg></svg></span></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-information-body mt-16">
+                    <div class="ui-table-products false">
+
+                      <table class="table table-hover product-info ">
+                        <thead class="head-product-info bg-light position-relative">
+                          <tr>
+                            <th class="min-width-200px text-left" colspan="2">Tên sản phẩm</th>
+                            <th class="min-width-50px text-left" colspan="1">Mã SKU</th>
+                            <th class="text-right min-width-100px w-100px" colspan="1">Số lượng</th>
+                            <th class="text-right head-product-info__second-text" colspan="1">Đơn giá</th>
+                            <th class="text-right table-header--money" colspan="1">Thành tiền</th>
+                          </tr>
+                        </thead>
+                        <tbody class="tbImportItems">
+
+                        <th:block th:each="importOrderItem : ${importOrderItemList}">
+                          <tr class="product">
+                            <td class="img">
+                              <div class="table-cell--image"><img
+                                      th:src="@{${importOrderItem.item.product.urlImage}}">
+                              </div>
+                            </td>
+                            <td class="text-primary"><span th:text="${importOrderItem.productTitle}"></span>
+                            </td>
+                            <td class="text-left"><span th:text="${importOrderItem.productSku}"></span></td>
+                            <td class="text-right"><span class="no-wrap" th:text="${importOrderItem.itemQuantity}"></span></td>
+                            <td class="text-right text-success"><span th:text="${#numbers.formatInteger(importOrderItem.itemPrice, 0, 'POINT')} + ' ₫'"></span></td>
+                            <td class="text-right no-wrap text-primary"><span th:text="${#numbers.formatInteger(importOrderItem.totalPrice, 0, 'POINT')} + ' ₫'"></span></td>
+                          </tr>
+                        </th:block>
+
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="wrapper-content mb-5">
+                <div class="ui-information">
+                  <div class="ui-information-title m-0 mt-2">Nhân viên xử lý</div>
+                  <div class="my-3">
+                    <svg class="svg-next-icon mr-2 svg-next-icon-size-16" width="16" height="16">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM7.07 18.28C7.5 17.38 10.12 16.5 12 16.5C13.88 16.5 16.51 17.38 16.93 18.28C15.57 19.36 13.86 20 12 20C10.14 20 8.43 19.36 7.07 18.28ZM12 14.5C13.46 14.5 16.93 15.09 18.36 16.83C19.38 15.49 20 13.82 20 12C20 7.59 16.41 4 12 4C7.59 4 4 7.59 4 12C4 13.82 4.62 15.49 5.64 16.83C7.07 15.09 10.54 14.5 12 14.5ZM12 6C10.06 6 8.5 7.56 8.5 9.5C8.5 11.44 10.06 13 12 13C13.94 13 15.5 11.44 15.5 9.5C15.5 7.56 13.94 6 12 6ZM10.5 9.5C10.5 10.33 11.17 11 12 11C12.83 11 13.5 10.33 13.5 9.5C13.5 8.67 12.83 8 12 8C11.17 8 10.5 8.67 10.5 9.5Z"
+                              fill="#0D3064"></path>
+                      </svg>
+                    </svg>
+                    <span th:text="${userr.fullName}"></span>
+                    </div>
+                  <div class="ui-information-title m-0 mt-2">Ngày tạo</div>
+                  <div class="my-3 d-flex align-items-center">
+                    <svg class="svg-next-icon mr-2 svg-next-icon-size-14" width="14" height="14">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M19 2c.553 0 1 .447 1 1v16c0 .553-.447 1-1 1H1c-.553 0-1-.447-1-1V3c0-.553.447-1 1-1h3V1c0-.553.447-1 1-1s1 .447 1 1v1h8V1c0-.553.447-1 1-1s1 .447 1 1v1h3zM2 18h16V8H2v10zM2 6h16V4H2v2zm4 4c-.553 0-1 .447-1 1s.447 1 1 1c.553 0 1-.447 1-1s-.447-1-1-1zm0 4c-.553 0-1 .447-1 1s.447 1 1 1c.553 0 1-.447 1-1s-.447-1-1-1zm4 0c-.553 0-1 .447-1 1s.447 1 1 1c.553 0 1-.447 1-1s-.447-1-1-1zm0-4c-.553 0-1 .447-1 1s.447 1 1 1c.553 0 1-.447 1-1s-.447-1-1-1zm4 0c-.553 0-1 .447-1 1s.447 1 1 1c.553 0 1-.447 1-1s-.447-1-1-1z"></path>
+                      </svg>
+                    </svg>
+                    <span th:text="${importOrder.createAt}"></span></div>
+                </div>
+              </div>
+
+              <div class="wrapper-content mb-5">
+                <div class="ui-information">
+                  <div class="ui-information-head pb-10"><label class="ui-information-title m-0">Chi
+                    phí mua hàng</label></div>
+                  <div class="mt-4">
+                    <div class="row">
+                      <div class="col">Tổng số lượng đặt</div>
+                      <div class="col-auto text-right" th:text="${importOrder.grandQuantity}"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 ">
+                    <div class="row font-weight-500">
+                      <div class="col">Tổng tiền mua hàng</div>
+                      <div class="col-auto text-right" th:text="${#numbers.formatInteger(importOrder.grandTotal, 0, 'POINT')} + ' ₫'"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+          <div class="display-none"></div>
+        </div>
+      </div>
+      <div class="display-none"></div>
+    </div>
+    <div id="_container_portal_"></div>
+  </main>
+</div>
+</th:block>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+
+
+</script>
+
+</body>
+
+</html>

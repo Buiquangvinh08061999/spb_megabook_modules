@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<!--home-content-->
+<div class="home-content">
+    <main id="_main_content_" class="ui-main">
+        <div class="omni-layout-body">
+            <div class="omni-layout-body-lg">
+                <div class="omni-layout-body--sidebar-backdrop">
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="omni-layout-card card-default">
+                        </div>
+                        <div class="omni-layout-card card-default">
+                            <div class="omni-layout-card--header line-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <span class="header-title">Kết quả kinh doanh hôm nay</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="omni-layout-body--activate-sidebar">
+                                            <button class="omni-btn omni-btn--icon omni-btn-secondary">
+                                                <div class="omni-btn-content">
+                                                    <span>
+                                                        <span class="omni-svg-create svg-next-icon d-flex svg-next-icon-size-20"
+                                                              style="color: rgb(46, 114, 210);">
+                                                            <svg width="20" height="20">
+                                                                <svg viewBox="0 0 20 20">
+                                                                    <path
+                                                                            d="M12.9841 18C12.7786 18.0003 12.578 17.9374 12.4097 17.8196C12.2414 17.7019 12.1135 17.5351 12.0435 17.3421L8.96781 8.88848L6.91866 14.3526C6.85225 14.5284 6.73764 14.682 6.58795 14.7958C6.43826 14.9096 6.25954 14.9789 6.07224 14.9959C5.88494 15.0129 5.69664 14.9769 5.52888 14.8919C5.36112 14.807 5.22068 14.6766 5.12365 14.5156L2.93542 10.8712L1.81079 12.5559C1.65855 12.7645 1.43151 12.9062 1.17713 12.9515C0.922754 12.9968 0.660713 12.942 0.445767 12.7988C0.230822 12.6555 0.0796047 12.4347 0.0237149 12.1826C-0.0321748 11.9306 0.0115876 11.6667 0.145857 11.4461L2.14698 8.44655C2.2382 8.30388 2.36534 8.18768 2.51566 8.10959C2.66598 8.0315 2.8342 7.99427 3.00346 8.00162C3.17208 8.00545 3.33698 8.05194 3.48274 8.13674C3.6285 8.22155 3.75036 8.3419 3.83693 8.48654L5.77302 11.71L8.04429 5.651C8.1155 5.45993 8.24347 5.29518 8.41104 5.17884C8.57861 5.0625 8.77777 5.00014 8.98182 5.00011H8.98682C9.19147 5.00115 9.39089 5.06487 9.55817 5.18269C9.72545 5.30051 9.85256 5.46675 9.92234 5.659L12.87 13.7597L16.0238 2.72648C16.1438 2.30555 16.5261 2.0116 16.9643 2.0016C17.3945 1.9756 17.7978 2.26955 17.9348 2.68549L19.936 8.68451C19.9833 8.8104 20.0048 8.94454 19.9991 9.07892C19.9934 9.21329 19.9606 9.34513 19.9027 9.46654C19.8448 9.58796 19.763 9.69645 19.6622 9.78554C19.5613 9.87462 19.4435 9.94245 19.3158 9.98498C19.1882 10.0275 19.0532 10.0439 18.919 10.0331C18.7849 10.0223 18.6543 9.98451 18.5351 9.92209C18.4159 9.85967 18.3105 9.77386 18.2252 9.66978C18.14 9.56571 18.0766 9.44552 18.0389 9.31641L17.0584 6.38389L13.9466 17.2721C13.8887 17.4756 13.7678 17.6555 13.6011 17.7859C13.4344 17.9164 13.2306 17.9906 13.0191 17.998H12.9841">
+                                                                    </path>
+                                                                </svg>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Làm-->
+                            <div id="orderData">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+<script>
+    const pages = {
+        urls: {
+            listOrderData: App.BASE_URL_ORDER + "/all-order-data",
+
+        },
+        elements: {}
+    }
+
+
+    let orderData = new OrderData();
+
+    function renderOrderData(orderData) {
+        let str = `
+                <div class="omni-layout-card--section">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 pr-sm-0">
+                            <div class="d-sm-flex justify-content-between h-100">
+                                <div class="flex-fill">
+                                    <p class="text-uppercase mb-0">Doanh Thu Ngày Hôm Nay</p>
+                                    <div class="w-100">
+                                        <div class="row m-0">
+                                            <div class="col-7 pl-0">
+                                                <p class="mb-0 font-weight-bold" style="font-size: 30px !important; color: #137805b8 ">
+                                                    ${new Intl.NumberFormat('vi-VN', {
+                                                    style: 'currency',
+                                                    currency: 'VND'
+                                                    }).format(orderData.grandTotalDay)}
+                                                </p>  <!--Doanh thu của ngày hôm nay-->
+                                            </div>
+                                            <div class="col-5 pl-0 pr-sm-3 pr-0">
+                                                <div class="" style="width: auto; height: 80.75px;">
+                                                    <div class="chartjs-size-monitor">
+                                                        <div class="chartjs-size-monitor-expand">
+                                                            <div class="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="chartjs-size-monitor-shrink">
+                                                            <div class="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <canvas height="101" width="202"
+                                                            style="display: block; height: 81px; width: 162px;"
+                                                            class="chartjs-render-monitor">
+                                                    </canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-sm-block d-none"
+                                     style="width: 1px; height: 100%; background-color: rgb(225, 227, 229);">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 pr-sm-0">
+                            <div>
+                                <p class="text-uppercase mb-0" >Doanh thu theo tháng</p>
+                                <div class="w-100">
+                                    <div class="row m-0">
+                                        <div class="col-7 pl-0">
+                                            <p class="mb-0 font-weight-bold text-uppercase" style="font-size: 30px !important; color: #137805b8 ">
+                                                ${new Intl.NumberFormat('vi-VN', {
+                                                style: 'currency',
+                                                currency: 'VND'
+                                                }).format(orderData.grandTotalMonth)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-right col-12 mt-4">
+                            <a href="/reports" class="text-decoration-none a">Xem báo cáo
+                                <span class="omni-svg-create svg-next-icon ml-2 mb-1 svg-next-icon-size-14">
+                                <svg width="14" height="14">
+                                    <svg viewBox="0 0 12 12">
+                                        <path
+                                               d="M6.00008 0.666992L5.06008 1.60699L8.78008 5.33366H0.666748V6.66699H8.78008L5.06008 10.3937L6.00008 11.3337L11.3334 6.00033L6.00008 0.666992Z">
+                                        </path>
+                                    </svg>
+                                </svg>
+                            </span>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="omni-layout-card card-default">
+                    <div class="omni-layout-card--header line-bottom">
+                        <div class="row align-items-center">
+                            <div class="col"><span class="header-title">Trạng thái đơn hàng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="omni-layout-card--item clickable">
+                        <div class="omni-layout-card--item-inner">
+                            <div class="omni-layout-card--item-stack-cover stack-nowrap align-items-center">
+                                <div class="omni-layout-card--item-stack fill">
+                                    <div class="omni-layout-card--item-stack-cover align-items-center">
+                                        <div class="omni-layout-card--item-stack">
+                                    <span class="omni-svg-create svg-next-icon svg-next-icon-size-24">
+                                        <svg width="24" height="24">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <g clip-path="url(#iconColorStock)">
+                                                <path d="M1 2H4V16" stroke="#212121"
+                                                      stroke-width="2"
+                                                      stroke-miterlimit="10"
+                                                      stroke-linecap="square">
+                                                </path>
+                                                <path d="M7 19H23" stroke="#212121"
+                                                      stroke-width="2"
+                                                      stroke-miterlimit="10"
+                                                      stroke-linecap="square">
+                                                </path>
+                                                <path d="M6.44999 19.1996C6.44999 20.7736 5.174 22.0496 3.59999 22.0496C2.02597 22.0496 0.749985 20.7736 0.749985 19.1996C0.749985 17.6256 2.02597 16.3496 3.59999 16.3496C5.174 16.3496 6.44999 17.6256 6.44999 19.1996Z"
+                                                      stroke="#212121" stroke-width="1.5"
+                                                      stroke-miterlimit="10"
+                                                      stroke-linecap="square">
+                                                </path>
+                                                <path d="M8.39998 2.40039H20.4V14.4004H8.39998V2.40039Z"
+                                                      stroke="#212121" stroke-width="2"
+                                                      stroke-miterlimit="10"
+                                                      stroke-linecap="square">
+                                                </path>
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="iconColorStock">
+                                                        <rect width="24" height="24"
+                                                              fill="white">
+                                                        </rect>
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                        <div class="omni-layout-card--item-stack">
+                                            <a class="text-decoration-none" href="/orders/pending" style="color: #fdbd41 ">
+                                                <span> ${orderData.countStatusPending} <b>đơn hàng đang chờ xử lí</b></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="omni-layout-card--item clickable">
+                        <div class="omni-layout-card--item-inner">
+                            <div class="omni-layout-card--item-stack-cover stack-nowrap align-items-center">
+                                <div class="omni-layout-card--item-stack fill">
+                                    <div class="omni-layout-card--item-stack-cover align-items-center">
+                                        <div class="omni-layout-card--item-stack">
+                                    <span class="omni-svg-create svg-next-icon svg-next-icon-size-24">
+                                        <svg width="24" height="24">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M15 8H20L23 12V17H15V8Z">
+                                                </path>
+                                                <path d="M19.5 9.5H17V12H21.5L19.5 9.5Z"
+                                                      fill="white">
+                                                </path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M1 4L17 4V8.3H15V6H1V4Z">
+                                                </path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M15 17C15 15.3431 16.3431 14 18 14C19.6569 14 21 15.3431 21 17C21 18.6569 19.6569 20 18 20C16.3431 20 15 18.6569 15 17Z">
+                                                </path>
+                                                    <circle cx="18" cy="17" r="1" fill="white">
+                                                    </circle>
+                                                    <path fill-rule="evenodd"
+                                                          clip-rule="evenodd"
+                                                          d="M9.3137 14.0001H3V12.0001H8.82842L6.53552 9.70718L7.94974 8.29297L12.8995 13.2427L7.94974 18.1925L6.53552 16.7782L9.3137 14.0001Z">
+                                                    </path>
+                                                </svg>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                        <div class="omni-layout-card--item-stack">
+                                            <a class="text-decoration-none" href="/orders/completed" style="color: #0d6efd ">
+                                                <span>${orderData.countStatusCompleted} <b>đơn hàng đã hoàn thành</b></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="omni-layout-card--item clickable">
+                        <div class="omni-layout-card--item-inner">
+                            <div class="omni-layout-card--item-stack-cover stack-nowrap align-items-center">
+                                <div class="omni-layout-card--item-stack fill">
+                                    <div class="omni-layout-card--item-stack-cover align-items-center">
+                                        <div class="omni-layout-card--item-stack">
+                                    <span class="omni-svg-create svg-next-icon svg-next-icon-size-24">
+                                        <svg width="24" height="24">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M14.5556 2L15.6667 3.11111H19.5556V5.33333H4V3.11111H7.88889L9 2H14.5556ZM11.7777 12.6556L14.1333 10.3L15.7 11.8667L13.3444 14.2222L15.7 16.5778L14.1333 18.1444L11.7777 15.7889L9.42218 18.1444L7.85551 16.5778L10.2111 14.2222L7.8444 11.8667L9.41107 10.3L11.7777 12.6556ZM5.11111 19.7778C5.11111 21 6.11111 22 7.33333 22H16.2222C17.4444 22 18.4444 21 18.4444 19.7778V6.44444H5.11111V19.7778ZM16.2222 8.66667H7.33333V19.7778H16.2222V8.66667Z">
+                                                </path>
+                                            </svg>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                        <div class="omni-layout-card--item-stack">
+                                            <a class="text-decoration-none" href="/orders/canceled" style="color: darkred ">
+                                                <span>${orderData.countStatusCancel} <b>đơn hàng đã bị hủy</b></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+        `;
+
+        return str;
+    }
+
+    function getAllOrderData() {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: pages.urls.listOrderData
+        })
+            .done(data => {
+
+                $.each(data, (i, item) => { //lấy dữ liệu tổng order data từ api truyền lên
+                    orderData = item
+
+                    let str = renderOrderData(orderData);
+
+                    $('#orderData').prepend(str)
+
+                })
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+
+    }
+    getAllOrderData();
+
+
+
+
+    //Hiển thị thông báo có muốn thoát không
+    $('#logout').on('click', function (){
+        let message = confirm("Bạn có chắc muốn thoát ứng dụng không!")
+        if(message === true){
+
+            App.IziToast.showSuccessAlert("Đăng Xuất Thành Công")
+            setTimeout(function () {
+                window.location.href = "/login"
+            }, 1000);
+
+        }
+    })
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

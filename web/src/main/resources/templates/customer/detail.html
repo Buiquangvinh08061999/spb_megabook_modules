@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+    <th:block th:replace="layout/leftbar :: leftbar"/>
+
+    <th:block th:replace="layout/header :: header"/>
+
+
+    <th:block th:object="${customer}">
+        <div class="customer-detail">
+            <main id="_main_content_" class="ui-main">
+                <input id="customerIdDetail" th:text="${customer.id}" hidden/>
+
+                <div class="wrapper-block">
+
+                    <div class="padding-container">
+                        <div class="row mb-4">
+                            <div class="col-11 ui-heading title-settings">Thông tin khách hàng</div>
+                            <div class="col-1">
+                                <a href="/customers">
+                                    <button class="btn btn-outline-primary float-right">Quay lại</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="display-none"></div>
+                            <div class="col-lg-8 col-12">
+                                <div class="wrapper-content mb-5">
+                                    <div class="ui-information">
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0 pt-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex align-items-center">
+<!--                                                        <span class="hrv-avatar hrv-avatar-circle"-->
+<!--                                                            style="background: rgb(41, 121, 255);">-->
+<!--                                                        <div id="customerAvatar">-->
+<!--    -->
+<!--                                                        </div>-->
+<!--                                                        </span>-->
+                                                        <span class="font-weight-bold text-uppercase table-break-word ml-4 customerFullName"
+                                                              th:text="${customer.fullName}"></span>
+                                                    </div>
+                                                    <div class="display-none"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ui-information-body">
+                                            <div class="form-group text-center p-0 border-bottom">
+                                                <div class="row">
+
+                                                    <div class="col-6 col-md-6"><p class="color-gray-solid">Doanh thu tích lũy</p>
+                                                        <!--Nếu người dùng có đơn hàng, tổng tiền thì hiển thị ra, còn chưa có hiển thị messError-->
+                                                        <th:block th:object="${sum}">
+                                                            <div th:if="${sum}">
+                                                                <p class="font-weight-bold" th:text="${#numbers.formatInteger(sum, 0, 'POINT')} + ' ₫'"></p>
+                                                            </div>
+                                                        </th:block>
+
+                                                        <th:block th:object="${messError}">
+                                                            <div th:if="${messError}">
+                                                                <p class="font-weight-bold" th:text="${messError}"></p>
+                                                            </div>
+                                                        </th:block>
+
+                                                        <th:block th:object="${size}">
+                                                            <div th:if="${size > 0}">
+                                                                <p class="color-gray-solid" th:text="${size} +' đơn hàng'"></p> <!--Nếu size lớn 0 thì mới hiển thị ra-->
+                                                            </div>
+                                                        </th:block>
+
+
+
+                                                    </div>
+
+                                                        <!--Giá trị trung bình đơn hàng-->
+                                                        <th:block th:object="${sumDivide}">
+                                                            <div class="col-6 col-md-6">
+                                                                <p class="color-gray-solid">Giá trị trung bình đơn hàng</p>
+                                                                <div th:if="${sumDivide > 0}">
+                                                                    <p class="font-weight-bold" th:text="${#numbers.formatInteger(sumDivide, 0, 'POINT')} + ' ₫'"></p>  <!--Nếu lớn 0 tức là có giá trị thì hiển thị ra-->
+                                                                </div>
+                                                            </div>
+                                                        </th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="wrapper-content mb-5">
+                                    <div class="ui-information">
+                                        <div class="ui-information-head mb-4 d-flex"><span
+                                                class="ui-information-title">Đơn hàng</span>
+                                        </div>
+                                        <div class="customer-detail--listProduct">
+
+                                         <th:block th:each="order : ${orderDTOList}">
+                                            <div class="ui-information-body mt-4">
+                                                <div class="form-group px-0 pt-0 pb-0 border-bottom">
+                                                    <div class="">
+                                                        <div class="">
+                                                            <div class="row">
+                                                                <div class="col"><p><a class="color-blue text-decoration-none" th:href="'/orders/detail/' + ${order.id}" th:text="'Mã đơn hàng '+${order.id}"></a></p></div>  <!--mã đơn hàng-->
+                                                                <div class="col-auto"><p class="color-gray-solid d-inline pr-5">
+                                                                     <span th:text="${order.createAt}"></span></p><span
+                                                                        class="cursor-pointer color-blue d-inline"><svg
+                                                                        class="svg-next-icon svg-next-icon-size-12"
+                                                                        width="12"
+                                                                        height="12"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                         viewBox="0 0 451.846 451.847"><g><path
+                                                                        d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></g></svg></svg></span>
+                                                                </div>
+                                                            </div>
+                                                            <p class=" d-inline" th:text="${#numbers.formatInteger(order.grandTotal, 0, 'POINT')} + ' ₫'"></p> <!--Tồng tiền của từng đơn hàng theo orderId-->
+                                                            <div class="row"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+
+                                        </div>
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0 pb-0">
+                                                <div class="row align-items-center">
+                                                    <div class="col-sm-6 col-6"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="wrapper-content mb-5">
+                                    <div class="ui-information">
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0 pt-0 border-bottom pb-2">
+                                                <div class="row no-gutters align-items-center mb-2 border-bottom pb-2">
+                                                    <div class="col"><p class="font-weight-bold mb-0">Thông tin liên hệ</p></div>
+                                                    <div class="col-auto text-right me-4">
+                                                        <div>
+                                                            <div class="display-none"></div>
+                                                            <div><span><span>
+                                                                <svg
+                                                                    class="svg-next-icon text-secondary cursor-pointer svg-next-icon-size-12"
+                                                                    width="12"
+                                                                    th:data-id="${customer.id}"
+                                                                    onclick="handleShowUpdateCustomerModal(this.getAttribute('data-id'))"
+                                                                    height=" 12"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 512 512"><g><path
+                                                                    d="M432,0c44.182,0,80,35.817,80,80c0,18.01-5.955,34.629-16,48l-32,32L352,48l32-32C397.371,5.955,413.988,0,432,0z M32,368   L0,512l144-32l296-296L328,72L32,368z M357.789,181.789l-224,224l-27.578-27.578l224-224L357.789,181.789z"></path></g></svg>
+                                                                </svg></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="btnShowDeleteCustomerConfirm" class="col-auto text-right">
+                                                        <div>
+                                                            <div class="display-none"></div>
+                                                            <div><span><span>
+                                                                <i class="fas fa-user-slash cursor-pointer"
+                                                                   th:data-id="${customer.id}"
+                                                                   onclick="handleShowDeleteCustomerConfirm(this.getAttribute('data-id'))"></i>
+                                                                </span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="my-3"><p class="mb-1 color-blue text-primary customerEmail"
+                                                                     th:text="${customer.email}"></p>
+                                                </div>
+                                            </div>
+                                            <div class="ui-information-body">
+                                                <div class="form-group px-0 pb-0">
+                                                    <div class="row no-gutters align-items-center mb-2">
+                                                        <div class="col"><p class="font-weight-bold mb-0"
+                                                                            id="cspot-customersdetail-diachimacdinh">Địa chỉ mặc định</p></div>
+                                                    </div>
+                                                    <p class="mb-1 table-break-word color-gray-solid customerFullName" style="color: #a52834"
+                                                       th:text="${customer.fullName}"></p>
+                                                    <p class="mb-1 table-break-word color-gray-solid customerLocationRegion"><th:block th:text="${locationRegion.wardName}"/>, <th:block th:text="${locationRegion.districtName}"/>, <th:block th:text="${locationRegion.provinceName}"/></p>
+                                                    <p class="mb-1 table-break-word color-gray-solid customerAddress"
+                                                       th:text="${locationRegion.address}"></p>
+                                                    <p class="mb-1 color-gray-solid customerPhone" style="color: #0088cc"
+                                                       th:text="${customer.phone}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </th:block>
+
+<th:block th:replace="layout/script :: script"/>
+
+<th:block th:replace="customer/modal-update-customer :: modal-update-customer"/>
+
+<script>
+
+    // function drawCustomerAvatar() {
+    //     let str = `<img src="/assets/images/${customer.urlImage}"/>`;
+    //     $("#customerAvatar").append(str);
+    // }
+    // drawCustomerAvatar();
+
+    const page = {
+        urls: {
+            getAllProvinces: App.BASE_URL_PROVINCE + "/",
+            getAllDistricts: App.BASE_URL_PROVINCE + "/district",
+            getAllWards: App.BASE_URL_PROVINCE + "/ward",
+            customerAPI: App.BASE_URL_CUSTOMER,
+            updateCustomerAPI: App.BASE_URL_CUSTOMER + "/update",
+            deleteCustomerAPI: App.BASE_URL_CUSTOMER + "/delete"
+        },
+        elements: {}
+    }
+
+    page.elements.provinceUp = $('#provinceUp');
+    page.elements.districtUp = $('#districtUp');
+    page.elements.wardUp = $('#wardUp');
+
+    page.elements.fullNameUp = $('#fullNameUp');
+    page.elements.emailUp = $('#emailUp');
+    page.elements.phoneUp = $('#phoneUp');
+    page.elements.addressUp = $('#addressUp');
+    page.elements.modalUpdateCustomer = $("#modalUpdateCustomer");
+
+    page.elements.customerFullName = $(".customerFullName");
+    page.elements.customerEmail = $(".customerEmail");
+    page.elements.customerPhone = $(".customerPhone");
+    page.elements.customerLocationRegion = $(".customerLocationRegion");
+    page.elements.customerAddress = $(".customerAddress");
+
+
+    function getAllProvincesUp() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllProvinces
+        })
+            .done(data => {
+                page.elements.provinceUp.empty();
+                drawProvinces(page.elements.provinceUp, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllDistrictsUp(provinceId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllDistricts + "/" + provinceId
+        })
+            .done(data => {
+                page.elements.districtUp.empty();
+                drawDistricts(page.elements.districtUp, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllWardsUp(districtId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllWards + "/" + districtId
+        })
+            .done(data => {
+                page.elements.wardUp.empty();
+                drawWards(page.elements.wardUp, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function drawProvinces(elem, provinces) {
+        $.each(provinces, (i, item) => {
+            let str = `<option value="${item.province_id}"> ${item.province_name} </option> `;
+            elem.append(str);
+        })
+    }
+
+    function drawDistricts(elem, districts) {
+        $.each(districts, (i, item) => {
+            let str = `<option value="${item.district_id}"> ${item.district_name} </option>`;
+            elem.append(str);
+        })
+    }
+
+    function drawWards(elem, wards) {
+        $.each(wards, (i, item) => {
+            let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+            elem.append(str);
+        })
+    }
+
+    getAllProvincesUp().then(() => {
+        let provinceId = page.elements.provinceUp.val();
+        getAllDistrictsUp(provinceId).then(() => {
+            let districtId = page.elements.provinceUp.val();
+            getAllWardsUp(districtId);
+        })
+    })
+
+    page.elements.provinceUp.on('change', function () {
+        let provinceId = page.elements.provinceUp.val();
+        getAllDistrictsUp(provinceId).then(() => {
+            let districtId = page.elements.districtUp.val()
+            getAllWardsUp(districtId);
+        })
+    })
+
+    page.elements.districtUp.on('change', function () {
+        let districtId = page.elements.districtUp.val();
+        getAllWardsUp(districtId);
+    })
+
+    function getCustomerById(customerId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.customerAPI + "/" + customerId
+        })
+            .done(data => {
+                customer = data;
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+
+    function handleShowUpdateCustomerModal(customerId) {
+        getCustomerById(customerId).then(() => {
+            page.elements.fullNameUp.val(customer.fullName);
+            page.elements.emailUp.val(customer.email);
+            page.elements.phoneUp.val(customer.phone);
+
+            locationRegion = customer.locationRegion;
+
+            page.elements.provinceUp.val(locationRegion.provinceId);
+            getAllDistrictsUp(locationRegion.provinceId);
+            getAllDistrictsUp(locationRegion.provinceId).then(() => {
+                page.elements.districtUp.val(locationRegion.districtId);
+                getAllWardsUp(locationRegion.districtId).then(() => {
+                    page.elements.wardUp.val(locationRegion.wardId);
+                })
+            })
+            page.elements.addressUp.val(locationRegion.address);
+
+            page.elements.modalUpdateCustomer.modal("show");
+        })
+    }
+
+    //doUpdate
+    function doUpdateCustomer(customerId) {
+        getCustomerById(customerId).then(() => {
+            customer.fullName = page.elements.fullNameUp.val();
+            customer.email = page.elements.emailUp.val();
+            customer.phone = page.elements.phoneUp.val();
+
+            locationRegion.provinceId = page.elements.provinceUp.val();
+            locationRegion.provinceName = $('#provinceUp :selected').text();
+            locationRegion.districtId = page.elements.districtUp.val();
+            locationRegion.districtName = $('#districtUp :selected').text();
+            locationRegion.wardId = page.elements.wardUp.val();
+            locationRegion.wardName = $('#wardUp :selected').text();
+            locationRegion.address = page.elements.addressUp.val();
+
+            customer.locationRegion = locationRegion;
+
+            $.ajax({
+                headers: {
+                    accept: "application/json",
+                    "content-type": "application/json"
+                },
+                type: "PUT",
+                url: page.urls.updateCustomerAPI,
+                data: JSON.stringify(customer)
+            })
+                .done(data => {
+                    customer = data;
+                    locationRegion = customer.locationRegion;
+
+                    page.elements.customerFullName.html(customer.fullName);
+                    page.elements.customerEmail.html(customer.email);
+                    page.elements.customerPhone.html(customer.phone);
+                    page.elements.customerLocationRegion.html(locationRegion.wardName + ", " + locationRegion.districtName + ", " + locationRegion.provinceName);
+                    page.elements.customerAddress.html(locationRegion.address);
+
+                    App.SweetAlert.showSuccessAlert("Cập nhật thành công!");
+
+                    page.elements.modalUpdateCustomer.modal("hide");
+                })
+                .fail(jqXHR => {
+                    console.log(jqXHR);
+                })
+        })
+    }
+
+    // Delete Confirm
+    function handleShowDeleteCustomerConfirm(customerId) {
+        getCustomerById(customerId).then(() => {
+            App.SweetAlert.showConfirm("Xác nhận xoá?", "Khách hàng " + customer.fullName + " sẽ bị xoá").then(result => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            accept: "application/json",
+                            "content-type": "application/json"
+                        },
+                        type: "DELETE",
+                        url: page.urls.deleteCustomerAPI + "/" + customerId,
+                        data: JSON.stringify(customer)
+                    })
+                        .done(data => {
+                            App.SweetAlert.showSuccessAlert("Khách hàng đã được xoá!");
+                            setTimeout(function () {
+                                window.location.href = "/customers";
+                            }, 3000);
+                            //return;
+                        })
+                        .fail(jqXHR => {
+                            console.log(jqXHR);
+                            App.SweetAlert.showErrorAlert("Lỗi không xác định!");
+                        })
+                }
+            })
+        })
+    }
+
+</script>
+
+</body>
+
+</html>

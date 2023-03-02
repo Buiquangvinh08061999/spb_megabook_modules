@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/styleLogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/iziToast-1.4.0.min.css">
+
+    <title>MegaBook</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="screen">
+
+        <div class="screen__content">
+            <div class="login">
+                <img src="/assets/image/logo.png" style="width: 240px">
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+
+                    <input type="text" class="login__input" id="usernameLogin"  placeholder="Tên đăng nhập">
+
+                </div>
+
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+
+                    <input type="password" class="login__input" id="passwordLogin" placeholder="Mật khẩu">
+
+                </div>
+
+                <button class="button login__submit" id="btn_login">
+                    Đăng nhập
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+<script>
+
+    const pages = {
+        urls: {
+            authLogin: App.BASE_URL_AUTH + "/login",
+
+        },
+        elements: {}
+    }
+
+    let user = new User();
+
+    let btnLogin = $("#btn_login");
+    btnLogin.on('click', function (){
+        let username = $("#usernameLogin").val()
+        let password = $("#passwordLogin").val()
+
+        let users ={
+            username: username,
+            password: password,
+        }
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "POST",
+            "url": pages.urls.authLogin,
+            "data": JSON.stringify(users)
+        })
+            .done((data) => {
+                user = data;
+
+                App.IziToast.showSuccessAlert("Đăng Nhập Thành Công")
+
+                setTimeout(function () {
+                    window.location.href = "/home" ;
+                }, 2000);
+
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                App.IziToast.showErrorAlert("Tài khoản không tồn tại!")
+
+
+            })
+
+
+    })
+
+
+</script>
+
+</body>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,60 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="modal-update-staff">
+    <div id="modalUpdateStaff" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tạo nhân viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-alert-danger hide"></div>
+
+                    <form id="frmUpdateProduct" method="post">
+                        <!--                        <fieldset class="row g-3">-->
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label for="fullnameup" class="form-label">Tên nhân viên</label>
+                                <input type="text" class="form-control form-control p-4 input-text-size" id="fullnameup"
+                                       name="fullnameup"
+                                       value=""/>
+                            </div>
+
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label for="phoneUp" class="form-label">Số điện thoại</label>
+                                <input class="form-control form-control p-4 input-text-size" type="phone" id="phoneUp"
+                                       name="phoneUp"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="role" class="form-label">Quyền</label>
+                                <select class="form-select p-2 input-text-size " id="role" name="role">
+                                    <option selected value="ADMIN">ADMIN</option>
+                                    <option value="USER">USER</option>
+                                </select>
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row mb-5">
+                            <label class="form-label">Hình ảnh</label>
+                            <input type="file">
+                        </div>
+
+
+                        <!--                        </fieldset>-->
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="btnCreate">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

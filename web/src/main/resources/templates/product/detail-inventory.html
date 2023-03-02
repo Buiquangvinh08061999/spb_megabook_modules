@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<th:block th:object="${item}">
+    <div class="product-detail-inventory">
+        <main id="_main_content_" class="ui-main">
+            <div class="wrapper-block">
+                <div class="padding-container">
+                    <div class="d-md-flex justify-content-between align-items-center">
+                        <div id="variant-header-title" class="h2 mb-md-0">Chi tiết mặt hàng</div>
+                    </div>
+                    <div class="display-none"></div>
+                    <div class="row pt-5">
+                        <div class="col-12 col-lg-4">
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-body">
+                                        <div class="d-flex py-2">
+                                            <div class="product-info-preview-container image-wrapper-border align-items-center">
+                                                <img class="product-info-preview-img"
+                                                     th:src="@{${product.urlImage}}" th:alt="${product.title}"></a>
+                                            </div>
+                                            <div class="flex-grow-1 pl-3 d-flex flex-column justify-content-around break-text">
+                                                <div class="h4 mb-0" th:text="${product.title}"></div>
+                                                <a aria-current="page" class="w-100 h-100 active" href="/inventory-management"><svg
+                                                        class="svg-next-icon svg-next-icon-size-14 text-decoration-none" width="14"
+                                                        height="14"><svg viewBox="0 0 14 8" fill="none"
+                                                                         xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                            d="M12 0.666667V3.33333H3.22002L5.60669 0.94L4.66669 0L0.666687 4L4.66669 8L5.60669 7.06L3.22002 4.66667H13.3334V0.666667H12Z"
+                                                            fill="#3383FF"></path>
+                                                </svg></svg><span class="small pl-1">Quay về danh sách Tồn kho</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-head"><span class="ui-information-title" style="color: #0c63e4">Chi tiết sản phẩm</span>
+                                    </div>
+                                    <div class="ui-information-body">
+                                        <div class="row justify-content-center">
+                                            <div class="flex-grow-1">
+                                                <div class="col-12 pt-4"><label for="titleDet">Tên sản phẩm</label>
+                                                    <div class="next-input--has-border-left"><input autocomplete="on" id="titleDet" name="titleDet"
+                                                                                                    type="text" class="next-input" placeholder="Nhập tên sản phẩm"
+                                                                                                    readonly th:value="${product.title}"></div>
+                                                </div>
+                                                <div class="col-6 pt-4"><label>Đơn vị tính</label>
+                                                    <div class="next-input--has-border-left"><input autocomplete="on" id="unitDet" name="unitDet"
+                                                                                                    type="text" class="next-input" placeholder=""
+                                                                                                    readonly th:value="${unit.title}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-head"><span class="ui-information-title" style="color: #bd2130">Chi tiết nhập hàng</span></div>
+                                    <div class="ui-information-body">
+                                        <div class="row product-pricing">
+                                            <div class="col-12 col-md-6 pt-4"><label>
+                                                <div class="d-flex align-items-center">Đơn giá nhập kho</div>
+                                            </label>
+                                                <br>
+                                                <span th:text="${#numbers.formatInteger(item.costPrice, 0, 'POINT')} + ' ₫'"></span>
+                                            </div>
+                                            <div class="col-12 col-md-6 pt-4"><label>
+                                                <div class="d-flex align-items-center">Số lượng nhập kho</div>
+                                            </label>
+                                                <br>
+                                                <span th:text="${#numbers.formatInteger(item.quantity, 0, 'POINT')}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row product-pricing">
+                                            <div class="col-12 col-md-6 pt-4"><label>
+                                                <div class="d-flex align-items-center">Tổng chi phí nhập kho</div>
+                                            </label>
+                                                <br>
+                                                <span th:text="${#numbers.formatInteger(item.totalCostPrice, 0, 'POINT')} + ' ₫'"></span>
+                                            </div>
+                                            <div class="col-12 col-md-6 pt-4"><label>
+                                                <div class="d-flex align-items-center">Ngày nhập kho</div>
+                                            </label>
+                                                <br>
+                                                <span th:text="${item.createAt}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-head"><span class="ui-information-title" style="color: #219653">Quản lý tồn kho</span>
+                                    </div>
+                                    <div class="ui-information-body">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 pt-4"><label
+                                                    class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">Đơn giá bán</div>
+                                            </label>
+                                                <span th:text="${#numbers.formatInteger(item.price, 0, 'POINT')} + ' ₫'"></span>
+                                            </div>
+                                            <div class="col-12 col-md-6 pt-4"><label>
+                                                <div class="d-flex align-items-center">Số lượng đã bán</div>
+                                            </label>
+                                                <br>
+                                                <span th:text="${#numbers.formatInteger(item.sold, 0, 'POINT')}"></span>
+                                            </div>
+                                            <div class="col-12 col-md-6 pt-4"><label>
+                                                <div class="d-flex align-items-center">Số lượng tồn kho</div>
+                                            </label>
+                                                <br>
+                                                <span th:text="${#numbers.formatInteger(item.available, 0, 'POINT')}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="display-none"></div>
+                    <div class="display-none"></div>
+                </div>
+                <div class="display-none"></div>
+            </div>
+            <div id="_container_portal_"> </div>
+        </main>
+    </div>
+</th:block>
+
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+</body>
+
+</html>

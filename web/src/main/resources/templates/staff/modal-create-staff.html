@@ -1,0 +1,78 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="modal-create-staff">
+    <div id="modalCreateStaff" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tạo nhân viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-alert-danger hide">
+
+
+                    </div>
+
+                    <form id="frmCreate" method="post">
+                        <!--                        <fieldset class="row g-3">-->
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <label for="fullname" class="form-label">Tên nhân viên</label>
+                                <input type="text" class="form-control" id="fullName"  name="fullName"/>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="username" class="form-label">Tên đăng nhập</label>
+                                <input type="email" class="form-control" id="username"  name="username" placeholder="txr@gmail.com"/>
+
+                            </div>
+
+                            <div class="col-sm-6 mt-3">
+                                <label>PassWord <span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" id="password" name="password" required>
+
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="btnPassword">
+                                            <span class="fas fa-eye"></span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input class="form-control" type="phone" id="phone"  name="phone"/>
+
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <label class="form-label">Role</label>
+                                <select name="role" id="role" class="form-select">
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!--Ảnh chưa dùng-->
+<!--                        <div class="row mb-5">-->
+<!--                            <label for="role" class="form-label">Hình ảnh</label>-->
+<!--                            <input type="file">-->
+<!--                        </div>-->
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

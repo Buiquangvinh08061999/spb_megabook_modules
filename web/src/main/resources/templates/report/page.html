@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar:: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="report">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div class="dash-board-activities">
+                <div class="max-width-center">
+                    <div class="ui---header-nav-tab ui-header-menu--collapse z-index-1 bd-radius">
+                        <ul>
+                            <li><a class="d-block active"><span class="tab-new-info">Tổng quan</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="padding-container dashboard-container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Tuỳ chọn</label>
+                            <select id="orders" class="form-control w-15">
+                                <option value="total-today">Hôm nay</option>
+                                <option value="total-week">7 ngày gần nhất</option>
+                                <option value="total-month">30 ngày gần nhất</option>
+                            </select>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 px-0">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="wrapper-dashboard-item undefined">
+                                                <div class="title-container">
+                                                    <p class="m-0 text-uppercase title-tooltip" id="optionOrderTotal">Doanh thu kiếm được</p>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div id="orderTotal">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="mt-5">Tuỳ chọn</label>
+                            <select id="imports" class="form-control w-15">
+                                <option value="total-today">Hôm nay</option>
+                                <option value="total-week">7 ngày gần nhất</option>
+                                <option value="total-month">30 ngày gần nhất</option>
+                            </select>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 px-0">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="wrapper-dashboard-item undefined">
+                                                <div class="title-container">
+                                                    <p class="m-0 text-uppercase title-tooltip" id="optionImportTotal">Chi phí nhập hàng</p>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div id="importTotal">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"> </div>
+    </main>
+</div>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+
+
+
+<script>
+
+    const page = {
+        urls: {
+            orderAPI: App.BASE_URL_ORDER,
+            importOrderAPI: App.BASE_URL_IMPORT_ORDER
+        },
+        elements: {}
+    }
+
+    page.elements.orders = $("#orders");
+    page.elements.imports = $("#imports");
+    page.elements.orderTotal= $("#orderTotal");
+    page.elements.importTotal = $("#importTotal");
+
+
+    function renderOrderTotal(orderPath) {
+        page.elements.orderTotal.empty();
+        $.ajax({
+            type: "GET",
+            url: page.urls.orderAPI + "/" + orderPath,
+        }).done((data) => {
+            let dateList = [];
+            let totalList = [];
+            var options;
+            $.each(data, (i, item) => {
+                dateList.push(moment(item.dates).date());
+                totalList.push(item.total);
+            })
+            options = {
+                series: [{
+                    data: [...totalList]
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '15%',
+                        borderRadius: 4,
+                        horizontal: false,
+                    }
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                xaxis: {
+                    categories: [...dateList],
+                }
+            };
+
+            myChart = new ApexCharts(document.querySelector("#orderTotal"), options);
+            myChart.render();
+        })
+    }
+
+
+
+    function renderImportTotal(importPath) {
+        page.elements.importTotal.empty();
+        $.ajax({
+            type: "GET",
+            url: page.urls.importOrderAPI + "/" + importPath,
+        }).done((data) => {
+            let dateList = [];
+            let totalList = [];
+            var options;
+            $.each(data, (i, item) => {
+                dateList.push(moment(item.dates).date());
+                totalList.push(item.total);
+            })
+            options = {
+                series: [{
+                    data: [...totalList]
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '15%',
+                        borderRadius: 4,
+                        horizontal: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: [...dateList],
+                }
+            };
+
+            myChart = new ApexCharts(document.querySelector("#importTotal"), options);
+            myChart.render();
+        })
+    }
+
+
+    renderOrderTotal("total-today");
+    renderImportTotal("total-today");
+
+    page.elements.orders.on("change", function() {
+        let orderPath = page.elements.orders.val();
+        renderOrderTotal(orderPath);
+    })
+
+
+    page.elements.imports.on("change", function() {
+        let importPath = page.elements.imports.val();
+        renderImportTotal(importPath);
+    })
+
+
+
+
+</script>
+
+</body>
+
+</html>

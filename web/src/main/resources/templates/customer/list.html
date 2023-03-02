@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <title></title>
+</head>
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="customer">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div class="padding-container">
+                <div class="row no-gutters pb-4">
+                    <div class="col align-items-center d-flex">
+                        <p class="title-page">Danh sách khách hàng</p>
+                    </div>
+                    <div class="col-auto pl-0">
+
+                        <a id="GTM-tao_khach_hang" href="/customers/create">
+                            <button class="btn btn-primary fix-height--button ml-3">
+                                <svg class="svg-next-icon svg-next-icon-size-16" width="16" height="16">
+                                    <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M6.99992 0.333374C3.31992 0.333374 0.333252 3.32004 0.333252 7.00004C0.333252 10.68 3.31992 13.6667 6.99992 13.6667C10.6799 13.6667 13.6666 10.68 13.6666 7.00004C13.6666 3.32004 10.6799 0.333374 6.99992 0.333374ZM6.33325 3.66671V6.33337H3.66658V7.66671H6.33325V10.3334H7.66658V7.66671H10.3333V6.33337H7.66658V3.66671H6.33325ZM1.66659 7.00004C1.66659 9.94004 4.05992 12.3334 6.99992 12.3334C9.93992 12.3334 12.3333 9.94004 12.3333 7.00004C12.3333 4.06004 9.93992 1.66671 6.99992 1.66671C4.05992 1.66671 1.66659 4.06004 1.66659 7.00004Z"
+                                        ></path>
+                                    </svg>
+                                </svg>
+                                <span class="ml-3 d-none d-sm-inline-block">Tạo khách hàng</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="omni-tabs-wrapper">
+                        <ul role="tablist" class="omni-tabs false">
+                            <li class="omni-tab-container">
+                                <a class="omni-tab omni-tab-selected">
+                                    <span class="text-black">Tất cả khách hàng</span>
+                                </a>
+                            </li>
+
+                            <li class="false omni-disclosureTab">
+                                <a class="omni-disclosureActivator">
+                                            <span class="text-black">
+                                                <span class="mr-2">Xem thêm</span>
+                                                <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                                     width="10" height="10">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 451.846 451.847">
+                                                        <g>
+                                                            <path
+                                                                    d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"
+                                                            ></path>
+                                                        </g>
+                                                    </svg>
+                                                </svg>
+                                            </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="omni-tabs omni-tabMeasurer">
+                            <li class="omni-tab-container">
+                                <a class="omni-tab omni-tab-selected"><span class="text-black">Tất cả khách hàng</span>
+                                </a>
+                            </li>
+
+                            <a class="omni-disclosureActivator">
+                                        <span class="text-black">
+                                            <span class="mr-2">Xem thêm</span>
+                                            <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                                 width="10" height="10">
+                                                <g>
+                                                    <path
+                                                            d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"
+                                                    ></path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                            </a>
+                        </div>
+                        <div class="position-relative">
+                            <div class="table-list--config">
+                                <div class="ui-table-listing-container">
+
+                                    <div id="searchHeader">
+
+                                    </div>
+                                    <!--class="ui-table"-->
+
+                                    <table id="tbListCustomers" class="table table-striped" style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th class="has-bulk-actions table-header--check">
+                                                <span>#</span>
+                                            </th>
+                                            <th class="text-left cursor-pointer min-width-100px">
+                                                <span>Khách hàng</span>
+                                            </th>
+                                            <th class="text-left min-width-100px">
+                                                <span>Địa chỉ</span>
+                                            </th>
+                                            <th class="cursor-pointer text-center">
+                                                <span>Số điện thoại</span>
+                                            </th>
+                                            <th class="table-header--money cursor-pointer text-center min-width-100px">
+                                                <span>Hành động</span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="display-none"></div>
+                        </div>
+                        <div id="_container_portal_"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<th:block th:replace="layout/script :: script"/>
+
+<th:block th:replace="customer/modal-update-customer-2 :: modal-update-customer-2"/>
+
+
+<script>
+
+    const page = {
+        urls: {
+            getAllProvinces: App.BASE_URL_PROVINCE + "/",
+            getAllDistricts: App.BASE_URL_PROVINCE + "/district",
+            getAllWards: App.BASE_URL_PROVINCE + "/ward",
+            customerAPI: App.BASE_URL_CUSTOMER,
+            updateCustomerAPI: App.BASE_URL_CUSTOMER + "/update",
+            deleteCustomerAPI: App.BASE_URL_CUSTOMER + "/delete"
+        },
+        elements: {}
+    }
+
+    page.elements.provinceUp = $('#provinceUp');
+    page.elements.districtUp = $('#districtUp');
+    page.elements.wardUp = $('#wardUp');
+
+    page.elements.fullNameUp = $('#fullNameUp');
+    page.elements.emailUp = $('#emailUp');
+    page.elements.phoneUp = $('#phoneUp');
+    page.elements.addressUp = $('#addressUp');
+
+    page.elements.tbListCustomers = $("#tbListCustomers");
+    page.elements.modalUpdateCustomer = $("#modalUpdateCustomer");
+
+    let customerTable = null;
+
+    function loadTableCustomers() {
+        $(() => {
+            customerTable = page.elements.tbListCustomers.DataTable({
+                ajax: {
+                    contentType: "application/json",
+                    url: page.urls.customerAPI,
+                    type: "GET",
+                    dataSrc: ""
+                },
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+                searching: true,
+                select: true,
+                bDestroy: true,
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "fullName"
+                    },
+                    {
+                        data: "locationRegion",
+                        render: function (locationRegion) {
+                            return `${locationRegion.address}, ${locationRegion.provinceName}`;
+                        }
+                    },
+                    {
+                        data: "phone",
+                        className: "text-center"
+                    },
+                    {
+                        data: "id",
+                        orderable: false
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a class="text-decoration-none detail" data-id="${row.id}" href="/customers/detail/${row.id}">
+                                        <span>${row.fullName}</span>
+                                    </a>
+                                `;
+                        }
+                    },
+                    {
+                        targets: 4,
+                        className: "text-center",
+                        render: function (data, type, row, meta) {
+                            return `
+                                <button class="btn btn-outline-success btn-lg"
+                                        data-id="${row.id}"
+                                        onclick="handleShowUpdateCustomerModal(this.getAttribute('data-id'))">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-lg"
+                                        data-id="${row.id}"
+                                        onclick="handleShowDeleteCustomerConfirm(this.getAttribute('data-id'))">
+                                    <i class="fa fa-archive"></i>
+                                </button>
+                            `;
+                        }
+                    }
+                ]
+            })
+        })
+    }
+
+    loadTableCustomers();
+
+    function getAllProvincesUp() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllProvinces
+        })
+            .done(data => {
+                page.elements.provinceUp.empty();
+                drawProvinces(page.elements.provinceUp, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllDistrictsUp(provinceId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllDistricts + "/" + provinceId
+        })
+            .done(data => {
+                page.elements.districtUp.empty();
+                drawDistricts(page.elements.districtUp, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllWardsUp(districtId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllWards + "/" + districtId
+        })
+            .done(data => {
+                page.elements.wardUp.empty();
+                drawWards(page.elements.wardUp, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function drawProvinces(elem, provinces) {
+        $.each(provinces, (i, item) => {
+            let str = `<option value="${item.province_id}"> ${item.province_name} </option> `;
+            elem.append(str);
+        })
+    }
+
+    function drawDistricts(elem, districts) {
+        $.each(districts, (i, item) => {
+            let str = `<option value="${item.district_id}"> ${item.district_name} </option>`;
+            elem.append(str);
+        })
+    }
+
+    function drawWards(elem, wards) {
+        $.each(wards, (i, item) => {
+            let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+            elem.append(str);
+        })
+    }
+    
+
+    getAllProvincesUp().then(() => {
+        let provinceId = page.elements.provinceUp.val();
+        getAllDistrictsUp(provinceId).then(() => {
+            let districtId = page.elements.districtUp.val();
+            getAllWardsUp(districtId);
+        })
+    })
+
+    page.elements.provinceUp.on('change', function () {
+        let provinceId = page.elements.provinceUp.val();
+        getAllDistrictsUp(provinceId).then(() => {
+            let districtId = page.elements.districtUp.val()
+            getAllWardsUp(districtId);
+        })
+    })
+
+    page.elements.districtUp.on('change', function () {
+        let districtId = page.elements.districtUp.val();
+        getAllWardsUp(districtId);
+    })
+
+    function getCustomerById(customerId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.customerAPI + "/" + customerId
+        })
+            .done(data => {
+                customer = data;
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+
+    function handleShowUpdateCustomerModal(customerId) {
+        $("#modalUpdateCustomer #btnUpdateCustomer").attr("data-id", customerId);
+        $("#modalUpdateCustomer #btnUpdateCustomer").attr("onclick", "doUpdateCustomer(this.getAttribute('data-id'))");
+
+        getCustomerById(customerId).then(() => {
+            page.elements.fullNameUp.val(customer.fullName);
+            page.elements.emailUp.val(customer.email);
+            page.elements.phoneUp.val(customer.phone);
+
+            locationRegion = customer.locationRegion;
+
+            page.elements.provinceUp.val(locationRegion.provinceId);
+            getAllDistrictsUp(locationRegion.provinceId);
+            getAllDistrictsUp(locationRegion.provinceId).then(() => {
+                page.elements.districtUp.val(locationRegion.districtId);
+                getAllWardsUp(locationRegion.districtId).then(() => {
+                    page.elements.wardUp.val(locationRegion.wardId);
+                })
+            })
+            page.elements.addressUp.val(locationRegion.address);
+            page.elements.modalUpdateCustomer.modal("show");
+        })
+    }
+
+    //doUpdate
+    function doUpdateCustomer(customerId) {
+        getCustomerById(customerId).then(() => {
+            customer.fullName = page.elements.fullNameUp.val();
+            customer.email = page.elements.emailUp.val();
+            customer.phone = page.elements.phoneUp.val();
+
+            locationRegion.provinceId = page.elements.provinceUp.val();
+            locationRegion.provinceName = $('#provinceUp :selected').text();
+            locationRegion.districtId = page.elements.districtUp.val();
+            locationRegion.districtName = $('#districtUp :selected').text();
+            locationRegion.wardId = page.elements.wardUp.val();
+            locationRegion.wardName = $('#wardUp :selected').text();
+            locationRegion.address = page.elements.addressUp.val();
+
+            customer.locationRegion = locationRegion;
+
+            $.ajax({
+                headers: {
+                    accept: "application/json",
+                    "content-type": "application/json"
+                },
+                type: "PUT",
+                url: page.urls.updateCustomerAPI,
+                data: JSON.stringify(customer)
+            })
+                .done(data => {
+                    customer = data;
+                    locationRegion = customer.locationRegion;
+
+                    loadTableCustomers();
+                    App.SweetAlert.showSuccessAlert("Cập nhật thành công!");
+                    page.elements.modalUpdateCustomer.modal("hide");
+                })
+                .fail(jqXHR => {
+                    console.log(jqXHR);
+                })
+        })
+    }
+
+    // Delete Confirm
+    function handleShowDeleteCustomerConfirm(customerId) {
+        getCustomerById(customerId).then(() => {
+            App.SweetAlert.showConfirm("Xác nhận xoá?", "Khách hàng " + customer.fullName + " sẽ bị xoá").then(result => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            accept: "application/json",
+                            "content-type": "application/json"
+                        },
+                        type: "DELETE",
+                        url: page.urls.deleteCustomerAPI + "/" + customerId,
+                        data: JSON.stringify(customer)
+                    })
+                        .done(data => {
+                            loadTableCustomers();
+                            App.SweetAlert.showSuccessAlert("Khách hàng đã được xoá!");
+                        })
+                        .fail(jqXHR => {
+                            console.log(jqXHR);
+                            App.SweetAlert.showErrorAlert("Lỗi không xác định!");
+                        })
+                }
+            })
+        })
+    }
+
+
+</script>
+
+</body>
+</html>

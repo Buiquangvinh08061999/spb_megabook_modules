@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<th:block th:fragment="script">
+
+  <script src="/assets/jquery/v3.6.1/jquery-3.6.1.min.js"></script>
+  <script src="/assets/bootstrap/v5.2/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/fontawesome/v5.15.4/js/all.min.js"></script>
+  <script src="/assets/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="/assets/js/iziToast-1.4.0.js"></script>
+  <script src="/assets/jquery-validate/1.19.3/jquery.validate-1.19.3.min.js"></script>
+
+  <script src="/assets/js/app.js"></script>
+
+  <script src="/assets/datatable/js/jquery.dataTables.min.js"></script>
+  <script src="/assets/datatable/js/dataTables.bootstrap5.min.js"></script>
+
+<!--  <script src="/assets/chart/chart.js"></script>-->
+<!--  <script scr="/assets/chart/moment.js"></script>-->
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--  <script>-->
+
+<!--    let url = window.location.href;-->
+<!--    let eleA = $(".div-detect")-->
+<!--    function reloadUrl () {-->
+<!--      let ur = url.split("/")-->
+<!--      for (let i = 0; i < eleA.length; i++) {-->
+<!--        console.log(eleA[i].getAttribute('href'))-->
+<!--        if(("/" + ur[3]) === eleA[i].getAttribute('href')) {-->
+<!--          eleA[i].classList.add("selected", "active");-->
+<!--        } else if (eleA[i].getAttribute('href') === null) {-->
+<!--          // eleA[i].classList.add("selected", "active");-->
+<!--          // eleA[i].removeClass('collapsed');-->
+<!--          // eleA[i].attr("aria-expanded",'true');-->
+<!--          // $('.multi-collapse').classList.add("show")-->
+<!--        }-->
+<!--      }-->
+<!--      console.log("ur: ", "/" + ur[3])-->
+<!--    }-->
+<!--    reloadUrl();-->
+<!--  </script>-->
+
+  <script>
+    window.Promise ||
+    document.write(
+            '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+    )
+    window.Promise ||
+    document.write(
+            '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+    )
+    window.Promise ||
+    document.write(
+            '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+    )
+  </script>
+
+</th:block>

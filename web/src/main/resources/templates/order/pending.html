@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<!--new-list-->
+<div class="order-list">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+
+            <div class="padding-container">
+                <div class="row no-gutters pb-4">
+                    <div class="col align-items-center d-flex">
+                        <p class="title-page">Danh sách đơn hàng</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5 col-3">
+                            <div class="wrapper-content pd-all-15"  style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px" >
+
+                                <div class="report-group-head color-white" style="color: rgb(87, 89, 98);">Đơn hàng đang chờ xử lí
+                                </div>
+                                <div class="report-group-body color-white text-right table-break-word"
+                                     style="color: rgb(87, 89, 98);"><span id="count-pending"></span>  <!--tổng số lượng đơn hàng trạng thái pending-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-3">
+                            <div class="wrapper-content pd-all-15"
+                                 style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px">
+                                <div class="report-group-head color-white" style="color: rgb(113, 106, 202);">Tổng giá trị đơn hàng </div>
+
+                                <div class="report-group-body color-white text-right table-break-word" id=""
+                                     style="color: rgb(113, 106, 202);"><span id="grand-total-pending"></span> <!--tổng tiền order theo trạng thái pending-->
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div>
+                    <div class="omni-tabs-wrapper ">
+                        <ul role="tablist" class="omni-tabs false">
+                            <li class="omni-tab-container">
+                                <a href="/orders" class="omni-tab omni-tab-selected text-decoration-none">
+
+                                <span class="text-black ">Tất cả đơn hàng đang xử lí</span>
+                                </a>
+                            </li>
+                            <li class="false omni-disclosureTab">
+                                <a class="omni-disclosureActivator">
+                                    <span class="text-black">
+                                        <span class="mr-2">Xem thêm</span>
+                                        <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                             width="10" height="10">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847">
+                                                <g>
+                                                    <path
+                                                            d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="omni-tabs omni-tabMeasurer">
+                            <li class="omni-tab-container">
+                                <a href="/orders" class="omni-tab omni-tab-selected  text-decoration-none">
+                                    <span class="text-black">Tất cả đơn hàng</span>
+                                </a>
+                            </li>
+
+                            <a class="omni-disclosureActivator">
+                                <span class="text-black">
+                                    <span class="mr-2">Xem thêm</span>
+                                    <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90" width="10"
+                                         height="10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847">
+                                            <g>
+                                                <path
+                                                        d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <div class="position-relative">
+                                <div class="order-list--table table-list--config">
+                                    <div class="ui-table-listing-container">
+
+                                        <table id="tbListOrders" class="ui-table">
+                                            <thead>
+                                            <tr>
+                                                <th >
+                                                    <span>Mã</span>
+                                                </th>
+                                                <th >
+                                                    <span>Ngày tạo</span>
+                                                </th>
+                                                <th >
+                                                    <span>Khách hàng</span>
+                                                </th>
+                                                <th >
+                                                    <span id="cspot-orders-trangthaigiaohang">Trạng thái</span>
+                                                </th>
+                                                <th>
+                                                    <span>Tổng tiền</span>
+                                                </th>
+
+                                                <th>
+                                                    <span>Hành động</span>
+                                                </th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="display-none"></div>
+                            <div class="display-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+
+    const pages = {
+        urls: {
+            listStatusPendingAPI: App.BASE_URL_ORDER + "/list-status-pending",
+            listTitleCompletedAndCancel: App.BASE_URL_ORDER_STATUS + "/list-title-completed-and-cancel",
+            updateStatus: App.BASE_URL_ORDER + "/update-status/"
+        },
+        elements: {}
+    }
+
+
+
+    //Vinh làm ( đơn hàng đang xử lí)
+    let order = new Order();
+    let customer = new Customer();
+    let orderStatus = new OrderStatus();
+    let orderItem = new OrderItem();
+
+    let orders = [];
+
+
+
+    function renderOrder(order) {
+        let str = `
+                <tr id="tr_${order.id}">
+                    <td><a class="text-decoration-none" href ="/orders/detail/${order.id}">${order.id}</a>
+                        <div class="d-inline-block ml-1">
+                            <span>
+                                <svg class="svg-next-icon ui-icon--notes position-top-minus-one svg-next-icon-size-16"
+                                     width="16" height="16">
+                                    <svg viewBox="0 0 16 16" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                                d="M5.86339 10.5834L3.08339 7.80336L2.13672 8.74336L5.86339 12.47L13.8634 4.47003L12.9234 3.53003L5.86339 10.5834Z"
+                                                fill="#0D8923">
+                                        </path>
+                                    </svg>
+                                </svg>
+                            </span>
+                        </div>
+                    </td>
+                    <td>${order.createAt}</td>
+                    <td>
+                        <div>
+                        <a class="text-decoration-none" target="_blank" href="/customers/detail/${customer.id}">
+                            <span>${customer.fullName}</span>
+                        </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <div class="status-component">
+                                <span class="circle-status mr-2 circle-status-shipment_notyet"></span>
+                                <span class="badges--carrier-status-7">${order.orderStatus.titleVi}</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        ${new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                        }).format(order.grandTotal)}
+                    </td>
+                    <td>
+                        <select id="orderStatusUp_${order.id}" data-id="${order.id}" class="form-select form-select-lg col-8">
+                                <option selected value="0">Chọn trạng thái</option>
+
+                        </select>
+                       <button type="button" data-id="${order.id}" class="btn btn-outline-primary btn-lg col-8 updateOrderStatus mt-3">Cập nhật trạng thái</button>
+                    </td>
+
+                </tr>
+
+            `;
+        return str;
+    }
+
+    function loadAllOrders() {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "GET",
+            "url": pages.urls.listStatusPendingAPI
+        })
+            .done(data => {
+                console.log(data);
+
+                orders = data;
+
+                $.each(data, (i, item) => {
+                    order = item;
+                    customer = order.customer;
+                    orderStatus = order.orderStatus;
+
+                    let str = renderOrder(order)
+                    $('#tbListOrders tbody').prepend(str);
+
+                })
+
+                //Đưa dữ liệu đẩy option vào select, bỏ ngoài vòng lặp
+                findByTitleEnCOMPLETEDAndCANCEL();
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    loadAllOrders();
+
+
+    function findByTitleEnCOMPLETEDAndCANCEL(){
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: pages.urls.listTitleCompletedAndCancel
+        })
+            .done(data => {
+
+                $.each(orders ,(i, order) => { //orders đã có dữ liệu từ api/list gán = data ở trên, mỗi thằng trạng thái sẽ có 1 orderId riêng
+
+                    $.each(data ,(i, item) => {
+                        orderStatus = item;
+
+                        let str =`<option value="${orderStatus.id}">${orderStatus.titleVi}</option>`;
+
+                        $(`#orderStatusUp_${order.id}`).append(str);
+
+                    })
+                })
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+
+    }
+
+
+
+
+    function handleUpdateOrderStatus() {
+        $('#tbListOrders tbody').on('click', 'button.updateOrderStatus', function () {
+            let orderId = $(this).data("id")
+            console.log(orderId)
+
+            let orderStatus = +$('#orderStatusUp_' + orderId).find("option:selected").val();
+
+            console.log("orderStatus")
+            console.log(orderStatus)
+            if (orderStatus == 0) {
+                App.IziToast.showErrorAlert("Vui lòng chọn trạng thái muốn cập nhật")
+                return;
+            }
+            if (orderStatus !== 2 && orderStatus !== 3) {
+                App.IziToast.showErrorAlert("Vui lòng chọn trạng thái muốn cập nhật")
+                return;
+            }
+
+            App.SweetAlert.showConfirmUpdateStatus()
+                .then(result => {
+                    if (result.isConfirmed) {
+                        let obj = {
+                            id: orderStatus    //truyền vào kiểu JSON
+                        }
+                        $.ajax({
+                            headers: {
+                                "accept": "application/json",
+                                "content-type": "application/json"
+                            },
+                            type: "PUT",
+                            url: pages.urls.updateStatus + orderId,
+                            data: JSON.stringify(obj)
+                        })
+                            .done(data => {
+                                console.log(data)
+                                $('#tr_' + orderId).remove(); //Cập nhật trạng thái thành công thì xóa luôn dòng có orderId đó ra
+
+                                App.IziToast.showSuccessAlert("Thay đổi trạng thái đơn hàng thành công")
+
+
+
+                                $('#grand-total-pending').html(""); //update trạng thái xong reset lại tiền
+                                $('#count-pending').html(""); //Số lượng
+
+                                grandTotalOrderPending();
+                                countOrderIdPending();
+                            })
+
+                            .fail(jqXHR => {
+                                console.log(jqXHR);
+
+                            })
+                    }
+                })
+        })
+    }
+
+    handleUpdateOrderStatus();
+
+
+
+    function grandTotalOrderPending(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: App.BASE_URL_ORDER + "/grand-total-pending"
+        })
+            .done((data) => {
+                console.log(data.grandTotal )
+
+                let str =  `${new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                            }).format(data.grandTotal)}`;
+
+                $('#grand-total-pending').prepend(str)
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+
+    }
+    grandTotalOrderPending();
+
+    function countOrderIdPending(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: App.BASE_URL_ORDER + "/count-pending"
+        })
+            .done((data) => {
+                console.log(data.count)
+
+                let str =  `${data.count}`;
+
+                $('#count-pending').prepend(str)
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    countOrderIdPending();
+
+</script>
+
+</body>
+</html>

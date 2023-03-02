@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <style>
+        .role-staff{
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: #fceee6;
+            color: #b8891e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<div class="staff-list">
+    <div class="product-list">
+        <main id="_main_content_" class="ui-main">
+            <div class="wrapper-block">
+
+                <div class="padding-container">
+                    <div class="row no-gutters pb-4">
+                        <div class="col align-items-center d-flex">
+                            <p class="title-page">Danh sách nhân sự</p>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="omni-tabs-wrapper ">
+                            <ul role="tablist" class="omni-tabs false">
+                                <li class="omni-tab-container">
+                                    <a class="omni-tab text-decoration-none" href="/staffs">
+                                        <span class="text-black ">Tất cả nhân sự</span>
+                                    </a>
+                                    <a class="omni-tab text-decoration-none" href="/staffs/admin-list">
+                                        <span class="text-black ">Quản trị viên</span>
+                                    </a>
+                                    <a class="omni-tab omni-tab-selected text-decoration-none">
+                                        <span class="text-black ">Nhân sự</span>
+                                    </a>
+                                </li>
+                                </li>
+                            </ul>
+                            <div class="omni-tabs omni-tabMeasurer">
+                                <li class="omni-tab-container">
+                                    <a class="omni-tab omni-tab-selected">
+                                        <span class="text-black">Tất cả nhân viên</span>
+                                        <span class="text-black">Quản trị viên</span>
+                                        <span class="text-black">Người bán hàng</span>
+                                    </a>
+                                </li>
+                                <a class="omni-disclosureActivator">
+                                            <span class="text-black">
+                                                <span class="mr-2">Xem thêm</span>
+                                                <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                                     width="10" height="10">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 451.846 451.847">
+                                                        <g>
+                                                            <path
+                                                                    d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                </svg>
+                                            </span>
+                                </a>
+                            </div>
+                            <div class="position-relative">
+                                <div class="table-list-product-list table-list--config">
+                                    <div class="ui-table-listing-container">
+                                        <table id="tbListUser" class="ui-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã Nhân viên</th>
+                                                    <th>Họ và tên </th>
+                                                    <th>Email </th>
+                                                    <th>Số điện thoại </th>
+                                                    <th>Quyền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="display-none"></div>
+            </div>
+
+            <div id="_container_portal_"></div>
+        </main>
+
+    </div>
+    <th:block th:replace="staff/modal-create-staff :: modal-create-staff"/>
+    <th:block th:replace="staff/modal-update-staff :: modal-update-staff"/>
+</div>
+
+
+<th:block th:replace="layout/script :: script"/>
+
+</body>
+<script>
+    const pages = {
+        urls: {
+            listStaff: App.BASE_URL_USER +"/list-staff",
+            listRole: App.BASE_URL_ROLE,
+
+        },
+        elements: {}
+    }
+    function renderUser(user){
+        let str = `
+                <tr id="tr_${user.id}">
+                    <td>${user.id}</td>
+                    <td>${user.fullName}</td>
+                    <td>${user.username}</td>
+                    <td>${user.phone}</td>
+                    <td>
+                        <span class="role-staff"> ${role.name}</span>
+                    </td>
+                </tr>
+        `;
+        return str;
+    }
+
+    function getAllUser(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: pages.urls.listStaff,
+        })
+            .done((data) => {
+                console.log(data)
+                $.each(data ,(i, item)=>{
+                    user = item;
+                    role = user.role;
+
+                    let str = renderUser(user);
+
+                    $('#tbListUser tbody').append(str)
+
+                })
+            })
+
+    }
+
+    getAllUser();
+
+</script>
+
+
+
+
+
+
+</html>

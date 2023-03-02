@@ -1,0 +1,44 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="modal-import-item-list">
+
+    <div id="modalItemList" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <span>Chọn mặt hàng</span>
+                    </h5>
+                    <div class="d-flex">
+                        <button class="btn btn-link close" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+                                      fill="#A6A6A6"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="itemList" class="product-search-modal__list">
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-auto 1 one-row">
+                        <div class="ml-auto d-flex">
+                            <div class="align-items-center">
+                                <p id="chooseQuantity">0 sản phẩm đã được chọn</p>
+                                <button type="button" id="btnChooseDone" class="btn btn-primary btn-lg me-2">Hoàn tất chọn</button>
+                                <button type="button" id="btnCancelChoose" class="btn btn-default btn-lg" data-bs-dismiss="modal">Hủy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>

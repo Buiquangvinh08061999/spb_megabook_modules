@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<!--new-list-->
+<div class="order-list">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+
+            <div class="padding-container">
+                <div class="row no-gutters pb-4">
+                    <div class="col align-items-center d-flex">
+                        <p class="title-page">Danh sách đơn hàng</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-3">
+                        <div class="wrapper-content pd-all-15"  style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px" >
+
+                            <div class="report-group-head color-white" style="color: rgb(87, 89, 98);">Đơn hàng đã hủy
+
+                            </div>
+                            <div class="report-group-body color-white text-right table-break-word"
+                                 style="color: rgb(87, 89, 98);"><span id="count-cancel"></span>  <!--tổng số lượng đơn hàng trạng thái completed-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="omni-tabs-wrapper ">
+                        <ul role="tablist" class="omni-tabs false">
+                            <li class="omni-tab-container">
+                                <a href="/orders" class="omni-tab omni-tab-selected text-decoration-none">
+
+                                <span class="text-black ">Tất cả đơn hàng đã hủy</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <div>
+                            <div class="position-relative">
+                                <div class="order-list--table table-list--config">
+                                    <div class="ui-table-listing-container">
+
+                                        <table id="tbListOrders" class="ui-table">
+                                            <thead>
+                                            <tr>
+                                                <th >
+                                                    <span>Mã</span>
+                                                </th>
+                                                <th >
+                                                    <span>Ngày tạo</span>
+                                                </th>
+                                                <th >
+                                                    <span>Ngày hủy đơn</span>
+                                                </th>
+                                                <th >
+                                                    <span>Khách hàng</span>
+                                                </th>
+                                                <th >
+                                                    <span>Trạng thái</span>
+                                                </th>
+                                                <th>
+                                                    <span>Tổng tiền</span>
+                                                </th>
+
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="display-none"></div>
+                            <div class="display-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+    const page = {
+        urls: {
+            listStatusCancel: App.BASE_URL_ORDER + "/list-status-cancel"
+        },
+        elements: {}
+    }
+
+    function renderOrder(order) {
+        let str = `
+
+               <tr id="tr_${order.id}">
+                    <td><a class="text-decoration-none" href ="/orders/detail/${order.id}">${order.id}</a>
+
+                        <div class="d-inline-block ml-1">
+                            <span>
+                                <svg class="svg-next-icon ui-icon--notes position-top-minus-one svg-next-icon-size-16"
+                                     width="16" height="16">
+                                    <svg viewBox="0 0 16 16" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                                d="M5.86339 10.5834L3.08339 7.80336L2.13672 8.74336L5.86339 12.47L13.8634 4.47003L12.9234 3.53003L5.86339 10.5834Z"
+                                                fill="#0D8923">
+                                        </path>
+                                    </svg>
+                                </svg>
+                            </span>
+                        </div>
+                    </td>
+                    <td>${order.createAt}</td>
+                    <td style="color: red !important;">${order.updateAt}</td>
+                    <td>
+                        <div>
+                         <a class="text-decoration-none" target="_blank" href="/customers/detail/${customer.id}">
+                            <span>${customer.fullName}</span>
+                        </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <div class="status-component">
+                                <span class="circle-status mr-2 circle-status-shipment_notyet" style="border-color: red"></span>
+                                <span class="badges--carrier-status-7" style="color: red !important;">${order.orderStatus.titleVi}</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        ${new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                        }).format(order.grandTotal)}
+                    </td>
+
+                </tr>
+            `;
+        return str;
+    }
+
+    function loadAllOrders() {
+        return $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "GET",
+            "url": page.urls.listStatusCancel,
+        })
+            .done((data) =>{
+                console.log(data);
+
+                $.each(data, (i, item) => {
+                    order = item;
+                    customer = order.customer;
+                    orderStatus = order.orderStatus;
+
+                    let str = renderOrder(order)
+                    $('#tbListOrders tbody').prepend(str);
+
+                })
+
+
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    loadAllOrders();
+
+    function countOrderIdCancel(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: App.BASE_URL_ORDER + "/count-cancel"
+        })
+            .done((data) => {
+                console.log(data.count)
+
+                let str =  `${data.count}`;
+
+                $('#count-cancel').prepend(str)
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    countOrderIdCancel();
+
+
+
+
+</script>
+
+</body>
+</html>

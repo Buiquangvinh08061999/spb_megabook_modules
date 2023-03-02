@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<!--new-list-->
+<div class="order-list">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+
+            <div class="padding-container">
+                <div class="row no-gutters pb-4">
+                    <div class="col align-items-center d-flex">
+                        <p class="title-page">Danh sách đơn hàng đã hoàn thành</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-5 col-3">
+                        <div class="wrapper-content pd-all-15"  style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px" >
+
+                            <div class="report-group-head color-white" style="color: rgb(87, 89, 98);">Đơn hàng đã hoàn thành
+
+                            </div>
+                            <div class="report-group-body color-white text-right table-break-word"
+                                 style="color: rgb(87, 89, 98);"><span id="count-completed"></span>  <!--tổng số lượng đơn hàng trạng thái completed-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-3">
+                        <div class="wrapper-content pd-all-15"
+                             style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px; height: 80px">
+                            <div class="report-group-head color-white" style="color: rgb(113, 106, 202);">Tổng doanh thu </div>
+
+                            <div class="report-group-body color-white text-right table-break-word" id=""
+                                 style="color: rgb(113, 106, 202);"><span id="grand-total-completed"></span> <!--tổng tiền order theo trạng thái completed-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="omni-tabs-wrapper ">
+                        <ul role="tablist" class="omni-tabs false">
+                            <li class="omni-tab-container"><a href="/orders" class="omni-tab omni-tab-selected text-decoration-none">
+                                <span class="text-black ">Tất cả đơn hàng</span></a></li>
+                            <li class="false omni-disclosureTab">
+                                <a class="omni-disclosureActivator">
+                                    <span class="text-black">
+                                        <span class="mr-2">Xem thêm</span>
+                                        <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90"
+                                             width="10" height="10">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847">
+                                                <g>
+                                                    <path
+                                                            d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="omni-tabs omni-tabMeasurer">
+                            <li class="omni-tab-container">
+                                <a href="/orders" class="omni-tab omni-tab-selected  text-decoration-none">
+                                    <span class="text-black">Tất cả đơn hàng</span>
+                                </a>
+                            </li>
+
+                            <a class="omni-disclosureActivator">
+                                <span class="text-black">
+                                    <span class="mr-2">Xem thêm</span>
+                                    <svg class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90" width="10"
+                                         height="10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847">
+                                            <g>
+                                                <path
+                                                        d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <div class="position-relative">
+                                <div class="order-list--table table-list--config">
+                                    <div class="ui-table-listing-container">
+
+                                        <table id="tbListOrders" class="ui-table">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <span>Mã</span>
+                                                </th>
+                                                <th >
+                                                    <span>Ngày tạo</span>
+                                                </th>
+                                                <th >
+                                                    <span>Ngày hoàn thành</span>
+                                                </th>
+                                                <th >
+                                                    <span>Khách hàng</span>
+                                                </th>
+                                                <th >
+                                                    <span id="cspot-orders-trangthaigiaohang">Trạng thái</span>
+                                                </th>
+                                                <th class="text-right">
+                                                    <span>Tổng tiền</span>
+                                                </th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+
+    const page = {
+        urls: {
+            listStatusCompleted: App.BASE_URL_ORDER + "/list-status-completed"
+        },
+        elements: {}
+    }
+
+
+    function renderOrder(order) {
+        let str = `
+               <tr id="tr_${order.id}">
+                    <td><a class="text-decoration-none" href ="/orders/detail/${order.id}">${order.id}</a>
+                        <div class="d-inline-block ml-1">
+                            <span>
+                                <svg class="svg-next-icon ui-icon--notes position-top-minus-one svg-next-icon-size-16"
+                                     width="16" height="16">
+                                    <svg viewBox="0 0 16 16" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                                d="M5.86339 10.5834L3.08339 7.80336L2.13672 8.74336L5.86339 12.47L13.8634 4.47003L12.9234 3.53003L5.86339 10.5834Z"
+                                                fill="#0D8923">
+                                        </path>
+                                    </svg>
+                                </svg>
+                            </span>
+                        </div>
+                    </td>
+                    <td>${order.createAt}</td>
+                    <td>${order.updateAt}</td>
+                    <td>
+                        <div>
+                        <a class="text-decoration-none" target="_blank" href="/customers/detail/${customer.id}">
+                            <span>${customer.fullName}</span>
+                        </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <div class="status-component">
+                                <span class="circle-status mr-2 circle-status-shipment_notyet" style="border-color: #3ebf39"></span>
+                                <span class="badges--carrier-status-7" style="color: #3ebf39 !important;">${order.orderStatus.titleVi}</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="text-right">
+                        ${new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                        }).format(order.grandTotal)}
+                    </td>
+
+
+                </tr>
+            `;
+        return str;
+    }
+
+    function loadAllOrders() {
+        $.ajax({
+            type: "GET",
+            url: page.urls.listStatusCompleted
+        })
+            .done(data => {
+                data.forEach(item => {
+                    order = item;
+                    customer = order.customer;
+
+                    let str = renderOrder(order);
+
+                    $("#tbListOrders tbody").prepend(str);
+
+                })
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    loadAllOrders();
+
+
+
+    function grandTotalOrderCompleted(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: App.BASE_URL_ORDER + "/grand-total-completed"
+        })
+            .done((data) => {
+                console.log(data.grandTotal )
+
+                let str =  `${new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(data.grandTotal)}`;
+
+                $('#grand-total-completed').prepend(str)
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+    grandTotalOrderCompleted();
+
+    function countOrderIdCompleted(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: App.BASE_URL_ORDER + "/count-completed"
+        })
+            .done((data) => {
+                console.log(data.count)
+
+                let str =  `${data.count}`;
+
+                $('#count-completed').prepend(str)
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    countOrderIdCompleted();
+
+
+</script>
+
+</body>
+
+</html>

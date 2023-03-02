@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+    <style>
+        .img{
+            width: 55px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div id="a" style="" class="create-order">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div class="ui-title-bar-container  max-width-center">
+                <div class="row">
+                    <div class="col">
+                        <div class="ui-toolbar-product-info">
+                            <div class="ui-product-head">Thông tin đơn hàng</div>
+                            <div class="ui-product-body">Vui lòng cung cấp các thông tin về đơn hàng sẽ tạo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="padding-container">
+                <div class="row" id="orderForm">
+                    <div class="col-lg-9 col-12">
+                        <div class="omni-layout-card card-default position-relative">
+                            <div class="omni-layout-card--header line-bottom">
+                                <span class="header-title">Sản Phẩm </span>
+                            </div>
+                            <div class="omni-layout-card--section">
+                                <div class="omni-layout-card--section-section">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col">
+                                            <button id="btnShowItemListModal" class="btn btn-success">Tạo đơn hàng</button>
+                                            <div class="display-none">
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="display-none">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card--section-section">
+                                <div class="ui-table-normal-container">
+                                    <div class="omni-layout-card--section pt-0">
+                                        <table id="tbListOrderItems" class="ui-table ui-table-vertical-top">
+                                            <thead>
+                                            <tr>
+                                                <th class="table-header--product min-width-200px">Sản Phẩm</th>
+                                                <th class="text-center table-header--money">Số lượng</th>
+                                                <th class="text-right table-header--money">Còn</th>
+                                                <th class="text-right table-header--money">Giá</th>
+                                                <th class="text-right table-header--money">Thành tiền</th>
+                                                <th class="table-header--quantity"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="omni-layout-card card-default">
+                            <div class="omni-layout-card--header line-bottom"><span
+                                    class="header-title">Thanh Toán</span>
+                            </div>
+                            <div class="omni-layout-card--section">
+                                <div class="row">
+                                    <div class="col-sm-6 col-12">
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="omni-layout-card--section-section">
+                                            <div class="omni-layout-card--item-stack-cover">
+                                                <div class="omni-layout-card--item-stack fill">
+                                                    <b>Số lượng sản phẩm</b>
+                                                </div>
+                                                <div class="omni-layout-card--item-stack fill text-right">
+                                                    <b id="totalOrderQuantity">0</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="omni-layout-card--section-section">
+                                            <div class="omni-layout-card--item-stack-cover">
+                                                <div class="omni-layout-card--item-stack fill text-primary">
+                                                    <b>Tổng giá trị đơn hàng</b>
+                                                </div>
+                                                <div class="omni-layout-card--item-stack fill text-right text-primary">
+                                                    <b id="grandTotalPrice">0 ₫</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card--section text-right">
+                                <div class="alert-danger-create-order text-left hide">
+
+                                </div>
+                                <button id="btnCreateOrder" class="btn btn-primary ml-3 mt-5">
+                                    <span>Đồng ý</span>
+                                </button>
+                                <div class="display-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-12 ">
+                        <div class="omni-layout-card card-default customer-tab" >
+                            <div class="omni-layout-card--header line-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col"><span class="header-title">Khách Hàng</span></div>
+                                    <div class="col-auto">
+                                        <div class="display-none"></div>
+                                        <div>
+                                            <div class="text-primary cursor-pointer">
+                                                <span>
+                                                    <span class="omni-svg-create svg-next-icon mr-2 svg-next-icon-size-14">
+                                                        <svg width="14" height="14">
+                                                            <svg viewBox="0 0 286.376 286.376">
+                                                                <path d="M268.477,125.29H161.086V17.899c0-9.885-8.013-17.898-17.898-17.898s-17.898,8.013-17.898,17.898v107.39H17.9c-9.885,0-17.9,8.013-17.9,17.898c0,9.885,8.015,17.898,17.9,17.898h107.39v107.39c0,9.885,8.013,17.898,17.898,17.898s17.898-8.013,17.898-17.898v-107.39h107.391c9.885,0,17.898-8.014,17.898-17.898C286.376,133.303,278.362,125.29,268.477,125.29z">
+                                                                </path>
+                                                            </svg>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                                <a href="/customers/create" class="text-decoration-none" id="createCustomer">Tạo mới</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card--section">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col">
+                                        <div class="ui-popover-control ui-popover-dropdown-customer--fullWidth">
+                                            <div class="position-relative-customer">
+                                                <div class="hrv-next-input-customer--stylized">
+                                                    <input placeholder="Tìm kiếm khách hàng..."
+                                                           class="hrv-next-input hrv-next-input-customer--invisible"
+                                                           type="text"
+                                                           id="searchCustomer"
+                                                           autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="ui-popover-dropdown ui-popover-dropdown-bottom">
+                                                <div class="ui-popover-header"></div>
+                                                <div class="ui-popover-body" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changing"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="display-none"></div>
+
+            <div id="_container_portal_"></div>
+        </div>
+    </main>
+
+
+    <th:block th:replace="/order/modal-order-item-list :: modal-order-item-list"/>
+
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+
+
+    const page = {
+        urls: {
+            searchCustomerByFullNameAndEmailAPI: App.BASE_URL_CUSTOMER + "/search-fullName-and-email",
+            customerAPI: App.BASE_URL_CUSTOMER,
+            itemAPI: App.BASE_URL_ITEM,
+            itemProductOrderAPI: App.BASE_URL_ITEM + "/order-products",
+            createOrderAPI: App.BASE_URL_ORDER + "/add"
+        },
+        elements: {}
+    }
+
+    page.elements.createCustomer = $('#createCustomer');
+    page.elements.modalCreateCustomer = $('#modalCreateCustomer');
+    page.elements.searchCustomer = $('#searchCustomer');
+    page.elements.nextInputCustomerInvisible = $(".hrv-next-input-customer--invisible");
+    page.elements.propOverDropDownCustomer = $(".ui-popover-dropdown-customer--fullWidth");
+    page.elements.positionRelativeCustomer = $(".position-relative-customer");
+    page.elements.nextInputCustomerStylized = $(".hrv-next-input-customer--stylized");
+    page.elements.popOverDropDown = $(".ui-popover-dropdown");
+    page.elements.customerTab = $(".customer-tab");
+    page.elements.changing = $('.changing');
+    page.elements.info = $("#info");
+
+    page.elements.btnShowItemListModal = $("#btnShowItemListModal");
+    page.elements.modalItemList = $("#modalItemList");
+    page.elements.itemList = $('#itemList');
+    page.elements.btnChooseDone = $("#btnChooseDone");
+    page.elements.btnCancelChoose = $("#btnCancelChoose");
+    page.elements.btnCreateOrder = $("#btnCreateOrder");
+    page.elements.tbListOrderItems = $("#tbListOrderItems");
+    page.elements.chooseQuantity = $("#chooseQuantity");
+    page.elements.totalOrderQuantity = $("#totalOrderQuantity");
+    page.elements.grandTotalPrice = $("#grandTotalPrice");
+
+
+    let item = new Item();
+
+    let product = new Product();
+    let customer = new Customer();
+    let locationRegion = new LocationRegion();
+
+    let listItemProducts = [];
+    let listItems = [];
+
+    let order = new Order();
+
+    let orderPurchase = {}
+    orderPurchase.customerId = null;
+    orderPurchase.orderItems = [];
+
+    let chooseQuantity = 0;
+    let totalOrderQuantity = 0;
+    let grandTotalPrice = 0;
+
+
+    page.elements.searchCustomer.on('input', function () {
+        let keySearch = page.elements.searchCustomer.val();
+
+        searchCustomer(keySearch);
+
+    })
+
+    function startSearch() {
+        page.elements.nextInputCustomerInvisible.focusin(() => {
+            page.elements.propOverDropDownCustomer.addClass("ui-popover-dropdown--isOpenning");
+            page.elements.positionRelativeCustomer.addClass("z-index-2");
+            page.elements.nextInputCustomerStylized.addClass("hrv-next-input--is-focused");
+        })
+    }
+
+    startSearch();
+
+    function searchCustomer(keySearch) {
+        let obj = {
+            "keySearch": keySearch
+        }
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json; charset=utf-8"
+            },
+            type: "POST",
+
+            url: App.BASE_URL_CUSTOMER + "/search-fullName-and-email",
+
+            data: JSON.stringify(obj)
+        })
+            .done((data) => {
+                $(".ui-popover-dropdown").html('');
+                console.log("data "+data);
+                    $.each(data,(i, item)=>{
+                        let str=`
+                           <div class="ui-popover-body customer-in-list result-search"  data-id=${item.id} ">
+                            <div class="p-3 box-shadown-bottom bg-hover-info cursor-pointer">
+                                <div class="row align-items-start no-gutters mb-2">
+                                    <div class="col max-width-30px">
+                                        <svg class="svg-next-icon svg-next-icon-size-30"
+                                             width="30" height="30">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 viewBox="0 0 64 64">
+                                                <g id="Layer_2" data-name="Layer 2">
+                                                    <g id="Layer_1-2" data-name="Layer 1">
+                                                        <path xmlns="http://www.w3.org/2000/svg"
+                                                              fill="#3c94d1"
+                                                              d="M32,63.5A31.5,31.5,0,1,1,63.5,32,31.54,31.54,0,0,1,32,63.5Z"></path>
+                                                        <path xmlns="http://www.w3.org/2000/svg"
+                                                              fill="#fff"
+                                                              d="M32,1A31,31,0,1,1,1,32,31,31,0,0,1,32,1m0-1A32,32,0,1,0,64,32,32,32,0,0,0,32,0Z"></path>
+                                                        <path xmlns="http://www.w3.org/2000/svg"
+                                                              fill="#fff"
+                                                              d="M32,7.8A11.94,11.94,0,1,1,20.06,19.75,11.93,11.93,0,0,1,32,7.8Z"></path>
+                                                        <path xmlns="http://www.w3.org/2000/svg"
+                                                              fill="#fff"
+                                                              d="M32,59.34A28.67,28.67,0,0,1,8.11,46.52C8.23,38.59,24,34.25,32,34.25s23.77,4.34,23.89,12.26A28.67,28.67,0,0,1,32,59.34Z"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </svg>
+                                    </div>
+                                    <div class="col pl-3">
+                                        <strong class="table-break-word">${item.fullName}</strong>
+                                        <p class="mb-0 table-break-word">${item.email}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                        $('.ui-popover-dropdown').prepend(str);
+                        showInfoCustomer();
+                    })
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                $(".ui-popover-dropdown").html('');
+                let str=`
+                    <div class="ui-popover-body">
+                           <div class="text-center p-3">
+                                 <p class="font-weight-bold text-center">Không tìm thấy dữ liệu</p>
+                           </div>
+                    </div>
+                `;
+                $('.ui-popover-dropdown').prepend(str);
+            })
+
+
+    }
+
+    function clearSearchInput(){
+        page.elements.searchCustomer.val("");
+    }
+
+    function showInfoCustomer() {
+        $(".result-search").on("click", function () {
+            $(".customer-tab").addClass("hide");
+            let customerId = $(this).data("id");
+            console.log(customerId);
+            $(".customer-tab").addClass("hide");
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: App.BASE_URL_CUSTOMER + "/" + customerId,
+            })
+                .done((data) => {
+                    $('.changing').html('');
+                        let str = `
+                        <div class="omni-layout-card card-default" id="info">
+                          <div class="omni-layout-card--header line-bottom">
+                             <div class="row align-items-center">
+                                <div class="col"><span class="header-title">Thông Tin Người Mua</span></div>
+                                     <div class="col-auto">
+                                     <button class="btn btn-link no-padding " id="closeInfo">
+                                     <svg class="svg-next-icon fill-gray-solid svg-next-icon-size-14" width="14" height="14">
+                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                          <path
+                                               d="M18.263 16l10.07-10.07c.625-.625.625-1.636 0-2.26s-1.638-.627-2.263 0L16 13.737 5.933 3.667c-.626-.624-1.637-.624-2.262 0s-.624 1.64 0 2.264L13.74 16 3.67 26.07c-.626.625-.626 1.636 0 2.26.312.313.722.47 1.13.47s.82-.157 1.132-.47l10.07-10.068 10.068 10.07c.312.31.722.468 1.13.468s.82-.157 1.132-.47c.626-.625.626-1.636 0-2.26L18.262 16z">
+                                          </path>
+                                      </svg></svg></button></div>
+                                  </div>
+                            </div>
+                            <div class="omni-layout-card--section">
+                                <div class="omni-layout-card--section-section">
+                                    <div class="omni-layout-card--item-stack-cover stack-nowrap align-items-center">
+                                        <div class="omni-layout-card--item-stack fill">
+                                        <a class="mb-2 word-break text-decoration-none">${data.fullName}</a>
+                                            <p class="mb-0 color-gray-solid word-break">${data.email}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card--header">
+                                <div class="row align-items-center">
+                                    <div class="col"><span class="header-title">Thông tin giao hàng</span></div>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card--section">
+                                <div class="omni-layout-card--section-section">
+                                    <p class="mb-2 table-break-word">${data.fullName}</p>
+
+                                    <p class="mb-2">${data.phone}</p>
+                                </div>
+                                <div class="omni-layout-card--section-section">
+                                    <p class="header-title">Địa Chỉ</p>
+                                    <p class="mb-0 table-break-word">${data.locationRegion.address}</p>
+                                    <p class="mb-0 table-break-word">${data.locationRegion.wardName}, ${data.locationRegion.districtName}, ${data.locationRegion.provinceName}</p>
+                                </div>
+                            </div>
+                            <div class="omni-layout-card--section">
+                                <div class="omni-layout-card--section-section">
+                                    <p class="header-title">Ghi chú về khách hàng</p>
+                                    <p class="mb-0 table-break-word text-nodata">${data.note}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    page.elements.changing.prepend(str);
+
+                    orderPurchase.customerId = customerId;  //lay dc id customer
+
+                    closeInfo();
+                })
+                .fail(jqXHR => {
+                    console.log(jqXHR);
+                    App.SweetAlert.showErrorAlert("Lỗi không xác định!");
+                })
+        })
+
+    }
+
+    function closeInfo(){
+        $("#closeInfo").on("click", () => {
+            page.elements.info.addClass("hide")
+            page.elements.customerTab.removeClass("hide");
+            page.elements.searchCustomer.blur();
+            page.elements.propOverDropDownCustomer.removeClass("ui-popover-dropdown--isOpenning");
+            page.elements.positionRelativeCustomer.removeClass("z-index-2");
+            page.elements.nextInputCustomerStylized.removeClass("hrv-next-input--is-focused");
+
+            orderPurchase.customerId = null;
+
+            page.elements.changing.empty();
+            clearSearchInput();
+        })
+    }
+
+    page.elements.searchCustomer.on("keydown", () => {
+        $(".result-search").remove();
+    })
+
+
+
+    //Tien
+    page.elements.btnShowItemListModal.on("click", function() {
+        $("#itemList .checkbox").prop("checked", false);
+
+        $.each(listItems, (i, item) => {
+            $("#ul_" + item.id).prop("checked", true);
+        })
+
+        chooseQuantity = listItems.length;
+        page.elements.chooseQuantity.text(listItems.length + " sản phẩm đã được chọn");
+        page.elements.modalItemList.modal("show");
+    })
+
+
+    function renderItem(item) {
+        let str = `
+            <ul class="next-list--divided--top order-item" data-id="${item.id}">
+                <li>
+                    <div class="cursor-pointer d-flex align-items-start justify-content-between mt-4">
+                        <div class="row w-100">
+                            <div class="col-md-5 col-12">
+                                <div class="d-flex">
+                                    <div class="hrv-next-input-checkbox product-list__item--input ">
+                                        <label class="hrv-next-label--switch hrv-next-label--empty" for="hrv-checkbox-112"></label>
+                                        <input id="ul_${item.id}" class="checkbox" data-id="${item.id}" type="checkbox">
+                                    </div>
+                                    <div class="ml-2">
+                                        <img class="img" src="${product.urlImage}" alt="${product.title}"/>
+                                    </div>
+                                    <div class="omni-product-search__text"><span>${product.title}</span>
+                                        <div class="mb-0 text-secondary word-break"><p class="mb-0">
+                                            <b>SKU</b>: ${product.sku}</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-12 ml-md-auto omni-product-item-info px-0">
+                                <div class="row">
+                                    <span class="col-4 text-left"></span>
+                                        <span class="text-right col-3">${item.available} tồn kho</span>
+                                        <span class="text-right col-4">
+                                        <span class="text-nowrap">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND', }).format(item.price)}</span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        `;
+        return str;
+    }
+
+    function loadAllItemProducts() {
+        $.ajax({
+            type: "GET",
+            url: page.urls.itemProductOrderAPI
+        })
+            .done(data => {
+                listItemProducts = data;
+                $.each(listItemProducts, (i, obj) => {
+                    product = obj.product;
+
+                    let str = renderItem(obj);
+                    page.elements.itemList.prepend(str);
+                })
+                onClickItem();
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    loadAllItemProducts();
+
+
+    function getItemById(itemId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.itemAPI + "/" + itemId
+        })
+            .done(data => {
+                item = data;
+                product = item.product;
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function renderOrderItem(item) {
+        let str = `
+            <tr id="tr_${item.id}">
+                <td class="align-middle text-normal fix-overflow-tooltip">
+                    <div class="order-block--table">
+                        <div class="order-block--table-image">
+                            <div class="table-cell--image">
+                                <img class="box-image" src="/assets/images/product.png">
+                            </div>
+                        </div>
+                        <div class="order-block--table-content">
+                            <div class="trigger "><span><strong
+                                class="text-primary mb-2 d-inline-block cursor-pointer table-break-word"><span
+                                class="">${item.product.title}</span></strong></span></div>
+                            <p class="mb-2 text-secondary">SKU: ${item.product.sku}</p></div>
+                    </div>
+                </td>
+                <td class="align-middle text-center">
+                    <div class="quantity-decimal_wrapper position-relative">
+                        <div class="">
+                        <input type="number" id="quantity_${item.id}" data-id="${item.id}" data-price="${item.price}"
+                             class="next-input text-left min-width-100px position-relative inp-quantity"
+                             min="1" max="${item.available}" step="1" value="1">
+                        </div>
+                    </div>
+                </td>
+                <td class="align-middle text-right">
+                    <div class="no-padding border-0 text-right">${item.available}</div>
+                    <div class="display-none"></div>
+                </td>
+                <td class="align-middle text-right">
+                    <div id="price_${item.id}" class="no-padding border-0 text-right">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND', }).format(item.price)}</div>
+                    <div class="display-none"></div>
+                </td>
+                <td class="text-right align-middle text-primary">
+                    <div id="totalPrice_${item.id}" class="border-0">${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND', }).format(item.price)}</div>
+                </td>
+                <td class="text-right align-middle">
+                    <button class="btn btn-link text-secondary btnRemoveOrderItem" data-id="${item.id}">
+                        <svg class="svg-next-icon svg-next-icon-size-14" width="14" height="14">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                <path
+                                    d="M18.263 16l10.07-10.07c.625-.625.625-1.636 0-2.26s-1.638-.627-2.263 0L16 13.737 5.933 3.667c-.626-.624-1.637-.624-2.262 0s-.624 1.64 0 2.264L13.74 16 3.67 26.07c-.626.625-.626 1.636 0 2.26.312.313.722.47 1.13.47s.82-.157 1.132-.47l10.07-10.068 10.068 10.07c.312.31.722.468 1.13.468s.82-.157 1.132-.47c.626-.625.626-1.636 0-2.26L18.262 16z"></path>
+                            </svg>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        `;
+
+        return str;
+    }
+
+    function removeItemOnce(arr, value) {
+        let index = arr.indexOf(value);
+        if (index > -1) {
+            arr.splice(index, 1);
+        }
+        return arr;
+    }
+
+
+    function onClickItem() {
+        $(".order-item").on("click", function () {
+            let itemId = $(this).data("id");
+
+            let itemChecked = $(this).find("#ul_" + itemId).prop("checked");
+
+            if (!itemChecked) {
+                $(this).find("#ul_" + itemId).prop("checked", true);
+                chooseQuantity++;
+                page.elements.chooseQuantity.text(chooseQuantity + " sản phẩm đã được chọn");
+            }
+            else {
+                $(this).find("#ul_" + itemId).prop("checked", false);
+                chooseQuantity--;
+                page.elements.chooseQuantity.text(chooseQuantity + " sản phẩm đã được chọn");
+            }
+        })
+    }
+
+    page.elements.btnChooseDone.on("click", () => {
+        $("#tbListOrderItems tbody").empty();
+
+        let orderItems = $(".order-item");
+
+        listItems = [];
+
+        $.each(orderItems, function(i, item) {
+            let itemId = +$(this).data("id");
+
+            let itemChecked = $(this).find("#ul_" + itemId).prop("checked");
+
+            if (itemChecked) {
+                listItemProducts.filter(item => {
+                    if (item.id === itemId) {
+                        item.totalQuantity = 1;
+                        totalOrderQuantity++;
+                        item.totalAmount = item.price;
+                        listItems.push(item);
+                        let str = renderOrderItem(item);
+                        $("#tbListOrderItems tbody").prepend(str);
+                    }
+                });
+            }
+        })
+        removeOrderItem();
+
+        page.elements.totalOrderQuantity.text(totalOrderQuantity);
+
+        $.each(listItems, (i, obj) => {
+            grandTotalPrice += obj.price;
+        })
+
+        page.elements.grandTotalPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(grandTotalPrice));
+
+        $('#orderForm .alert-danger-create-order').empty();
+
+        page.elements.modalItemList .modal("hide");
+        $("ul.order-item .product-list__item--input input").prop("checked", false);
+    })
+
+    page.elements.btnCancelChoose.on("click", () => {
+        $('#orderForm .alert-danger-create-order').empty();
+    })
+
+    function removeOrderItem() {
+        $(".btnRemoveOrderItem").on("click", function() {
+            let orderItemId = +$(this).data("id");
+            $(`#tr_${orderItemId}`).empty();
+
+            getItemById(orderItemId).then(() => {
+
+                $.each(listItems, (i, obj) => {
+                    if (obj.id === orderItemId) {
+                        grandTotalPrice -= obj.totalAmount;
+                        totalOrderQuantity -= obj.totalQuantity;
+
+                        removeItemOnce(listItems, obj);
+
+                        page.elements.totalOrderQuantity.text(totalOrderQuantity);
+                        page.elements.grandTotalPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(grandTotalPrice));
+                    }
+                })
+            })
+        })
+    }
+
+    function createOrder() {
+        App.SweetAlert.showConfirm("Xác nhận đơn hàng", "Đơn hàng sẽ được tạo").then(result => {
+            if (result.isConfirmed) {
+                $.each(listItems, (i, obj) => {
+                    let chooseOrderItem = new OrderItemCreate();
+                    chooseOrderItem.id = obj.id;
+                    chooseOrderItem.quantity = Number($("#quantity_" + obj.id).val());
+
+                    orderPurchase.orderItems.push(chooseOrderItem);
+                })
+                console.log(JSON.stringify(orderPurchase));
+
+                $.ajax({
+                    headers: {
+                        accept: "application/json",
+                        "content-type": "application/json"
+                    },
+                    type: "POST",
+                    url: page.urls.createOrderAPI,
+                    data: JSON.stringify(orderPurchase)
+                })
+                    .done(data => {
+                        order = data;
+                        App.IziToast.showSuccessAlert("Tạo đơn hàng thành công");
+                        clearOldOrderInfo();
+                    })
+                    .fail(jqXHR => {
+                        console.log(jqXHR);
+
+                        $('#orderForm .alert-danger-create-order').empty().removeClass('hide').addClass('show');
+
+                        if (jqXHR.responseJSON.errors) {
+                            $.each(jqXHR.responseJSON.errors, (key, item) => {
+                                let str = `<label id="${key}-error" class="error" for="${key}">${item.message}</label><br>`;
+                                $("#" + key).addClass("error");
+                                $('#orderForm .alert-danger-create-order').append(str);
+                            })
+                        } else if (jqXHR.responseJSON) {
+                            $.each(jqXHR.responseJSON, (key, item) => {
+                                let str = `<label id="${key}-error" class="error" for="${key}">${item}</label><br>`;
+                                $("#" + key).addClass("error");
+                                $('#orderForm .alert-danger-create-order').append(str);
+                            })
+                        }
+                    })
+            }
+        })
+    }
+
+    function clearOldOrderInfo() {
+        page.elements.info.addClass("hide")
+        page.elements.customerTab.removeClass("hide");
+        page.elements.searchCustomer.blur();
+        page.elements.propOverDropDownCustomer.removeClass("ui-popover-dropdown--isOpenning");
+        page.elements.positionRelativeCustomer.removeClass("z-index-2");
+        page.elements.nextInputCustomerStylized.removeClass("hrv-next-input--is-focused");
+
+        orderPurchase.customerId = null;
+        page.elements.changing.empty();
+        clearSearchInput();
+
+        $("#tbListOrderItems tbody").empty();
+        listItems = [];
+        $.each(listItems, (i, obj) => {
+            $("ul").find("#ul_" + obj.id).prop("checked", false);
+        })
+        orderPurchase.orderItems = [];
+
+        page.elements.chooseQuantity.text("0 sản phẩm đã được chọn");
+        page.elements.totalOrderQuantity.text(0);
+        page.elements.grandTotalPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(0));
+    }
+
+    page.elements.btnCreateOrder.on("click", () => {
+        createOrder();
+        $('#orderForm .alert-danger-create-order').empty();
+        orderPurchase.orderItems = [];
+    })
+
+
+    page.elements.tbListOrderItems.on("input", ".inp-quantity", function() {
+        let id = +$(this).data("id");
+
+        let quantity = Math.floor(Number($(this).val()));
+        let price = Number($(this).data("price"));
+        let totalPrice = quantity * price;
+
+        $("#totalPrice_" + id).text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(totalPrice));
+
+        totalOrderQuantity = 0;
+        grandTotalPrice = 0;
+
+        $.each(listItems, (i, obj) => {
+            totalOrderQuantity += Math.floor(Number($("#quantity_" + obj.id).val()));
+            obj.totalAmount = Math.floor(Number($("#quantity_" + obj.id).val())) * obj.price;
+            grandTotalPrice += obj.totalAmount;
+        })
+
+        page.elements.totalOrderQuantity.text(totalOrderQuantity);
+        page.elements.grandTotalPrice.text(new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(grandTotalPrice));
+    })
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
+

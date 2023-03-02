@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+<div class="inventory">
+    <main id="_main_content_" class="ui-main">
+        <div class="wrapper-block">
+            <div class="padding-container">
+                <div class="py-4">
+                    <div class="row no-gutters">
+                        <div class="col align-items-center d-flex"><p class="title-page" style="padding: 0px 10px">Tồn kho</p></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-6">
+                        <div class="wrapper-content pd-all-15"
+                             style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px;height: 80px">
+                            <div class="report-group-head color-white" style="color: rgb(54, 163, 247);">Tổng đơn hàng đã nhập
+                            </div>
+                            <div class="report-group-body color-white text-right table-break-word"
+                                 style="color: rgb(54, 163, 247);"><span id="sum-quantity"> sản phẩm</span>  <!--Tổng đơn hàng-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-6">
+                        <div class="wrapper-content pd-all-15"
+                             style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px;height: 80px">
+                            <div class="report-group-head color-white" style="color: rgb(87, 89, 98);">
+                                Số lượng tồn kho
+                            </div>
+                            <div class="report-group-body color-white text-right table-break-word"
+                                 style="color: rgb(87, 89, 98);"><span id="sum-available"> sản phẩm</span>  <!--Tổng đơn hàng tồn kho-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-6">
+                        <div class="wrapper-content pd-all-15"
+                             style="background-color: rgb(255, 255, 255); box-shadow: rgba(33, 33, 33, 0.05) 0px 0px 10px; border-radius: 4px;height: 80px">
+                            <div class="report-group-head color-white" style="color: rgb(113, 106, 202);">
+                                Số lượng đã bán
+                            </div>
+                            <div class="report-group-body color-white text-right table-break-word"
+                                 style="color: rgb(113, 106, 202);"><span id="sum-sold"> sản phẩm</span>  <!--Tổng đơn hàng đã bán-->
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div>
+                    <div class="omni-tabs-wrapper ">
+                        <ul role="tablist" class="omni-tabs false">
+                            <li class="omni-tab-container"><a class="omni-tab omni-tab-selected"><span
+                                    class="text-black">Tất cả</span></a></li>
+
+                            <li class="omni-tab-container"><a class="omni-tab text-decoration-none" href="/inventory-management/more-than-0"><span
+                                    class="text-black">Tồn kho lớn hơn 0</span></a></li>
+
+                            <li class="omni-tab-container"><a class="omni-tab text-decoration-none" href="/inventory-management/is-0"><span
+                                    class="text-black">Tồn kho bằng 0</span></a></li>
+
+                        </ul>
+                        <div class="omni-tabs omni-tabMeasurer">
+                            <li class="omni-tab-container"><a class="omni-tab omni-tab-selected"><span
+                                    class="text-black">Tất cả</span></a></li>
+                            <a class="omni-disclosureActivator"><span class="text-black"><span
+                                    class="mr-2">Xem thêm</span><svg
+                                    class="svg-next-icon svg-next-icon-size-10 svg-next-icon-rotate-90" width="10"
+                                    height="10"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451.846 451.847"><g><path
+                                    d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744   L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284   c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></g></svg></svg></span></a>
+                        </div>
+
+                        <div class="position-relative">
+                            <div class="table-list--config">
+                                <div class="ui-table-normal-container" style="overflow-x: hidden">
+
+                                    <table id="tbListItems" class="ui-table">
+                                        <thead>
+                                        <tr>
+                                            <th class="has-bulk-actions table-header--id" style="width: 30px;">
+                                                <span>#</span>
+                                            </th>
+                                            <th class="font-weight-bold w-20">
+                                                <span>Sản phẩm</span>
+                                            </th>
+                                            <th class="table-header--money font-weight-bold text-center w-5">
+                                                <span>Mã SKU</span>
+                                            </th>
+                                            <th class="table-header--money font-weight-bold text-right w-5">
+                                                <span>Đơn giá nhập</span>
+                                            </th>
+                                            <th class="table-header--money font-weight-bold text-right w-5">
+                                                <span>Đơn giá bán</span>
+                                            </th>
+                                            <th class="table-header--money font-weight-bold text-right w-5">
+                                                <span>Tồn kho</span>
+                                            </th>
+                                            <th class="table-header--money font-weight-bold text-right w-5">
+                                                <span>Đã bán</span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="_container_portal_"></div>
+    </main>
+
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+
+    const page = {
+        urls: {
+            itemAPI: App.BASE_URL_ITEM,
+            sumAllQuantity: App.BASE_URL_ITEM + "/list-sum-quantity"
+        },
+        elements: {}
+    }
+
+    page.elements.tbListItems = $("#tbListItems");
+
+    let sum = new SumQuantityItem();
+
+    let itemTable = null;
+
+    function loadTableListItems() {
+        $(() => {
+            itemTable = page.elements.tbListItems.DataTable({
+                ajax: {
+                    contentType: "application/json",
+                    url: page.urls.itemAPI,
+                    type: "GET",
+                    dataSrc: ""
+                },
+                lengthMenu: [
+                    [10, 15, 20, -1],
+                    ["10", "15", "25", "All"]
+                ],
+                searching: true,
+                select: true,
+                bDestroy: true,
+                fixedColumns: true,
+                autoWidth: false,
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "product",
+                        className: "text-left"
+                    },
+                    {
+                        data: "product",
+                        className: "text-center",
+                        render: function (product) {
+                            return `${product.sku}`;
+                        }
+                    },
+                    {
+                        data: "product",
+                        className: "text-right text-danger",
+                        render: function (product) {
+                            return new Intl.NumberFormat('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            }).format(product.costPrice);
+                        }
+                    },
+                    {
+                        data: "product",
+                        className: "text-right text-success",
+                        render: function (product) {
+                            return new Intl.NumberFormat('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            }).format(product.price);
+                        }
+                    },
+                    {
+                        data: "available",
+                        className: "text-right text-info"
+                    },
+                    {
+                        data: "sold",
+                        className: "text-right text-warning"
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        width: "5%",
+                    },
+                    {
+                        targets: 1,
+                        width: "50%",
+                        render: function (data, type, row, meta) {
+                            return `
+                                <img class="w-10 me-4" src="${row.product.urlImage}" alt="${row.product.title}" />
+                                <a href="/products/detail-inventory/${row.id}" class="text-decoration-none">${row.product.title}</a>`;
+                        }
+                    },
+                    {
+                        targets: 2,
+                        width: "10%",
+                        // render: function (data, type, row, meta) {
+                        //     return `<a class="text-decoration-none" >${row.product.title}</a>`;
+                        //     ;
+                        // }
+                    },
+                    {
+                        targets: 3,
+                        width: "10%",
+                    },
+                    {
+                        targets: 4,
+                        width: "10%",
+                    },
+                    {
+                        targets: 5,
+                        width: "10%",
+                    },
+                    {
+                        targets: 6,
+                        width: "10%",
+                    },
+                ]
+            })
+        })
+    }
+
+    loadTableListItems();
+
+
+
+    function sumAllQuantity(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.sumAllQuantity
+        })
+            .done((data) => {
+
+                console.log(data); //data đã có tất cả dữ liệu số lượng, được lấy từ sp
+                $.each(data ,(i, item) => { //vì nó là list nên dùng vòng for để duyệt lấy hết
+                    sum = item;
+
+                    let strQuantity =  `${sum.sumQuantity}`;
+                    let strAvailable =  `${sum.sumAvailable}`;
+                    let strSold =  `${sum.sumSold}`;
+
+                    $('#sum-quantity').prepend(strQuantity)
+                    $('#sum-available').prepend(strAvailable)
+                    $('#sum-sold').prepend(strSold)
+                })
+
+
+            })
+
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    sumAllQuantity();
+
+
+
+
+</script>
+
+</body>
+
+</html>

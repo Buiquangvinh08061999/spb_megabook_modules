@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+<body>
+    <th:block th:replace="layout/leftbar :: leftbar"/>
+    <th:block th:replace="layout/header :: header"/>
+
+    <div class="create-customer">
+        <main id="_main_content_" class="ui-main">
+            <div class="wrapper-block">
+                <div>
+                    <div class="ui-title-bar-container  max-width-center">
+                        <div class="row">
+                            <div class="col-11 col-lg-6 mb-2 mb-sm-0">
+                                <div class="ui-toolbar-product-info">
+                                    <div class="row">
+                                        <label class="title-header">Thông tin khách hàng</label>
+                                    </div>
+                                    <div class="ui-product-body">Vui lòng cung cấp các thông tin về khách hàng sẽ tạo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1 col-lg-6 text-lg-right">
+                                <a href="/customers">
+                                    <button class="btn btn-outline-primary float-right">Quay lại</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="formCreateCustomer">
+                    <div class="padding-container">
+                        <div class="row">
+                            <div class="col-lg-8 col-12">
+                                <div class="wrapper-content mb-5">
+                                    <div class="ui-information">
+                                        <div class="ui-information-head">
+                                            <span
+                                                    class="ui-information-title">Thông tin chung</span>
+                                        </div>
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-12"><label for="fullNameCre" class="label-input-group">Họ và tên
+                                                    </label>
+                                                        <div class="">
+                                                            <input autocomplete="on" type="text" id="fullNameCre" name="fullNameCre"
+                                                                   class="next-input" placeholder="Nhập họ và tên"
+                                                                   step="1" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-12">
+                                                        <label for="emailCre" class="label-input-group">Địa chỉ email
+                                                        </label>
+                                                        <div class="">
+                                                            <input autocomplete="on" type="text"
+                                                                   class="next-input" id="emailCre" name="emailCre"
+                                                                   placeholder="Nhập địa chỉ email" step="1"
+                                                                   value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group px-0">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-12">
+                                                        <label for="phoneCre" class="label-input-group">Số điện thoại
+                                                        </label>
+                                                        <div class="">
+                                                            <input autocomplete="on" type="text"
+                                                                   class="next-input" id="phoneCre" name="phoneCre"
+                                                                   placeholder="Nhập số điện thoại" step="1"
+                                                                   value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrapper-content mb-5">
+                                    <div class="ui-information">
+                                        <div class="ui-information-head">
+                                            <span class="ui-information-title">Địa chỉ</span>
+                                        </div>
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0 pb-0">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-12">
+                                                        <label class="label-input-group">Tỉnh/Thành phố</label>
+                                                        <div class="trigger omni-selection ">
+                                                            <span>
+                                                            <div class="omni-input-wrapper ">
+                                                                <select class="omni-input" id="provinceCre" name="provinceCre">
+
+                                                                </select>
+                                                            </div>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-12">
+                                                        <label class="label-input-group">Quận/Huyện</label>
+                                                        <div class="trigger omni-selection ">
+                                                            <span>
+                                                            <div class="omni-input-wrapper ">
+                                                                <select class="omni-input" id="districtCre" name="districtCre">
+
+                                                                </select>
+                                                            </div>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-12 pt-16">
+                                                        <label class="label-input-group">Phường/Xã</label>
+                                                        <div class="trigger omni-selection ">
+                                                        <span>
+                                                            <div class="omni-input-wrapper ">
+                                                                <select class="omni-input" id="wardCre" name="wardCre">
+
+                                                                </select>
+                                                            </div>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-12 pt-16">
+                                                        <label for="addressCre" class="label-input-group">Địa chỉ</label>
+                                                        <div class="">
+                                                            <input autocomplete="on" type="text" id="addressCre" name="addressCre"
+                                                                   class="next-input" placeholder="Nhập địa chỉ"
+                                                                   step="1" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="wrapper-content mb-5">
+                                    <div class="ui-information">
+                                        <div class="ui-information-head"><span class="ui-information-title">Thông tin bổ sung</span>
+                                        </div>
+                                        <div class="ui-information-body">
+                                            <div class="form-group px-0 pb-0">
+                                                <label for="noteCre" class="label-input-group">Ghi chú</label>
+                                                <textarea placeholder="Nhập ghi chú" rows="1" id="noteCre" name="noteCre"
+                                                          class="hrv-ui-textarea"
+                                                          style="overflow: hidden; overflow-wrap: break-word; height: 40px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="float-right">
+                                <button id="btnCreateCustomer" class="btn btn-primary ml-3 btn-lg" type="button">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                </div>
+                <div class="display-none"></div>
+            </div>
+            <div id="_container_portal_"></div>
+        </main>
+    </div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+<script>
+    
+    const page = {
+        urls: {
+            getAllProvinces: App.BASE_URL_PROVINCE + "/",
+            getAllDistricts: App.BASE_URL_PROVINCE + "/district",
+            getAllWards: App.BASE_URL_PROVINCE + "/ward",
+            createCustomerAPI:  App.BASE_URL_CUSTOMER + "/create"
+        },
+        elements: {}
+    }
+    
+    page.elements.provinceCre = $("#provinceCre");
+    page.elements.districtCre = $("#districtCre");
+    page.elements.wardCre = $("#wardCre");
+
+    page.elements.fullNameCre = $("#fullNameCre");
+    page.elements.emailCre = $("#emailCre");
+    page.elements.phoneCre = $("#phoneCre");
+    page.elements.addressCre = $("#addressCre");
+    page.elements.noteCre = $("#noteCre");
+
+    page.elements.formCreateCustomer = $("#formCreateCustomer");
+    page.elements.btnCreateCustomer = $("#btnCreateCustomer");
+
+
+    let customer = new Customer();
+    let locationRegion = new LocationRegion();
+
+
+    function getAllProvincesCre() {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllProvinces
+        })
+            .done(data => {
+                page.elements.provinceCre.empty();
+                drawProvinces(page.elements.provinceCre, data.results);
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllDistrictsCre(provinceId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllDistricts + "/" + provinceId
+        })
+            .done(data => {
+                page.elements.districtCre.empty();
+                drawDistricts(page.elements.districtCre, data.results);
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllWardsCre(districtId) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllWards + "/" + districtId
+        })
+            .done(data => {
+                page.elements.wardCre.empty();
+                drawWards(page.elements.wardCre, data.results);
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function drawProvinces(elem, provinces) {
+        $.each(provinces, (i, item) => {
+            let str = `<option value="${item.province_id}"> ${item.province_name} </option> `;
+            elem.append(str);
+        })
+    }
+
+    function drawDistricts(elem, districts) {
+        $.each(districts, (i, item) => {
+            let str = `<option value="${item.district_id}"> ${item.district_name} </option> `;
+            elem.append(str);
+        })
+    }
+
+    function drawWards(elem, wards) {
+        $.each(wards, (i, item) => {
+            let str = `<option value="${item.ward_id}"> ${item.ward_name} </option> `;
+            elem.append(str);
+        })
+    }
+
+    getAllProvincesCre().then(() => {
+        let provinceId = page.elements.provinceCre.val();
+        getAllDistrictsCre(provinceId).then(() => {
+            let districtId = page.elements.districtCre.val();
+            getAllWardsCre(districtId);
+        })
+    })
+
+    page.elements.provinceCre.on('change', function () {
+        let provinceId = page.elements.provinceCre.val();
+        getAllDistrictsCre(provinceId).then(() => {
+            let districtId = page.elements.districtCre.val();
+            getAllWardsCre(districtId);
+        })
+    })
+
+    page.elements.districtCre.on('change', function () {
+        let districtId = page.elements.districtCre.val();
+        getAllWardsCre(districtId);
+    })
+
+
+    //doCreate
+    function doCreateCustomer() {
+        customer.fullName = page.elements.fullNameCre.val();
+        customer.email = page.elements.emailCre.val();
+        customer.phone = page.elements.phoneCre.val();
+        customer.urlImage = "customer_icon.png";
+        customer.deleted = 0;
+        locationRegion.provinceId = page.elements.provinceCre.val();
+        locationRegion.provinceName = $("#provinceCre :selected").text();
+        locationRegion.districtId = page.elements.districtCre.val();
+        locationRegion.districtName = $("#districtCre :selected").text();
+        locationRegion.wardId = page.elements.wardCre.val();
+        locationRegion.wardName = $("#wardCre :selected").text();
+        locationRegion.address = page.elements.addressCre.val();
+        customer.note = page.elements.noteCre.val();
+
+        customer.locationRegion = locationRegion;
+
+        $.ajax({
+            headers: {
+                accept: "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: page.urls.createCustomerAPI,
+            data: JSON.stringify(customer)
+        })
+            .done(data => {
+                customer = data;
+                locationRegion = customer.locationRegion;
+                page.elements.formCreateCustomer[0].reset();
+                App.SweetAlert.showSuccessAlert("Tạo khách hàng thành công!");
+            })
+            .fail(jqXHR => {
+                console.log(jqXHR);
+            })
+    }
+
+    page.elements.btnCreateCustomer.on("click", () => {
+        doCreateCustomer();
+    })
+
+</script>
+
+</body>
+</html>
+

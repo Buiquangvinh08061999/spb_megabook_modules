@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/head :: head"/>
+</head>
+
+<body>
+<th:block th:replace="layout/leftbar :: leftbar"/>
+
+<th:block th:replace="layout/header :: header"/>
+
+
+<th:block th:object="${product}">
+    <div class="product-list">
+        <main id="_main_content_" class="ui-main">
+            <div class="wrapper-block">
+                <div class="padding-container pb-0">
+                    <div class="row">
+                        <div class="col-11">
+                            <label class="title-header" th:text="${product.title}"></label>
+                        </div>
+                        <div class="col-1">
+                            <a href="/products">
+                                <button class="btn btn-outline-primary float-right">Quay lại</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="padding-container pb-0">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-head">
+                                        <span class="ui-information-title">Thông tin chung</span>
+                                    </div>
+                                    <div class="ui-information-body">
+                                        <div class="form-group px-0">
+                                            <div class="row">
+
+                                                <div class="col-sm-12 col-12">
+                                                    <label class="label-input-group">Tên sản phẩm</label>
+
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="titleDet" name="titleDet"
+                                                               class="next-input" placeholder="Nhập tên sản phẩm"
+                                                               th:value="${product.title}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Nhà xuất bản</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="publisherDet" name="publisherDet"
+                                                               class="next-input" placeholder="Nhập tên sản phẩm"
+                                                               th:value="${publisher.title}" readonly>
+                                                    </div>
+<!--                                                    <div class="trigger omni-selection ">-->
+<!--                                                        <span>-->
+<!--                                                            <div class="omni-input-wrapper ">-->
+<!--                                                                <select th:field="*{publisher.id}" class="omni-input" id="publisherDet" name="publisherDet">-->
+<!--                                                                    <th:block th:each="publisher: ${publishers}">-->
+<!--                                                                        <option th:value="${publisher.id}" th:text="${publisher.title}"></option>-->
+<!--                                                                    </th:block>-->
+<!--                                                                </select>-->
+<!--                                                            </div>-->
+<!--                                                        </span>-->
+<!--                                                    </div>-->
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Danh mục</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="categoryDet" name="categoryDet"
+                                                               class="next-input" placeholder="Nhập tên sản phẩm"
+                                                               th:value="${category.title}" readonly>
+                                                    </div>
+<!--                                                    <div class="trigger omni-selection ">-->
+<!--                                                        <span>-->
+<!--                                                            <div class="omni-input-wrapper ">-->
+<!--                                                                <select th:field="*{category}" class="omni-input" id="categoryDet" name="categoryDet">-->
+<!--                                                                    <th:block th:each="category: ${categories}">-->
+<!--                                                                        <option th:value="${category.id}" th:text="${category.title}"></option>-->
+<!--                                                                    </th:block>-->
+<!--                                                                </select>-->
+<!--                                                            </div>-->
+<!--                                                        </span>-->
+<!--                                                    </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0 ">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Mã SKU</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="skuDet" name="skuDet"
+                                                               class="next-input" placeholder="Nhập mã SKU"
+                                                               th:value="${product.sku}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <label class="label-input-group">Đơn vị</label>
+                                                    <div class="">
+                                                        <input autocomplete="on" type="text" id="unitDet" name="unitDet"
+                                                               class="next-input" placeholder="Nhập tên sản phẩm"
+                                                               th:value="${unit.title}" readonly>
+                                                    </div>
+<!--                                                    <div class="trigger omni-selection ">-->
+<!--                                                        <span>-->
+<!--                                                            <div class="omni-input-wrapper ">-->
+<!--                                                                <select th:field="*{unit.id}" class="omni-input" id="unitDet" name="unitDet">-->
+<!--                                                                    <th:block th:each="unit: ${units}">-->
+<!--                                                                        <option th:value="${unit.id}" th:text="${unit.title}"></option>-->
+<!--                                                                    </th:block>-->
+<!--                                                                </select>-->
+<!--                                                            </div>-->
+<!--                                                        </span>-->
+<!--                                                    </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group px-0 ">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-12">
+                                                    <label for="describeDet" class="label-input-group">Mô tả sản phẩm</label>
+                                                    <input autocomplete="on" type="text" id="describeDet" name="describeDet"
+                                                           class="next-input" placeholder="Mô tả sản phẩm"
+                                                           th:value="${product.describe}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-content mb-5">
+                                <div class="ui-information">
+                                    <div class="ui-information-head">
+                                        <div class="row">
+                                            <div class="col"><span class="ui-information-title"><div
+                                                    class="d-flex align-items-center">Hình ảnh sản phẩm</div></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-product-photo product-upload-image">
+                                        <ul class="ui-product-photo-grid clearfix">
+                                            <li class="ui-product-photo-item">
+                                                <div draggable="true" style="cursor: move; opacity: 1;">
+                                                    <div class="ui-product-photo-box"><img
+                                                            class="ui-product-photo-item__image"
+                                                            th:src="@{${product.urlImage}}" th:alt="${product.title}">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-none">
+                                                <div class="hrv-loading-box hrv-loading-icon loading-fileupload">
+                                                    <div class="hrv-loading-main"></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="display-none"></div>
+                <div class="display-none"></div>
+                <div class="display-none"></div>
+            </div>
+            <div id="_container_portal_"></div>
+        </main>
+    </div>
+</th:block>
+
+<th:block th:replace="/layout/script :: script"/>
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
